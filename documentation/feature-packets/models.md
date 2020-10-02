@@ -1,41 +1,43 @@
 **Models**
 
 **`Question` Model**
+|     Column      |  Type  |     Validations            |
+| --------------  | ------ | -------------------------- |
+|      id         | int    | PK, auto, notNull, unique  |
+|  questionSubject| string |       notNull              | 
+|  questionText   |  text  |                            |
+|    answerId     |  int   |  references "Answers".id   |
 
-_________
-
-- `questionText`(text)
-  - Validations:
-- `answerId`(integer) references`"Answers".id`
 - **Associations:**
   - A Question belongsTo a User(`models.User`)
   - A Question hasMany Answers(`models.Answer`)
   - A Question hasMany tags(?)
-
-________
-
+---------
 **`User` Model**
-
-
-- `username`(text)
-  - Validations:
-- `email`(text)
-  - Validations:
-- `hashedPassword`(text)
-  - Validations:
-- `questionId` references`"Questions".id`
+|     Column      |  Type  |      Validations           |
+| --------------  | ------ | -------------------------- |
+|      id         |  int   |  PK, auto, notNull, unique |
+|     username    |  text  |   unique, notNull          | 
+|     email       |  text  |   unique, notNull          |
+| hashedPassword  |  text  |   unique, notNull          |
+|    questionId   |  int   | references "Questions".id  |
 - **Associations:**
   - A User hasMany Questions(`models.Question`)
-
+---------
 **`Answer` model**
-
-- `message`(text)
-  - Validations:
+|     Column      |  Type  |      Validations           |
+| --------------  | ------ | -------------------------- |
+|      id         |  int   |  PK, auto, notNull, unique |
+|   answerText    |  text  |         notNull            | 
+|    questionId   |  int   | references "Questions".id  |
 - **Associations**:
   - An Answer belongsTo a Question(`models.Question`)
-
+----------
 **`VotesQuestion` Model**
-
-- `userId` references user.id
-- `questionId` references`"Questions".id`
-- `type`(boolean) - upvote/downvote
+|     Column      |  Type  |      Validations           |
+| --------------  | ------ | -------------------------- |
+|      id         |  int   |  PK, auto, notNull, unique |
+|      userId     |  int   | references "Users".id      |
+|     answerId    |  int   | references "Answers".id    | 
+|      type       |  bool  |                            |
+- **Associations**:
