@@ -1,0 +1,5 @@
+**Endpoints**
+
+* '/’
+* '/questions’
+* '/questions/:id'
