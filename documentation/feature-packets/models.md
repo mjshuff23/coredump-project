@@ -6,6 +6,7 @@
 |      id         | int    | PK, auto, notNull, unique  |
 |  questionSubject| string |       notNull              | 
 |  questionText   |  text  |                            |
+|      userId     |  int   |  references "Users".id     |
 |    answerId     |  int   |  references "Answers".id   |
 
 - **Associations:**
