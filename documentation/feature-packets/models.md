@@ -7,7 +7,6 @@
 |  questionSubject| string |       notNull              | 
 |  questionText   |  text  |                            |
 |      userId     |  int   |  references "Users".id     |
-|    answerId     |  int   |  references "Answers".id   |
 
 - **Associations:**
   - A Question belongsTo a User(`models.User`)
