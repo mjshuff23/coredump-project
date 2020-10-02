@@ -12,7 +12,6 @@
 - **Associations:**
   - A Question belongsTo a User(`models.User`)
   - A Question hasMany Answers(`models.Answer`)
-  - A Question hasMany tags(?)
 ---------
 **`User` Model**
 |     Column      |  Type  |      Validations           |
@@ -21,7 +20,7 @@
 |     username    |  text  |   unique, notNull          | 
 |     email       |  text  |   unique, notNull          |
 | hashedPassword  |  text  |   unique, notNull          |
-|    questionId   |  int   | references "Questions".id  |
+|     avatar      |  ----  |                            |
 - **Associations:**
   - A User hasMany Questions(`models.Question`)
 ---------
@@ -29,16 +28,17 @@
 |     Column      |  Type  |      Validations           |
 | --------------  | ------ | -------------------------- |
 |      id         |  int   |  PK, auto, notNull, unique |
-|   answerText    |  text  |         notNull            | 
+|    answerText   |  text  |         notNull            | 
 |    questionId   |  int   | references "Questions".id  |
+|     userId      |  int   | references "Users".id      |
 - **Associations**:
   - An Answer belongsTo a Question(`models.Question`)
 ----------
-**`VotesQuestion` Model**
+**`Votes` Model**
 |     Column      |  Type  |      Validations           |
 | --------------  | ------ | -------------------------- |
 |      id         |  int   |  PK, auto, notNull, unique |
 |      userId     |  int   | references "Users".id      |
-|     answerId    |  int   | references "Answers".id    | 
-|      type       |  bool  |                            |
+|     answerId    |  int   | references "Answers".id    |
+|      type       |  bool  | up=true    down=false      |
 - **Associations**:
