@@ -108,7 +108,7 @@ body {
   border: 1px solid white;
   width: 80px;
   height: 50px;
-  background-image: url(./coredump/tile.png);
+  background-image: url(/images/tile.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -139,7 +139,7 @@ width: 100%;
   width: 900px;
   height: 400px;
   margin: 60px auto;
-  background-image: url(./coredump/core.png), url(./coredump/tile.png), url(./coredump/code3.png), url(./coredump/Wireframe-Core-preview.jpg);
+  background-image: url(/images/core.png), url(/images/tile.png), url(/images/code3.png), url(/images/Wireframe-Core-preview.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
