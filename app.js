@@ -7,9 +7,10 @@ const path = require('path');
 
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
-
-
 app.use(morgan("dev"));
+app.use(express.json());
+
+app.use("/users", usersRouter);
 
 app.get('/', (req, res) => {
   res.render('site-layout')

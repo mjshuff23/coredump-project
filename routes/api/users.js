@@ -4,12 +4,14 @@
 
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const { check } = require("express-validator");
 const { validateEmailAndPassword, validateUsername, asyncHandler} = require("../../utils");
+const {getUserToken, requireAuth} = require('./auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
 
-
+//create user with hashedpassword
 router.post(
     "/",
     check("username")
@@ -44,14 +46,18 @@ router.post(
       },
     });
 
+	// Password validation and error handling
 	if( !user || !user.validatePassword(password)) {
-	
-	}
+		const err = new Error("Login failed");
+		err.status = 401;
+		err.title = "Login failed";
+		err.errors = ["The provided credentials were invalid."];
+		return next(err);
+	}	
 
-    // TODO: Password validation and error handling
-	
-
-    // TODO: Token generation
+    // Token generation
+	const token = getUserToken(user);
+	res.json({ token, user: {id: user.id}});
   })
 );
 
