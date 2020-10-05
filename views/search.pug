@@ -8,5 +8,8 @@ html(lang="en")
   body
     table.results
       each question in relevantQuestions
-        tr: strong: td(style="color: orange; font-size: 1.5rem; text-indent: 50px; padding: 0") #{question.questionSubject}
-        td(style="") #{question.questionText}
+        tr: td.resultSubject #{question.questionSubject}
+        tr: td #{question.questionText}
+        tr: td.questionFooter Author: #{question.userId}
+        tr: td.questionFooter Posted: #{question.createdAt}
+        tr: td.questionBreak
