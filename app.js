@@ -3,11 +3,25 @@ const morgan = require("morgan");
 const { environment } = require('./config');
 const app = express();
 
+const path = require('path');
+
+app.set('view engine', 'pug');
+app.use(express.static(path.join(__dirname, '/public')));
+
+
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-  res.send("Welcome to the express-sequelize-starter!");
-});
+app.get('/', (req, res) => {
+  res.render('site-layout')
+})
+
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+
+app.get('/signup', (req, res) => {
+  res.render('signup')
+})
 
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {

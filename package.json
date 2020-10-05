@@ -20,6 +20,7 @@
     "morgan": "^1.10.0",
     "per-env": "^1.0.2",
     "pg": "^8.0.0",
+    "pug": "^2.0.4",
     "sequelize": "^5.21.6"
   },
   "devDependencies": {
