@@ -1,23 +1,17 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet" type='text/css' href="../style.css")
-    title Core Dump - Welcome
-  body
-    div.wrapper
-      div.leftbar
-        p.logobox-a
-        p.logobox-b
-        p.logobox-c
-        a(href='/').logo COREDUMP
-      div.center
-        span.search
-          form(method='get' action='/search/')
-          span.button.btn.btn-info Search
-          input(type='search' class='searchinput' placeholder='  search coredump')
-          a(href='/login').login Login
-          a(href='/signup').signup Sign Up
-          span.avatar
-        p.line
+extends layout2.pug
+block content
+      div.signupbox
+        form(method='get' action='/signup')
+        p.signuphead SIGN UP
+        div
+          input(type='search' class='input-username' placeholder='  username')
+        div
+          input(type='search' class='input-email' placeholder='  email')
+        div
+          input(type='search' class='input-password' placeholder='  password')
+        div
+          input(type='search' class='input-confirmPassword' placeholder='  confirmPassword')
+        div
+          p
+          button(type='submit').btn-signUp SIGN UP
+      div.gradient

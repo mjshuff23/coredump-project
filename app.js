@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(morgan("dev"));
 
 app.get('/', (req, res) => {
-  res.render('site-layout')
+  res.render('banner')
 })
 
 app.get('/login', (req, res) => {
