@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const { environment } = require('./config');
 const app = express();
-
+const usersRouter = require("./routes/api/users");
 const path = require('path');
 
 app.set('view engine', 'pug');
