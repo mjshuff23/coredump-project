@@ -221,3 +221,9 @@ width: 100%;
 .gradient2 {
   background-image: linear-gradient(180deg, whitesmoke, whitesmoke);
 }
+
+.sign-up-container{
+  padding: 40px;
+  font-size: large;
+  
+}

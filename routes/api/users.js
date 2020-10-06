@@ -33,9 +33,9 @@ router.post(
   validateEmailAndPassword,
   handleValidationErrors,
   asyncHandler(async (req, res) => {
-    const { userName, email, password } = req.body;
+    const { userName, email, password, avatar } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ userName, email, hashedPassword });
+    const user = await User.create({ userName, email, hashedPassword, avatar });
 
     const token = getUserToken(user);
     res.status(201).json({

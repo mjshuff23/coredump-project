@@ -30,7 +30,8 @@ module.exports = {
         type: Sequelize.STRING.BINARY
       },
       avatar: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: "public/images/silhouete.jpg"
       },
       createdAt: {
         allowNull: false,
