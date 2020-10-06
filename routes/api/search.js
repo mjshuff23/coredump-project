@@ -29,10 +29,13 @@ router.post('/', asyncHandler(async(req, res, next) => {
     }
   }
 
+  let noRelevantQuestions;
+
   if (relevantQuestions.length === 0) {
-    relevantQuestions[0] = {
+    noRelevantQuestions = {
       questionSubject: `No results found`,
-      questionText: `We couldn't find any results for your search! Try again!`
+      questionText: `We couldn't find any results for your search!`,
+      answers: []
     };
   } else {
     console.log(questionIds)
@@ -53,9 +56,8 @@ router.post('/', asyncHandler(async(req, res, next) => {
       }
       return question;
     });
-    console.log(answers);
   }
-  res.render('search', { relevantQuestions, search });
+  res.render('search', { relevantQuestions, noRelevantQuestions, search });
 }));
 
 
