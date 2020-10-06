@@ -4,11 +4,11 @@ signUpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(signUpForm);
 
-  const username = formData.get("username");
+  const userName = formData.get("userName");
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const body = { email, password, username };
+  const body = { email, password, userName };
   try {
     const res = await fetch("http://localhost:8080/users", {
       method: "POST",
@@ -27,8 +27,8 @@ signUpForm.addEventListener("submit", async (e) => {
       user: { id },
     } = await res.json();
     // storage access_token in localStorage:
-    localStorage.setItem("TWITTER_LITE_ACCESS_TOKEN", token);
-    localStorage.setItem("TWITTER_LITE_CURRENT_USER_ID", id);
+    localStorage.setItem("COREDUMP_ACCESS_TOKEN", token);
+    localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
     window.location.href = "/";
   } catch (err) {
     if (err.status >= 400 && err.status < 600) {

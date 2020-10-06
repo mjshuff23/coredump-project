@@ -1,28 +1,21 @@
-const { check } = require("express-validator");
+const { validationResult } = require("express-validator");
 
-const validateUsername =
-  check("username")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide a username");
+const asyncHandler = (handler) => (req, res, next) =>
+  handler(req, res, next).catch(next);
 
-const validateEmailAndPassword = [
-  check("email")
-    .exists({ checkFalsy: true })
-    .isEmail()
-    .withMessage("Please provide a valid email."),
-  check("password")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
-];
+const handleValidationErrors = (req, res, next) => {
+  const validationErrors = validationResult(req);
 
-const asyncHandler = (handler) => {
-	return (req, res, next) => {
-		return (req, res, next).catch(next);
-	}
-}
+  if (!validationErrors.isEmpty()) {
+    const errors = validationErrors.array().map((error) => error.msg);
 
-module.exports = {
-	validateEmailAndPassword,
-	validateUsername,
-	asyncHandler
-}
+    const err = Error("Bad request.");
+    err.status = 400;
+    err.title = "Bad request.";
+    err.errors = errors;
+    return next(err);
+  }
+  next();
+};
+
+module.exports = { asyncHandler, handleValidationErrors };

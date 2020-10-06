@@ -1,4 +1,4 @@
-const loginForm = document.querySelector("") //something here
+const loginForm = document.querySelector("");
 
 loginForm.addEventListener("submit", async (error) => {
 	error.preventDefault();
