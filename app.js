@@ -10,7 +10,7 @@ const usersRouter = require("./routes/api/users");
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const { searchRouter }  = require('./routes/search');
+const { searchRouter }  = require('./routes/api/search');
 
 const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
 
@@ -21,8 +21,8 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/search', searchRouter);
-app.use("/users", usersRouter);
+app.use('routes/api/search', searchRouter);
+app.use("routes/api/users", usersRouter);
 
 
 app.get('/', (req, res) => {
