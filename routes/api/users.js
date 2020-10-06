@@ -13,7 +13,7 @@ const { User } = db;
 
 
 const validateEmailAndPassword = [
-  check("username")
+  check("userName")
       .exists({ checkFalsy: true })
       .withMessage("Please provide a username"),
   check("email")
@@ -23,14 +23,14 @@ const validateEmailAndPassword = [
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a password."),
-  handleValidationErrors,
+  
 ];
 
 
 //create user with hashedpassword
 router.post(
     "/",
-    // validateEmailAndPassword,
+    validateEmailAndPassword,
     handleValidationErrors,
     asyncHandler(async (req, res) => {
       const { userName, email, password } = req.body;
