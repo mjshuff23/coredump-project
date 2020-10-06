@@ -63,7 +63,6 @@ body {
   color: white;
   font-weight: lighter;
   position: relative;
-  margin-right: 10px;
   text-align: center;
   padding:30px;
   display: inline;
@@ -72,8 +71,31 @@ body {
 }
 
 
+
+.btn-search {
+box-sizing: border-box;
+border-radius: 20px;
+border: 1px solid white;
+height: 30px;
+width: 90px;
+margin-right: 10px;
+}
+
+
+.input-search {
+  box-sizing: border-box;
+  border: 1px solid white;
+  border-radius: 20px;
+  height: 40px;
+  width: 500px;
+  text-decoration: none;
+  padding-left: 40px;
+}
+
+
+
 .line {
-  width: 800px;
+  width: 55%;
   border-bottom: 1px solid white;
   position: relative;
   text-align: center;
@@ -105,16 +127,17 @@ body {
 
 .avatar {
   box-sizing: border-box;
-  padding-right: 40px;
   border: 1px solid white;
   width: 80px;
-  height: 50px;
-  background-image: url(/images/tile.png);
+  height: 80px;
+  margin-left: 20px;
+  background-color: white;
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
   border-radius: 50%;
-  color: white;
+  opacity: 0.7;
+  position: absolute;
 }
 
 
@@ -179,7 +202,7 @@ width: 100%;
   width: 350px;
   height: 480px;
   border: 1px solid white;
-  margin-top: 60px;
+  margin-top: 50px;
   margin-left: 585px;
   border-radius: 25px;
   background-color: white;
@@ -208,8 +231,6 @@ width: 100%;
   margin-right: 10px;
 }
 
-
-
 .signup2 {
   text-decoration: none;
   font-weight: bold;
@@ -221,9 +242,9 @@ width: 100%;
   background-image: linear-gradient(180deg, #2c8c99, whitesmoke, #2c8c99);
 }
 
-/* .gradient2 {
-  background-image: linear-gradient(180deg, whitesmoke, whitesmoke);
-} */
+.gradient2 {
+  background: linear-gradient(to bottom, #2c8c99 -100%,white 100%);
+}
 
 
 .signupbox {
@@ -252,26 +273,6 @@ width: 100%;
 }
 
 
-.input-search {
-  box-sizing: border-box;
-  border: 1px solid white;
-  border-radius: 20px;
-  height: 40px;
-  width: 500px;
-  text-decoration: none;
-}
-
-
-.btn-search {
-border-radius: 10px;
-box-sizing: border-box;
-border: 1px solid white;
-height: 30px;
-width: 90px;
-margin-right: 10px;
-}
-
-
 .btn-login {
   margin-top: 20px;
 }
@@ -289,4 +290,41 @@ margin-top: 90px;
   box-sizing: border-box;
   width: 30%;
   height: 10%;
+}
+
+
+.question {
+  text-align: center;
+
+}
+
+.btn-question {
+
+}
+
+.question-list {
+  box-sizing: border-box;
+
+}
+
+.list-question {
+  box-sizing: border-box;
+  height: 180px;
+  width: 900px;
+  border: 1px solid #2c8c99;
+  margin-left: 300px;
+  background-color: #2c8c99 ;
+  opacity: 0.5;
+  color: white;
+}
+
+.list-answer {
+  box-sizing: border-box;
+  height: 180px;
+  width: 800px;
+  border: 1px solid #ff6b35;
+  margin-left: 400px;
+  margin-top: 60px;
+  background-color: #ff6b35;
+  color: white;
 }

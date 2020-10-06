@@ -1,13 +1,17 @@
 const express = require("express");
 const morgan = require("morgan");
-const { environment } = require('./config');
+const { environment, db } = require('./config');
 const app = express();
 
 const path = require('path');
 
+const db = require('./db/models')
+const cookieParser = require('cookie-parser');
+
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.use(cookieParser());
 
 app.use(morgan("dev"));
 
@@ -21,6 +25,11 @@ app.get('/login', (req, res) => {
 
 app.get('/signup', (req, res) => {
   res.render('signup')
+})
+
+app.get('/main', async (req, res) => {
+  const topQuestion = await db.question.findAll();
+  res.render('main', { topQuestion })
 })
 
 // Catch unhandled requests and forward to error handler.
