@@ -6,10 +6,14 @@ html(lang="en")
     link(href="../style.css" rel='stylesheet' type='text/css')
     title Search Results
   body
-    table.results
+    div.questionContainer
       each question in relevantQuestions
-        tr: td.resultSubject #{question.questionSubject}
-        tr: td #{question.questionText}
-        tr: td.questionFooter Author: #{question.userId}
-        tr: td.questionFooter Posted: #{question.createdAt}
-        tr: td.questionBreak
+        div.container
+            p.resultSubject #{question.questionSubject}
+            p.questionText #{question.questionText}
+            p.questionFooter Author: #{question.userId} </br> Posted: #{question.createdAt}
+            div
+              each answer in question.answers
+                p.answer Answer: #{answer.answerText}
+                p.questionFooter Author: #{answer.userId} </br> Posted: #{answer.createdAt}
+            p.questionBreak

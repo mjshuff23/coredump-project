@@ -29,9 +29,24 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 })
 
+let answers = [
+  {
+    questionId: 2,
+    answerText: "A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).",
+    userId: 1
+  },
+  {
+    questionId: 1,
+    answerText: "Switchable help-desks are not a real thing.",
+    userId: 2
+  },
+];
+
 app.post('/search', asyncHandler(async(req, res, next) => {
   let { search } = req.body;         // Grab search value
   let relevantQuestions = [];
+  let associatedAnswers = [];
+
   search = search.toLowerCase();                              // Make it lowercase
   const questions = await Question.findAll();
   // Search through questions list to find relevant questions
@@ -50,6 +65,17 @@ app.post('/search', asyncHandler(async(req, res, next) => {
       questionSubject: `No results found`,
       questionText: `We couldn't find any results for your search! Try again!`
     };
+  } else {
+    // Loop through questions and find associated answers
+    for (let i = 0; i < relevantQuestions.length; i++) {
+      let questionId = relevantQuestions[i].id;
+      let answers = await Answer.findAll({
+        where: {
+          questionId: questionId,
+        },
+      })
+      relevantQuestions[i].answers = answers;
+    }
   }
   res.render('search', { relevantQuestions });
 }));
