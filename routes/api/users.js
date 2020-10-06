@@ -5,8 +5,8 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check } = require("express-validator");
-const { handleValidationErrors, asyncHandler} = require("../../utils");
-const {getUserToken} = require('./auth');
+const { handleValidationErrors, asyncHandler } = require("../../utils");
+const { getUserToken } = require('./auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
@@ -14,8 +14,8 @@ const { User } = db;
 
 const validateEmailAndPassword = [
   check("userName")
-      .exists({ checkFalsy: true })
-      .withMessage("Please provide a username"),
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a username"),
   check("email")
     .exists({ checkFalsy: true })
     .isEmail()
@@ -23,27 +23,27 @@ const validateEmailAndPassword = [
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a password."),
-  
+
 ];
 
 
 //create user with hashedpassword
 router.post(
-    "/",
-    validateEmailAndPassword,
-    handleValidationErrors,
-    asyncHandler(async (req, res) => {
-      const { userName, email, password } = req.body;
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await User.create({ userName, email, hashedPassword });
-  
-      const token = getUserToken(user);
-      res.status(201).json({
-        user: { id: user.id },
-        token,
-      });
-    })
-  );
+  "/",
+  validateEmailAndPassword,
+  handleValidationErrors,
+  asyncHandler(async (req, res) => {
+    const { userName, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({ userName, email, hashedPassword });
+
+    const token = getUserToken(user);
+    res.status(201).json({
+      user: { id: user.id },
+      token,
+    });
+  })
+);
 
 
 router.post(
@@ -57,18 +57,18 @@ router.post(
       },
     });
 
-	// Password validation and error handling
-	if( !user || !user.validatePassword(password)) {
-		const err = new Error("Login failed");
-		err.status = 401;
-		err.title = "Login failed";
-		err.errors = ["The provided credentials were invalid."];
-		return next(err);
-	}	
+    // Password validation and error handling
+    if (!user || !user.validatePassword(password)) {
+      const err = new Error("Login failed");
+      err.status = 401;
+      err.title = "Login failed";
+      err.errors = ["The provided credentials were invalid."];
+      return next(err);
+    }
 
     // Token generation
-	const token = getUserToken(user);
-	res.json({ token, user: {id: user.id}});
+    const token = getUserToken(user);
+    res.json({ token, user: { id: user.id } });
   })
 );
 

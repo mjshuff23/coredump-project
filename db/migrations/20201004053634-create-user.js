@@ -1,4 +1,10 @@
 'use strict';
+User.prototype.validatePassword = function (password) {
+  // Note that since this function is a model instance method,
+  // `this` is the user instance here:
+  return bcrypt.compareSync(password, this.hashedPassword.toString());
+};
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
