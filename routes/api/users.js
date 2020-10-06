@@ -5,23 +5,37 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check } = require("express-validator");
-const { validateEmailAndPassword, validateUsername, asyncHandler} = require("../../utils");
-const {getUserToken, requireAuth} = require('./auth');
+const { handleValidationErrors, asyncHandler} = require("../../utils");
+const {getUserToken} = require('./auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
 
+
+const validateEmailAndPassword = [
+  check("username")
+      .exists({ checkFalsy: true })
+      .withMessage("Please provide a username"),
+  check("email")
+    .exists({ checkFalsy: true })
+    .isEmail()
+    .withMessage("Please provide a valid email."),
+  check("password")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a password."),
+  handleValidationErrors,
+];
+
+
 //create user with hashedpassword
 router.post(
     "/",
-    check("username")
-      .exists({ checkFalsy: true })
-      .withMessage("Please provide a username"),
-    validateEmailAndPassword,
+    // validateEmailAndPassword,
+    handleValidationErrors,
     asyncHandler(async (req, res) => {
-      const { username, email, password } = req.body;
+      const { userName, email, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await User.create({ username, email, hashedPassword });
+      const user = await User.create({ userName, email, hashedPassword });
   
       const token = getUserToken(user);
       res.status(201).json({
@@ -31,9 +45,6 @@ router.post(
     })
   );
 
-  User.prototype.validatePassword = function (password) {
-	return bcrypt.compareSync(password, this.hashedPassword.toString());
-  };
 
 router.post(
   "/token",

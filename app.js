@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 app.get('/', (req, res) => {
