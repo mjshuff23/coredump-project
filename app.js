@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const { environment } = require('./config');
 const app = express();
 const usersRouter = require("./routes/api/users");
+const indexRouter = require("./routes/api/index");
 const path = require('path');
 
 app.set('view engine', 'pug');
@@ -10,6 +11,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(morgan("dev"));
 app.use(express.json());
 
+app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 app.get('/', (req, res) => {
