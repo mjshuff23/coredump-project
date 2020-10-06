@@ -28,7 +28,9 @@ app.get('/signup', (req, res) => {
 })
 
 app.get('/main', async (req, res) => {
+
   const topQuestions = await Question.findAll();
+  console.log(topQuestions[0].createdAt)
   res.render('main', { topQuestions })
 
 })
