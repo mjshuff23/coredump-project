@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require('../db/models');
+const db = require('../../db/models');
 const { User, Question, Answer, Vote } = db;
 const morgan = require("morgan");
 const cookieParser = require('cookie-parser');
@@ -55,7 +55,7 @@ router.post('/', asyncHandler(async(req, res, next) => {
     });
     console.log(answers);
   }
-  res.render('search', { relevantQuestions });
+  res.render('search', { relevantQuestions, search });
 }));
 
 

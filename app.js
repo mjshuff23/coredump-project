@@ -21,8 +21,8 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('routes/api/search', searchRouter);
-app.use("routes/api/users", usersRouter);
+app.use('/search', searchRouter);
+app.use("/users", usersRouter);
 
 
 app.get('/', (req, res) => {
