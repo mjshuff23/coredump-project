@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(href="../style.css" rel='stylesheet' type='text/css')
+    title Search Results
+  body
+    div.questionContainer
+      each question in relevantQuestions
+        div.container
+            p.resultSubject #{question.questionSubject}
+            p.questionText #{question.questionText}
+            p.questionFooter Author: #{question.userId} </br> Posted: #{question.createdAt}
+            div
+              each answer in question.answers
+                p.answer Answer: #{answer.answerText}
+                p.questionFooter Author: #{answer.userId} </br> Posted: #{answer.createdAt}
+            p.questionBreak

@@ -14,14 +14,12 @@ html(lang="en")
         a(href='/').logo COREDUMP
       div.center
         span.search
-          form(method='get' action='/search/')
-          span.button.btn.btn-info Search
-          input(type='search' placeholder='     search coredump')
-          span.loginsignup
-            a(href='/login').login Login
-            a(href='/signup').signup Sign Up
-          span.logout
-            a(href='/logout').logout Log Out
+          form(action='/search' method='post')
+            label(for='search') Search:
+            input(type='text' name='search' placeholder='search coredump' required)
+            input(type='submit' name='searchBtn')
+          a(href='/login').login Login
+          a(href='/signup').signup Sign Up
           span.avatar
         p.line
       div.banner
