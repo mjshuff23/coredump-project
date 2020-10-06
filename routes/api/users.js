@@ -10,14 +10,17 @@ const {getUserToken} = require('./auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
-
+console.log(check.toString());
 
 const validateEmailAndPassword = [
   check("userName")
       .exists({ checkFalsy: true })
-      .withMessage("Please provide a username"),
+      .withMessage("Please provide a username."),
+      // .isEmpty({ignore_whitespace: true})
+      // .withMessage("Username cannot be empty."),
   check("email")
     .exists({ checkFalsy: true })
+    .withMessage("Please provide an email.")
     .isEmail()
     .withMessage("Please provide a valid email."),
   check("password")
@@ -33,6 +36,7 @@ router.post(
     validateEmailAndPassword,
     handleValidationErrors,
     asyncHandler(async (req, res) => {
+      console.log(req.body);
       const { userName, email, password, avatar } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({ userName, email, hashedPassword, avatar });

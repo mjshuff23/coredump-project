@@ -9,7 +9,7 @@ signUpForm.addEventListener("submit", async (e) => {
   const password = formData.get("password");
   const avatar = formData.get("avatar");
 
-  const body = { email, password, userName };
+  const body = { email, password, userName, avatar };
   try {
     const res = await fetch("http://localhost:8080/users", {
       method: "POST",
@@ -38,11 +38,13 @@ signUpForm.addEventListener("submit", async (e) => {
       let errorsHtml = [
         `
         <div class="alert alert-danger">
-            Something went wrong. Please try again.
+            Please provide a Username, Email, and Password.
         </div>
       `,
       ];
+      console.log(errorJSON);
       const { errors } = errorJSON;
+      console.log(errors);
       if (errors && Array.isArray(errors)) {
         errorsHtml = errors.map(
           (message) => `
