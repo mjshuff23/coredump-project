@@ -5,9 +5,9 @@ const app = express();
 
 const path = require('path');
 
-const db = require('./db/models')
 const cookieParser = require('cookie-parser');
 
+const { Question } = require('./db/models')
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -28,8 +28,9 @@ app.get('/signup', (req, res) => {
 })
 
 app.get('/main', async (req, res) => {
-  const topQuestion = await db.question.findAll();
-  res.render('main', { topQuestion })
+  const topQuestions = await Question.findAll();
+  res.render('main', { topQuestions })
+
 })
 
 // Catch unhandled requests and forward to error handler.

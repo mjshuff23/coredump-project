@@ -2,16 +2,16 @@ extends layout3.pug
 block content
   div.question
     h2 Top Questions
-  div.btn-question
+  div.btn-question Ask a question
   div.question-list
   div.list-question
-    //- table.top-question
-    //-   each question in topQuestions
-    //-   tr
-    //-     td.questionSubject= question.questionSubject
-    //-     td.questionText= question.questionText
-    //-     td.user Author: #{question.userId}
-    //-     td.create Posted: #{question.createdAt}
+    table.top-question
+      each question in topQuestions
+        tr
+          td.questionSubject= question.questionSubject
+          td.questionText= question.questionText
+          td.user Author: #{question.userId}
+          td.create Posted: #{question.createdAt}
 
 
 

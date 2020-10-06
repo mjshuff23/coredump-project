@@ -1,0 +1,44 @@
+/* .signupbox {
+  box-sizing: border-box;
+  width: 850px;
+  height: 420px;
+  border: 1px solid white;
+  margin-top: 80px;
+  margin-left: 320px;
+  border-radius: 25px;
+  background-color: white;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.signuphead {
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.username, .email, .password, .confirmPassword {
+  margin-top: 30px;
+}
+
+
+.btn-login {
+  margin-top: 20px;
+}
+
+.btn-signUp {
+  margin-top: 40px
+}
+
+
+.footer {
+margin-top: 90px;
+}
+
+.input-username, .input-email, .input-password, .input-confirmPassword {
+  box-sizing: border-box;
+  width: 30%;
+  height: 10%;
+} */
