@@ -1,12 +1,8 @@
-// register account handler
-// Session id handling using jwt
-// log in handler
-
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check } = require("express-validator");
 const { handleValidationErrors, asyncHandler } = require("../../utils");
-const { getUserToken } = require('./auth');
+const { getUserToken, logoutUser, loginUser } = require('../../auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
@@ -71,6 +67,11 @@ router.post(
     res.json({ token, user: { id: user.id } });
   })
 );
+
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/user/login');
+});
 
 
 module.exports = router;

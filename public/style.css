@@ -79,6 +79,8 @@ body {
   margin-left: 350px;
 }
 
+
+
 .login, .signup {
   text-decoration: none;
   display:flex;
@@ -91,6 +93,17 @@ body {
 
 }
 
+.logout-button {
+  text-decoration: none;
+  display:flex;
+  align-items: flex-end;
+  display: inline;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 50px;
+  color: white;
+}
+
 .login:hover  {
   color: white;
   text-decoration: none;
@@ -99,6 +112,21 @@ body {
 .signup:hover  {
   color: white;
   text-decoration: none;
+}
+
+.hidden {
+  display: none
+}
+
+.nav-bar {
+  text-decoration: none;
+  display:flex;
+  align-items: flex-end;
+  display: inline;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 50px;
+  color: white;
 }
 
 
@@ -274,4 +302,3 @@ width: 100%;
   font-size: large;
   
 }
-

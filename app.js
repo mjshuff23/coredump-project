@@ -10,8 +10,7 @@ const usersRouter = require("./routes/api/users");
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const { searchRouter }  = require('./routes/search');
-
+const { searchRouter } = require('./routes/api/search');
 const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
 
 app.set('view engine', 'pug');
@@ -25,8 +24,11 @@ app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 
 
+//TODO: Get username from session Id
 app.get('/', (req, res) => {
-  res.render('site-layout');
+  res.render('site-layout', {
+    user: "User"
+  });
 })
 
 app.get('/login', (req, res) => {
@@ -36,6 +38,7 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('signup');
 })
+
 
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
