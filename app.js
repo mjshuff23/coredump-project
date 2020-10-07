@@ -1,30 +1,44 @@
 const express = require("express");
+const db = require('./db/models');
+const { User, Question, Answer, Vote } = db;
 const morgan = require("morgan");
 const { environment } = require('./config');
 const app = express();
 const usersRouter = require("./routes/api/users");
 // const indexRouter = require("./routes/api/index");
+
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const { searchRouter } = require('./routes/api/search');
+const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
 
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
+
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
-
-// app.use("/", indexRouter);
+app.use(express.urlencoded({ extended: true }));
+app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 
+
+//TODO: Get username from session Id
 app.get('/', (req, res) => {
-  res.render('site-layout')
+  res.render('site-layout', {
+    user: "User"
+  });
 })
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login');
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup')
+  res.render('signup');
 })
+
 
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {

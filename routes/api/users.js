@@ -1,12 +1,8 @@
-// register account handler
-// Session id handling using jwt
-// log in handler
-
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check } = require("express-validator");
-const { handleValidationErrors, asyncHandler} = require("../../utils");
-const {getUserToken} = require('./auth');
+const { handleValidationErrors, asyncHandler } = require("../../utils");
+const { getUserToken, logoutUser, loginUser } = require('../../auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
@@ -14,17 +10,15 @@ console.log(check.toString());
 
 const validateEmailAndPassword = [
   check("userName")
-      .exists({ checkFalsy: true })
-      .withMessage("Please provide a username."),
-      // .isEmpty({ignore_whitespace: true})
-      // .withMessage("Username cannot be empty."),
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a username"),
   check("email")
     .isEmail()
     .withMessage("Please provide a valid email."),
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a password."),
-  
+
 ];
 
 
@@ -59,20 +53,25 @@ router.post(
       },
     });
 
-	// Password validation and error handling
-	if( !user || !user.validatePassword(password)) {
-		const err = new Error("Login failed");
-		err.status = 401;
-		err.title = "Login failed";
-		err.errors = ["The provided credentials were invalid."];
-		return next(err);
-	}	
+    // Password validation and error handling
+    if (!user || !user.validatePassword(password)) {
+      const err = new Error("Login failed");
+      err.status = 401;
+      err.title = "Login failed";
+      err.errors = ["The provided credentials were invalid."];
+      return next(err);
+    }
 
     // Token generation
-	const token = getUserToken(user);
-	res.json({ token, user: {id: user.id}});
+    const token = getUserToken(user);
+    res.json({ token, user: { id: user.id } });
   })
 );
+
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/user/login');
+});
 
 
 module.exports = router;
