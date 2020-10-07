@@ -1,11 +1,11 @@
 const express = require("express");
 const db = require('./db/models');
-// const { User, Question, Answer, Vote } = db;
+const { User, Question, Answer, Vote } = db;
 const morgan = require("morgan");
-// const { environment, db } = require('./config');
+const { environment, model } = require('./config');
 const app = express();
 const usersRouter = require("./routes/api/users");
-// const indexRouter = require("./routes/api/index");
+const indexRouter = require("./routes/api/index");
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -41,11 +41,8 @@ app.get('/signup', (req, res) => {
 })
 
 app.get('/main', async (req, res) => {
-
   const topQuestions = await Question.findAll();
-  // console.log(topQuestions[0].createdAt)
   res.render('main', { topQuestions })
-
 })
 
 // Catch unhandled requests and forward to error handler.
