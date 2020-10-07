@@ -1,5 +1,4 @@
 'use strict';
-const moment = require('moment');
 module.exports = (sequelize, DataTypes) => {
   const Question = sequelize.define('Question', {
     questionSubject: DataTypes.TEXT,
@@ -19,8 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {});
-  Question.associate = function (models) {
+  Question.associate = function(models) {
     // associations can be defined here
+    Question.belongsTo( models.User, { foreignKey: 'userId' });
+    Question.hasMany( models.Answer, {foreignKey: 'questionId'});
   };
   return Question;
 };
