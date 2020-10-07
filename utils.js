@@ -5,7 +5,6 @@ const asyncHandler = (handler) => (req, res, next) =>
 
 const handleValidationErrors = (req, res, next) => {
   const validationErrors = validationResult(req);
-    console.log(req.body);
   if (!validationErrors.isEmpty()) {
     const errors = validationErrors.array().map((error) => error.msg);
 

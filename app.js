@@ -1,32 +1,45 @@
 const express = require("express");
 const { asyncHandler }= require('./utils');
-const morgan = require("morgan");
 const { environment } = require('./config');
+const db = require('./db/models');
+const { User, Question, Answer, Vote } = db;
+
+const morgan = require("morgan");
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
+const path = require('path');
+
 const questionsRoute = require('./routes/api/questions');
+const usersRouter = require("./routes/api/users");
+const { searchRouter }  = require('./routes/api/search');
+
 const csrfProtection = csurf( { cookie: true });
 const app = express();
 
-const path = require('path');
-
 app.use(express.static(path.join(__dirname, '/public')));
-app.use(cookieParser());
-app.use(express.json());
 app.set('view engine', 'pug');
+
+app.use(cookieParser());
 app.use(morgan("dev"));
+//Do we need both express.json() and express.urlencoded?
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//routes
+app.use('/search', searchRouter);
+app.use("/users", usersRouter);
 app.use("/api/questions", questionsRoute);
 
 app.get('/', (req, res) => {
-  res.render('site-layout')
+  res.render('site-layout');
 })
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login');
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup')
+  res.render('signup');
 })
 
 app.get('/postQuestion', csrfProtection, (req, res) => {

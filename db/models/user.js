@@ -1,10 +1,11 @@
 'use strict';
+const bcrypt = require("bcryptjs");
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    userName: DataTypes.STRING,
-    email: DataTypes.STRING,
+    userName: {type: DataTypes.STRING, allowNull: false, unique: true},
+    email: {type: DataTypes.STRING, allowNull: false, unique: true},
     bio: DataTypes.STRING,
-    hashedPassword: DataTypes.STRING,
+    hashedPassword: {type: DataTypes.STRING.BINARY, allowNull: false},
     avatar: DataTypes.STRING
   }, {});
   User.associate = function(models) {
@@ -13,5 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany (models.Vote, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
     User.hasMany (models.Answer, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true  });
   };
+
+  User.prototype.validatePassword = function (password) {
+    // because this is a model instance method, `this` is the user instance here:
+    return bcrypt.compareSync(password, this.hashedPassword.toString());
+  };
+
   return User;
 };
