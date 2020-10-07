@@ -1,39 +1,16 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet" type='text/css' href="style.css")
-    title Core Dump - Welcome
-  body.gradient
-    div.wrapper
-      div.leftbar
-        p.logobox-a
-        p.logobox-b
-        p.logobox-c
-        a(href='/').logo COREDUMP
-      div.center
-        span.search
-          form(method='get' action='/search/')
-          label(for='search')
-          button(type="submit") Search
-          input(type='search' class='searchinput' placeholder='  search coredump' name='search')
-          a(href='/login').login Login
-          a(href='/signup').signup Sign Up
-          span.avatar
-        p.line
-      div.loginbox
-        form(method='get' action='/login')
-        p.loginhead LOGIN
-        div
-          input(type='search' class='email' placeholder='  email')
-          input(type='search' class='password' placeholder='  password')
-        div
-          input(type='checkbox' class='remember' value='rememberme')
-          span Remember me
-        div
-          p
-          button(type='submit').btn.btn-primary LOGIN
-        div
-          a(href='/signup').signup2 Sign Up
-    div.gradient
+extends layout.pug
+block content
+  div.loginbox
+    div(class="log-in-container")
+      div(class="errors-container")
+      h2 Log In
+      form(class="log-in-form")
+        .form-group
+          label(for='email') Email address
+          input#email.form-control(type='email', name="email", placeholder='Enter email')
+        .form-group
+          label(for='password') Password
+          input#password.form-control(type='password', name="password", placeholder='Password')
+        button.btn.btn-primary(type='submit') Log In
+      a(href='/sign-up') Don't have an account? Sign up here.
+    script(src="js/log-in.js" type='module')

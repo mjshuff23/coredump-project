@@ -1,37 +1,31 @@
 const express = require("express");
-const { asyncHandler }= require('./utils');
-const { environment } = require('./config');
 const db = require('./db/models');
-const { User, Question, Answer, Vote } = db;
-
 const morgan = require("morgan");
 const csurf = require('csurf');
-const cookieParser = require('cookie-parser');
-const path = require('path');
-
-const questionsRoute = require('./routes/api/questions');
-const usersRouter = require("./routes/api/users");
-const { searchRouter }  = require('./routes/api/search');
-
-const csrfProtection = csurf( { cookie: true });
+const { User, Question, Answer, Vote } = db;
+const { environment, model } = require('./config');
+const { asyncHandler }= require('./utils');
 const app = express();
+const usersRouter = require("./routes/api/users");
+const questionsRoute = require('./routes/api/questions');
+const searchRouter = require('./routes/api/search');
+const cookieParser = require('cookie-parser');
+const csrfProtection = csurf( { cookie: true });
 
-app.use(express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'pug');
+const path = require('path');
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(cookieParser());
 app.use(morgan("dev"));
-//Do we need both express.json() and express.urlencoded?
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-//routes
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 app.use("/api/questions", questionsRoute);
 
+
 app.get('/', (req, res) => {
-  res.render('site-layout');
+  res.render('banner')
 })
 
 app.get('/login', (req, res) => {
@@ -42,16 +36,15 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 })
 
+app.get('/main', async (req, res) => {
+  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+  res.render('main', { topQuestions })
+})
+
 app.get('/postQuestion', csrfProtection, (req, res) => {
   let csrfToken = req.csrfToken();
   res.render('add-question', {csrfToken})
 })
-
-app.post('/postQuestion', (req, res) => {
-  console.log("Hit the app.js app.post -- req.body:  ", req.body);
-  next()
-})
-
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
   const err = new Error("The requested resource couldn't be found.");
@@ -69,7 +62,6 @@ app.use((err, req, res, next) => {
   res.json({
     title: err.title || "Server Error",
     message: err.message,
-    errors: err.errors,
     stack: isProduction ? null : err.stack,
   });
 });
