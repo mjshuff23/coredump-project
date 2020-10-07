@@ -210,10 +210,11 @@ width: 11%;
 .intro {
   box-sizing: border-box;
   width: 800px;
-  height: 400px;
+  height: 300px;
   margin:30px auto;
   color: black;
-  text-align: left;
+  text-align: center;
+
 }
 
 
@@ -247,6 +248,8 @@ width: 11%;
 
 .email {
   margin-top: 30px;
+  height: 35px;
+  width: 250px;
 }
 
 .password {
