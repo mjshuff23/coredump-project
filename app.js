@@ -6,9 +6,10 @@ const { User, Question, Answer, Vote } = db;
 const { environment, model } = require('./config');
 const { asyncHandler }= require('./utils');
 const app = express();
+const searchRouter = require("./routes/api/search");
 const usersRouter = require("./routes/api/users");
 const questionsRoute = require('./routes/api/questions');
-const searchRouter = require('./routes/api/search');
+
 const cookieParser = require('cookie-parser');
 const csrfProtection = csurf( { cookie: true });
 
@@ -19,9 +20,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use('/search', searchRouter);
+app.use("/search", searchRouter);
 app.use("/users", usersRouter);
-app.use("/api/questions", questionsRoute);
+app.use("/questions", questionsRoute);
 
 
 app.get('/', (req, res) => {
