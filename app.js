@@ -41,7 +41,7 @@ app.get('/signup', (req, res) => {
 })
 
 app.get('/main', async (req, res) => {
-  const topQuestions = await Question.findAll();
+  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
   res.render('main', { topQuestions })
 })
 
