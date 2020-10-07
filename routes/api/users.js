@@ -19,8 +19,6 @@ const validateEmailAndPassword = [
       // .isEmpty({ignore_whitespace: true})
       // .withMessage("Username cannot be empty."),
   check("email")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide an email.")
     .isEmail()
     .withMessage("Please provide a valid email."),
   check("password")
