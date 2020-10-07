@@ -20,18 +20,21 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(href="../style.css" rel='stylesheet' type='text/css')
-    title Search Results
+    link(href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet")
+    title= question.questionSubject
   body
     div.searchHeader= question.questionSubject
     br
     br
     div.questionContainer
       div.containerSolo
-        div.questionSubject
-          img(src='../images/upArrow.png' height="25" width="25")
-          span #{question.questionSubject}
-          img(src='../images/downArrow.png' height="25" width="25")
-        div.questionTextSolo #{question.questionText}
+        div.questionVotes
+          span(style="font-size: 2em; color: lightblue;")
+            i(class="fas fa-caret-up")
+          span(style="font-size: 2em; color: lightblue;")
+            i(class="fas fa-caret-down")
+        div.questionTextSolo
+          span #{question.questionText}
         div.questionFooter Author: #{question.userId} </br> Posted: #{question.createdAt}
       div.containerSolo
         each answer in answers
