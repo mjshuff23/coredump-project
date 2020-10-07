@@ -4,6 +4,7 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" type='text/css' href="/style.css")
+    script(src="js/logout.js")
     title Core Dump - Welcome
   body
     div.wrapper
@@ -18,8 +19,13 @@ html(lang="en")
             label(for='search') Search:
             input(type='text' name='search' placeholder='search coredump' required)
             input(type='submit' name='searchBtn')
-          a(href='/login').login Login
-          a(href='/signup').signup Sign Up
+            //- span.navbar-logout-text.hidden
+            span.welcome-text Welcome #{user.userName}!
+            a(href='/login').logout-button Logout
+            //- TODO: GET USERNAME FROM SESSION ID
+            //- span.navbar-signup-login
+            a(href='/login').login Login
+            a(href='/signup').signup Sign Up
           span.avatar
         p.line
       div.banner
