@@ -11,8 +11,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { searchRouter }  = require('./routes/api/search');
+const { questionsRouter } = require('./routes/questions');
 
-const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
 
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
-
+app.use('/questions', questionsRouter);
 
 app.get('/', (req, res) => {
   res.render('site-layout');

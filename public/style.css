@@ -240,11 +240,22 @@ width: 100%;
   background-color: #d5a23c;
   margin: 0px 0px 10px;
 }
+.containerSolo {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 200px;
+  max-width: 400px;
+  max-height: 100%;
+  border-radius: 25px;
+  background-color: #d5a23c;
+  margin: 0px 0px 10px;
+}
 
 .questionSubject {
   display: flex;
-  justify-content: center;
-  color: white;
+  justify-content: space-between;
+  color: #2c8c99;
   padding: 4px 10px;
   font-size: 1.15rem;
 }
@@ -270,10 +281,14 @@ width: 100%;
 .questionFooter {
   display: flex;
   justify-content: center;
-  padding: 0 0 10px 0;
-  max-height: 5px;
+  padding: 10px 0 10px 0;
+  max-height: 100%;
   color: white;
   font-size: .75rem;
+  width: 100%;
+  border-top: 2px solid black;
+  margin-bottom: 5px;
+  font-weight: 10;
 }
 
 .answer {
@@ -281,7 +296,6 @@ width: 100%;
   padding: 10px 0 0 0;
   justify-content: center;
   width: 500px;
-  border-top: 2px solid #2c8c99;
 }
 .sign-up-container{
   padding: 40px;
@@ -309,4 +323,22 @@ width: 100%;
   width: 95%;
   color: #433E3F;
   padding: 5px;
+}
+
+.questionTextSolo {
+  color: white;
+  box-sizing: border-box;
+  border-top: 2px solid #2c8c99;
+  padding: 10px 20px;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.answer {
+  margin-top: 0;
+  color: white;
+  max-height: 10px;
+  box-sizing: border-box;
+  justify-content: center;
+  max-width: 100%;
 }
