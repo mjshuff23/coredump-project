@@ -1,5 +1,5 @@
 const signUpForm = document.querySelector(".sign-up-form");
-import { handleErrors } from "./errors.js";
+// import { handleErrors } from "./errors.js";
 
 signUpForm.addEventListener("submit", async (e) => {
   e.preventDefault();

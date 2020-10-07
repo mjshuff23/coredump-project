@@ -21,7 +21,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 
@@ -57,6 +56,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   const isProduction = environment === "production";
+  console.log(err);
   res.json({
     title: err.title || "Server Error",
     message: err.message,
