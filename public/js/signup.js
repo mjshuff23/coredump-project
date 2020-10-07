@@ -30,7 +30,7 @@ signUpForm.addEventListener("submit", async (e) => {
     // storage access_token in localStorage:
     localStorage.setItem("COREDUMP_ACCESS_TOKEN", token);
     localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
-    window.location.href = "/login";
+    window.location.href = "/";
   } catch (err) {
     handleErrors(err);
   }
