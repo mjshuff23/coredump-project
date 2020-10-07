@@ -1,0 +1,11 @@
+extends layout.pug
+block content
+  div.question
+    h2 Top Questions
+    button(type='submit').btn-question Ask a question
+  div.list-question
+    each question in topQuestions
+      div.list-box
+        p.questionSubject #{question.questionSubject}
+        p.questionText #{question.questionText}
+        p.user Author: #{question.userId}, Posted: #{question.createdAt}
