@@ -74,6 +74,47 @@ body {
 
 
 
+
+.menu {
+  box-sizing: border-box;
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 11%;
+  margin-top: 20%;
+  position: fixed;
+  margin-left: 60px;
+}
+
+.home {
+
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+.public{
+  margin-top: 15px;
+  margin-left: 30px;
+}
+
+.submenu-questions, .submenu-users {
+  text-decoration: none;
+  margin-top: 55px;
+  margin-left: 10px;
+  font-size: 15px;
+  padding-top: 18px;
+}
+
+
+
+
+
+
+
 .search {
   font-size: 18px;
   color: white;
@@ -165,22 +206,22 @@ flex-direction: row;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-width: 11%;
+width: 15%;
 }
 
 .center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 79%;
+  width: 72%;
 }
 
-.leftbar {
+/* .rightbar {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 10;
-}
+} */
 
 
 
