@@ -1,46 +1,15 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet" type='text/css' href="style.css")
-    title Core Dump - Welcome
+extends layout.pug
+block content
+  div.mceContainer
+    div.mceErrors
+    div.mceBox
+        script(src="https://cdn.tiny.cloud/1/imc1fcb65bpfltbfodzejv92t1z705gvnrekj1svi9uz6bgp/tinymce/5/tinymce.min.js" referrerpolicy="origin")
+        script(type="text/javascript" src="/js/add-question.js")
 
-  body
-    div.wrapper
-      div.leftbar
-        p.logobox-a
-        p.logobox-b
-        p.logobox-c
-        a(href='/').logo COREDUMP
-      div.center
-        span.search
-          form(method='get' action='/search/')
-          span.button.btn.btn-info Search
-          input(type='search' placeholder='     search coredump')
-          a(href='/login').login Login
-          a(href='/signup').signup Sign Up
-          span.avatar
-        p.line
-
-        div.mceContainer
-          div.mceErrors
-
-          div.mceBox
-              script(src="https://cdn.tiny.cloud/1/imc1fcb65bpfltbfodzejv92t1z705gvnrekj1svi9uz6bgp/tinymce/5/tinymce.min.js" referrerpolicy="origin")
-              script(type="text/javascript" src="/js/add-question.js")
-              //-  Start here for question
-              form(id="testForm" method="post" )
-                //- Get request to the form, the csrfToken is generated.
-                input(type='hidden' name='_csrf' value=csrfToken)
-                label() SUBJECT:
-                input(id= "subject" type="text" name="subject" required value=questionSubject).mceSubject
-                textarea(id="questionText" required value=questionText)
-              div
-                  button(type="submit" id="postQuestion" style="display:inline-block").mceSubmit SUBMIT QUESTION
-
-      //-  End here for new question
-      //-div.banner
-
-    div.footer
-      p © Copyright: Group 9 - July Cohort 2020
+        form(id="testForm" method="post" )
+          input(type='hidden' name='_csrf' value=csrfToken)
+          label() SUBJECT:
+          input(id= "subject" type="text" name="subject" required value=questionSubject).mceSubject
+          textarea(id="questionText" required value=questionText)
+        div
+            button(type="submit" id="postQuestion" style="display:inline-block").mceSubmit SUBMIT QUESTION
