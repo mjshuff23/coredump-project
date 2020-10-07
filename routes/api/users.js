@@ -17,7 +17,16 @@ const validateEmailAndPassword = [
     .withMessage("Please provide a valid email."),
   check("password")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
+    .withMessage("Please provide a password.")
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters long.'),
+  check('confirmPassword')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Confirm password does not match password.');
+      }
+      return true;
+    }),
 
 ];
 

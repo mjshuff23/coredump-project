@@ -213,9 +213,9 @@ width: 100%;
 .loginbox {
   box-sizing: border-box;
   width: 350px;
-  height: 500px;
+  height: auto;
   border: 1px solid white;
-  margin-top: 110px;
+  margin-top: 50px;
   margin-left: 470px;
   border-radius: 25px;
   background-color: white;
@@ -325,6 +325,7 @@ width: 100%;
 .sign-up-container, .log-in-container{
   padding: 40px;
   font-size: large;
+  min-height: min-content;
 
 }
 

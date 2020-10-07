@@ -38,6 +38,9 @@ html(lang="en")
             .form-group
               label(for='password') Password
               input#password.form-control(type='password', name="password", placeholder='Password')
+            .form-group
+              label(for='confirmPassword') Confirm Password
+              input(type='password' name='confirmPassword' placeholder='Confirm Password')
             button.btn.btn-primary(type='submit') Sign Up
           a(href='/login') Already have an account? Log in here.
         script(src="js/signup.js")
