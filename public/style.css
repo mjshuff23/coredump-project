@@ -235,7 +235,7 @@ width: 11%;
 }
 
 .background {
-    background: url(./coredump/core.png) 50% no-repeat;
+    background: url(./images/core.png) 50% no-repeat;
 
   background-position: left;
   opacity: 0.5;

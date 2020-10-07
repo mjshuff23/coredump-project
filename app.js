@@ -1,29 +1,52 @@
-const express = require("express");
-const db = require('./db/models');
-const morgan = require("morgan");
-const csurf = require('csurf');
-const { User, Question, Answer, Vote } = db;
-const { environment, model } = require('./config');
-const { asyncHandler }= require('./utils');
-const app = express();
-const searchRouter = require("./routes/api/search");
-const usersRouter = require("./routes/api/users");
-const questionsRoute = require('./routes/api/questions');
 
+
+// const { environment, model } = require('./config');
+
+
+// app.set('view engine', 'pug');
+// const path = require('path');
+// app.use(express.static(path.join(__dirname, '/public')));
+
+// app.use(cookieParser());
+// app.use(morgan("dev"));
+// app.use(express.json());
+// app.use("/search", searchRouter);
+// app.use("/users", usersRouter);
+// app.use("/questions", questionsRoute);
+
+
+
+const express = require("express");
+const app = express();
+
+const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const csrfProtection = csurf( { cookie: true });
 
-app.set('view engine', 'pug');
+const questionsRoute = require('./routes/api/questions');
+const { searchRouter } = require('./routes/api/search');
+const usersRouter = require("./routes/api/users");
+
+const { asyncHandler } = require('./utils');
+
+const db = require('./db/models');
+const { User, Question, Answer, Vote } = db;
+
+const morgan = require("morgan");
+const { environment, model } = require('./config');
+
 const path = require('path');
 app.use(express.static(path.join(__dirname, '/public')));
+
+
+app.set('view engine', 'pug');
 
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use("/search", searchRouter);
+app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
-
 
 app.get('/', (req, res) => {
   res.render('banner')
