@@ -11,22 +11,28 @@ console.log(check.toString());
 const validateEmailAndPassword = [
   check("userName")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a username"),
+    .withMessage("Please provide a username")
+    .isLength({ max: 50 })
+    .withMessage('Username must not be more than 50 characters long'),
   check("email")
     .isEmail()
-    .withMessage("Please provide a valid email."),
+    .withMessage("Please provide a valid email.")
+    .isLength({ max: 255 })
+    .withMessage('Email Address must not be more than 255 characters long'),
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a password.")
     .isLength({ min: 8 })
-    .withMessage('Password must be at least 8 characters long.'),
-  check('confirmPassword')
-    .custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error('Confirm password does not match password.');
-      }
-      return true;
-    }),
+    .withMessage('Password must be at least 8 characters long.')
+    .isLength({ max: 50 })
+    .withMessage('Password must not be more than 50 characters long'),
+  // check('confirmPassword')
+  //   .custom((value, { req }) => {
+  //     if (value !== req.body.password) {
+  //       throw new Error('Confirm password does not match password.');
+  //     }
+  //     return true;
+  //   }),
 
 ];
 

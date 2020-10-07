@@ -8,6 +8,7 @@ signUpForm.addEventListener("submit", async (e) => {
   const password = formData.get("password");
   const avatar = formData.get("avatar");
 
+
   const body = { email, password, userName, avatar };
   try {
     const res = await fetch("http://localhost:8080/users", {
