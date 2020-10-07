@@ -1,36 +1,49 @@
 const express = require("express");
+const db = require('./db/models');
+// const { User, Question, Answer, Vote } = db;
 const morgan = require("morgan");
-const { environment, db } = require('./config');
+// const { environment, db } = require('./config');
 const app = express();
+const usersRouter = require("./routes/api/users");
+// const indexRouter = require("./routes/api/index");
 
 const path = require('path');
-
 const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const { searchRouter } = require('./routes/api/search');
 
-const { Question } = require('./db/models')
+const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
+
+
+// const { Question } = require('./db/models')
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(cookieParser());
-
 app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/search', searchRouter);
+app.use("/users", usersRouter);
+
 
 app.get('/', (req, res) => {
   res.render('banner')
 })
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login');
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup')
+  res.render('signup');
 })
 
 app.get('/main', async (req, res) => {
 
   const topQuestions = await Question.findAll();
-  console.log(topQuestions[0].createdAt)
+  // console.log(topQuestions[0].createdAt)
   res.render('main', { topQuestions })
 
 })

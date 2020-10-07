@@ -1,20 +1,19 @@
 extends layout2.pug
 block content
-      div
-      div.loginbox
-        form(method='get' action='/login')
-        p.loginhead LOGIN
-        div
-          input(type='search' class='email' placeholder='  email')
-        div
-          input(type='search' class='password' placeholder='  password')
-        div
-          input(type='checkbox' class='remember' value='rememberme')
-          span Remember me
-        div
-          p
-          button(type='submit').btn-login LOGIN
-        div
-          p
-        div
-          a(href='/signup').signup2 Sign Up
+  div.loginbox
+    form(method='get' action='/login')
+    p.loginhead LOGIN
+    div
+      input(type='search' class='email' placeholder='  email')
+    div
+      input(type='search' class='password' placeholder='  password')
+    div
+      input(type='checkbox' class='remember' value='rememberme')
+      span Remember me
+    div
+      p
+      button(type='submit').btn-login LOGIN
+    div
+      p
+    div
+      a(href='/signup').signup2 Sign Up

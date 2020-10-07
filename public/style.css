@@ -297,7 +297,7 @@ width: 11%;
 margin-top: 90px;
 }
 
-.input-username, .input-email, .input-password, .input-confirmPassword {
+.input-username, .input-email,.input-avatar, .input-password, .input-confirmPassword {
   box-sizing: border-box;
   width: 30%;
   height: 10%;
