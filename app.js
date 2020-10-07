@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const { environment, model } = require('./config');
 const app = express();
 const usersRouter = require("./routes/api/users");
-const indexRouter = require("./routes/api/index");
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
