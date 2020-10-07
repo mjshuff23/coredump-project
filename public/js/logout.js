@@ -4,15 +4,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
     logoutButton.addEventListener('click', (eve) => {
         localStorage.removeItem("COREDUMP_CURRENT_USER_ID");
-        localStorage.removeItem("COREDUMP_CURRENT_USER_ID");
+        localStorage.removeItem("COREDUMP_ACCESS_TOKEN");
 
-        window.location.href = "/login";
-        document
-            .querySelector(".navbar-logout-text")
-            .classList.add(".hidden")
+        // window.location.href = "/login";
+        // document
+        //     .querySelector(".navbar-logout-text")
+        //     .classList.add("hidden")
 
-        document
-            .querySelector(".navbar-signup-login")
-            .classList.remove(".hidden")
+        // document
+        //     .querySelector(".navbar-signup-login")
+        //     .classList.remove("hidden")
     });
 });

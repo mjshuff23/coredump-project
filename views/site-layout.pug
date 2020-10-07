@@ -19,13 +19,13 @@ html(lang="en")
             label(for='search') Search:
             input(type='text' name='search' placeholder='search coredump' required)
             input(type='submit' name='searchBtn')
-            span.navbar-logout-text.hidden
-              span.logout-button Welcome #{user.userName}!
-              button().logout-button Logout 
+            //- span.navbar-logout-text.hidden
+            span.welcome-text Welcome #{user.userName}!
+            a(href='/login').logout-button Logout 
             //- TODO: GET USERNAME FROM SESSION ID
-            span.navbar-signup-login
-              a(href='/login').login Login
-              a(href='/signup').signup Sign Up
+            //- span.navbar-signup-login
+            a(href='/login').login Login
+            a(href='/signup').signup Sign Up
           span.avatar
         p.line
       div.banner

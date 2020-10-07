@@ -93,7 +93,18 @@ body {
 
 }
 
-.logout-button {
+/* .logout-button {
+  text-decoration: none;
+  display:flex;
+  align-items: flex-end;
+  display: inline;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 50px;
+  color: white;
+} */
+
+.logout-button, .welcome-text {
   text-decoration: none;
   display:flex;
   align-items: flex-end;
