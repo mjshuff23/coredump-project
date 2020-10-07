@@ -28,32 +28,21 @@ loginForm.addEventListener("submit", async (e) => {
 		localStorage.setItem("COREDUMP_ACCESS_TOKEN", token);
 		localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
 
-
-		// document
-		// 	.querySelector(".navbar-logout-text")
-		// 	.classList.remove("hidden")
-
-		// document
-		// 	.querySelector(".navbar-signup-login")
-		// 	.classList.add("hidden")
-
-		// document
-		// 	.querySelector(".login")
-		// 	.classList.add("hidden")
-
-		// document
-		// 	.querySelector(".signup")
-		// 	.classList.add("hidden")
-
-		// document
-		// 	.querySelector(".logout-button")
-		// 	.classList.remove("hidden")
-
-		// document
-		// 	.querySelector(".welcome-text")
-		// 	.classList.remove("hidden")
-
 		window.location.href = "http://localhost:8080/";
+		// let login = document.querySelector("login");
+		// let signup = document.querySelector("signup");
+		// let welcome = document.querySelector("navbar-text");
+		// let logout = document.querySelector("logout");
+
+		// if (login && signup) {
+		// 	login.classList.add("hidden")
+		// 	signup.classList.add("hidden")
+		// }
+		// if (logout) {
+		// 	logout.classList.remove("hidden")
+		// 	welcome.classList.remove("hidden")
+		// }
+
 	}
 	catch (err) {
 		handleErrors(err);
