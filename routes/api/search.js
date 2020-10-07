@@ -10,7 +10,7 @@ router.post('/', asyncHandler (async (req, res, next) => {
   let relevantQuestions = [];
   let questionIds = [];
   let answers = [];
-
+  console.log(req.body);
   search = search.toLowerCase();                              // Make it lowercase
   const questions = await Question.findAll();
   // Search through questions list to find relevant questions
