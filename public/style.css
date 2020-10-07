@@ -274,22 +274,36 @@ width: 100%;
   align-items: center;
   min-width: 200px;
   max-width: 400px;
+  max-height: 150px;
   border-radius: 25px;
   background-color: #d5a23c;
   margin: 0px 0px 10px;
 }
 
-.resultSubject {
+.questionSubject {
   display: flex;
   justify-content: center;
   color: white;
+  padding: 4px 10px;
   font-size: 1.15rem;
 }
 
+:link {
+  color: #2c8c99;
+}
+
+
 .questionText {
+  color: white;
+  box-sizing: border-box;
   border-top: 2px solid #2c8c99;
   padding: 10px 20px;
   justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+
 }
 
 .questionFooter {
@@ -311,5 +325,30 @@ width: 100%;
 .sign-up-container{
   padding: 40px;
   font-size: large;
-  
+
 }
+<<<<<<< HEAD
+=======
+
+.searchHeader {
+  font-size: 2rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.searchVal {
+  font-size: 1.75rem;
+  color: #433E3F;
+  padding-bottom: 10px;
+}
+
+.answerAmount {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid white;
+  width: 95%;
+  color: #433E3F;
+  padding: 5px;
+}
+>>>>>>> main
