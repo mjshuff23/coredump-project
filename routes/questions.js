@@ -14,6 +14,7 @@ router.get('/', asyncHandler(async(req, res, next) => {
   res.render('questions', { questions });
 }));
 
+
 router.get('/:id', asyncHandler(async(req, res, next) => {
   const questionId = parseInt(req.params.id);
   // Find question based on id
@@ -23,11 +24,11 @@ router.get('/:id', asyncHandler(async(req, res, next) => {
   const answers = await Answer.findAll({
     where: {
       questionId: {
-        [Op.in]: [questionId],
+        [Op.eq]: [questionId],
       }
     },
   });
-
+  console.log(answers.length);
   res.render('question', { question, answers });
 }));
 

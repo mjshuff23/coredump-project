@@ -22,21 +22,30 @@ html(lang="en")
     link(href="../style.css" rel='stylesheet' type='text/css')
     link(href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet")
     title= question.questionSubject
-  body
+  body.gradient
     div.searchHeader= question.questionSubject
     br
     br
     div.questionContainer
-      div.containerSolo
+      div.containerSolo.box-width
         div.questionVotes
           span(style="font-size: 2em; color: lightblue;")
             i(class="fas fa-caret-up")
+            span 0
           span(style="font-size: 2em; color: lightblue;")
             i(class="fas fa-caret-down")
         div.questionTextSolo
-          span #{question.questionText}
-        div.questionFooter Author: #{question.userId} </br> Posted: #{question.createdAt}
-      div.containerSolo
-        each answer in answers
-          p.answer Answer: #{answer.answerText}
-          p.questionFooter Author: #{answer.userId} </br> Posted: #{answer.createdAt}
+          span #{question.questionText} <br>
+          span.author Author: John Hughes </br> Posted: March 25, 2020
+        //- Author: #{question.userId} </br> Posted: #{question.createdAt}
+      div.numAnswers
+        if answers.length === 1
+          span #{answers.length} Answer
+        else if answers.length === 0
+          span No answers for this question
+        else
+          span #{answers.length} Answers
+      each answer in answers
+        div.containerSolo.box-width
+          p.questionTextSolo #{answer.answerText}
+            span.author Author: #{answer.userId} </br> Posted: March 26, 2020

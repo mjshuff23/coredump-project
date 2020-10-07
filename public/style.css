@@ -242,10 +242,10 @@ width: 100%;
 .containerSolo {
   display: flex;
   align-items: stretch;
-  width: 80%;
+  width: 625px;
   max-height: 100%;
   border-radius: 25px;
-  background-color: #d5a23c;
+  background-color: #226d77;
   margin: 0px 0px 10px;
 }
 
@@ -266,7 +266,6 @@ width: 100%;
 .questionText {
   color: white;
   box-sizing: border-box;
-  border-top: 2px solid #2c8c99;
   padding: 10px 20px;
   justify-content: center;
   overflow: hidden;
@@ -277,7 +276,6 @@ width: 100%;
 }
 
 .questionFooter {
-  display: flex;
   justify-content: center;
   padding: 10px 0 10px 0;
   max-height: 100%;
@@ -289,12 +287,12 @@ width: 100%;
   font-weight: 10;
 }
 
-.answer {
+.author {
   display: flex;
-  padding: 10px 0 0 0;
-  justify-content: center;
-  width: 500px;
+  justify-content: flex-end;
 }
+
+
 .sign-up-container{
   padding: 40px;
   font-size: large;
@@ -326,20 +324,34 @@ width: 100%;
 .questionTextSolo {
   color: white;
   padding: 10px 20px;
-  max-width: 80%;
+  width: 575px;
 }
 
 .answer {
+  display: flex;
+  padding: 10px 0 0 0;
+  justify-content: center;
   margin-top: 0;
   color: white;
   max-height: 10px;
   box-sizing: border-box;
   justify-content: center;
-  max-width: 100%;
+}
+
+.numAnswers {
+  color: #226d77;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.box-width {
+  width: 50%;
+  min-width: 320px;
 }
 
 .questionVotes {
   display: flex;
   flex-direction: column;
   max-width: 20%;
+  margin-left: 10px;
 }
