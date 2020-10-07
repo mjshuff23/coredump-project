@@ -76,7 +76,7 @@ body {
   border-bottom: 1px solid white;
   position: relative;
   text-align: center;
-  margin-left: 350px;
+  /* margin-left: 350px; */
 }
 
 .login, .signup {
@@ -101,7 +101,54 @@ body {
   text-decoration: none;
 }
 
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+.mceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: 125px;
+  width: 90%;
+  /* margin-left: 79px;  */
+}
 
+.mceErrors {
+  /* box-sizing: border-box; */
+  /* width: 75%;
+  height: 60%;
+  margin-top: 125px;
+  margin-left: 213px; */
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.mceSubmit {
+  margin-top: 10px;
+  border-radius: 2px;
+  float: right;
+  right: 10px;
+  height: 40px;
+
+}
+.mceSubject {
+  width: 99%;
+  height: 30px;
+  border-radius: 2px;
+}
+
+.mceBox {
+  box-sizing: border-box;
+  width: 75%;
+  height: 60%;
+  /* margin-top: 125px;
+  margin-left: 213px; */
+  border-radius: 2px;
+
+}
 .avatar {
   box-sizing: border-box;
   padding-right: 40px;
@@ -117,18 +164,20 @@ body {
 }
 
 
-#leftbar {
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-width: 100%;
+.leftbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 20%;
 }
 
 .center {
   display: flex;
   flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
+  align-items: center;
+  /* flex-basis: 100%;
+  flex: 1; */
+  width: 80%;
 
 }
 
