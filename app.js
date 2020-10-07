@@ -12,7 +12,6 @@ const cookieParser = require('cookie-parser');
 // const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { searchRouter } = require('./routes/api/search');
-
 const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
 
 
@@ -28,6 +27,7 @@ app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 
 
+//TODO: Get username from session Id
 app.get('/', (req, res) => {
   res.render('banner')
 })

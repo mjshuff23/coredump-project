@@ -1,9 +1,9 @@
 const signUpForm = document.querySelector(".sign-up-form");
+import { handleErrors } from "./errors.js";
 
 signUpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(signUpForm);
-
   const userName = formData.get("userName");
   const email = formData.get("email");
   const password = formData.get("password");
@@ -32,31 +32,6 @@ signUpForm.addEventListener("submit", async (e) => {
     localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
     window.location.href = "/";
   } catch (err) {
-    if (err.status >= 400 && err.status < 600) {
-      const errorJSON = await err.json();
-      const errorsContainer = document.querySelector(".errors-container");
-      let errorsHtml = [
-        `
-        <div class="alert alert-danger">
-            Something went wrong. Please try again.
-        </div>
-      `,
-      ];
-      const { errors } = errorJSON;
-      if (errors && Array.isArray(errors)) {
-        errorsHtml = errors.map(
-          (message) => `
-          <div class="alert alert-danger">
-              ${message}
-          </div>
-        `
-        );
-      }
-      errorsContainer.innerHTML = errorsHtml.join("");
-    } else {
-      alert(
-        "Something went wrong. Please check your internet connection and try again!"
-      );
-    }
+    handleErrors(err);
   }
 });
