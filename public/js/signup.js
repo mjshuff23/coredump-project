@@ -1,5 +1,5 @@
 const signUpForm = document.querySelector(".sign-up-form");
-import { handleErrors } from "./errors.js";
+// import { handleErrors } from "./errors.js";
 
 signUpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -30,7 +30,7 @@ signUpForm.addEventListener("submit", async (e) => {
     // storage access_token in localStorage:
     localStorage.setItem("COREDUMP_ACCESS_TOKEN", token);
     localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
-    window.location.href = "/login";
+    window.location.href = "/";
   } catch (err) {
     handleErrors(err);
   }

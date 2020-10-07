@@ -2,33 +2,41 @@ const express = require("express");
 const db = require('./db/models');
 const { User, Question, Answer, Vote } = db;
 const morgan = require("morgan");
-const { environment } = require('./config');
+const { environment, model, cookieConfig, jwtConfig } = require('./config');
+const { secret, expiresIn } = jwtConfig;
 const app = express();
 const usersRouter = require("./routes/api/users");
-// const indexRouter = require("./routes/api/index");
+const bearerToken = require('express-bearer-token');
+const { checkAuth } = require("./auth.js");
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
+
 const bodyParser = require('body-parser');
 const { searchRouter } = require('./routes/api/search');
 const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
 
+
+// const { Question } = require('./db/models')
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use(cookieParser());
+app.use(cookieParser(cookieConfig));
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bearerToken({
+  cookie: {
+    signed: true,
+    secret,
+    key: "access_token",
+  }
+}));
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 
-
 //TODO: Get username from session Id
 app.get('/', (req, res) => {
-  res.render('site-layout', {
-    user: "User"
-  });
+  res.render('banner')
 })
 
 app.get('/login', (req, res) => {
@@ -37,8 +45,15 @@ app.get('/login', (req, res) => {
 
 app.get('/signup', (req, res) => {
   res.render('signup');
-})
+});
 
+app.get('/main', checkAuth, async (req, res) => {
+  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+  // const signedIn = true;
+  // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
+  console.log(req.user)
+  res.render('main', { topQuestions, signedIn: req.user })
+})
 
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
@@ -53,6 +68,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   const isProduction = environment === "production";
+  console.log(err);
   res.json({
     title: err.title || "Server Error",
     message: err.message,

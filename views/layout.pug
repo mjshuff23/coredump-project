@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" type='text/css' href="/style.css")
+    script(src='../js/logout.js')
+    title Core Dump - Welcome
+  body.gradient2
+    div.wrapper
+      div.leftbar
+        p.logobox-a
+        p.logobox-b
+        p.logobox-c
+        a(href='/').logo COREDUMP
+      div.center
+        span.search
+          form(method='post' action='/search')
+          button(type='submit').btn-search Search
+          input(type='search' class='input-search' placeholder='search coredump' name='searchBtn' required)
+          if !signedIn
+            a(href='/login').login Login
+            a(href='/signup').signup Sign Up
+          else
+            button().logout Log Out
+            span.navbar-text Welcome User!
+          a(href='/')
+          span.avatar
+        p.line
+        block content
+    div.footer
+      p © Copyright: App Academy Group Project - July Cohort 2020
