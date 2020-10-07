@@ -9,7 +9,7 @@ const router = express.Router();
 
 const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
 
-router.post('/', asyncHandler(async(req, res, next) => {
+router.post('/', asyncHandler(async (req, res, next) => {
   let { search } = req.body;         // Grab search value
   let relevantQuestions = [];
   let questionIds = [];
@@ -23,7 +23,7 @@ router.post('/', asyncHandler(async(req, res, next) => {
     let questionSubject = questions[i].questionSubject.toLowerCase();
 
     if (questionText.includes(` ${search}`) || questionSubject.includes(` ${search}`)
-     || questionText.startsWith(search)      || questionSubject.startsWith(search)) {
+      || questionText.startsWith(search) || questionSubject.startsWith(search)) {
       relevantQuestions.push(questions[i]);
       questionIds.push(questions[i].id);
     }
