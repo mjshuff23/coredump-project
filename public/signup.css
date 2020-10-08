@@ -21,6 +21,13 @@
   margin-top: 20px;
 }
 
+.btn-login {
+  margin-top: 20px;
+}
+
+.btn-signUp {
+  margin-top: 10px
+}
 
 
 .input-username, .input-email,.input-avatar, .input-password, .input-confirmPassword {
@@ -31,3 +38,7 @@
   border: 1px solid grey;
   margin-bottom: 5px;
 }
+
+.footer {
+  margin-top: 90px;
+  }

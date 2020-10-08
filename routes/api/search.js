@@ -1,15 +1,12 @@
 const express = require("express");
 const db = require('../../db/models');
 const { User, Question, Answer, Vote } = db;
-const morgan = require("morgan");
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const { Op } = require("sequelize");
 const router = express.Router();
 
-const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
+const { asyncHandler } = require('../../utils');
 
-router.post('/', asyncHandler(async (req, res, next) => {
+router.post('/', asyncHandler (async (req, res, next) => {
   let { search } = req.body;         // Grab search value
   let relevantQuestions = [];
   let questionIds = [];

@@ -1,5 +1,4 @@
 const loginForm = document.querySelector(".log-in-form");
-// const { query } = require("express");
 import { handleErrors } from "./errors.js";
 
 loginForm.addEventListener("submit", async (e) => {
@@ -28,32 +27,21 @@ loginForm.addEventListener("submit", async (e) => {
 		localStorage.setItem("COREDUMP_ACCESS_TOKEN", token);
 		localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
 
+		window.location.href = "/main";
+		// let login = document.querySelector("login");
+		// let signup = document.querySelector("signup");
+		// let welcome = document.querySelector("navbar-text");
+		// let logout = document.querySelector("logout");
 
-		// document
-		// 	.querySelector(".navbar-logout-text")
-		// 	.classList.remove("hidden")
+		// if (login && signup) {
+		// 	login.classList.add("hidden")
+		// 	signup.classList.add("hidden")
+		// }
+		// if (logout) {
+		// 	logout.classList.remove("hidden")
+		// 	welcome.classList.remove("hidden")
+		// }
 
-		// document
-		// 	.querySelector(".navbar-signup-login")
-		// 	.classList.add("hidden")
-
-		// document
-		// 	.querySelector(".login")
-		// 	.classList.add("hidden")
-
-		// document
-		// 	.querySelector(".signup")
-		// 	.classList.add("hidden")
-
-		// document
-		// 	.querySelector(".logout-button")
-		// 	.classList.remove("hidden")
-
-		// document
-		// 	.querySelector(".welcome-text")
-		// 	.classList.remove("hidden")
-
-		window.location.href = "http://localhost:8080/";
 	}
 	catch (err) {
 		handleErrors(err);

@@ -1,32 +1,46 @@
 const express = require("express");
-const db = require('./db/models');
-const { User, Question, Answer, Vote } = db;
-const morgan = require("morgan");
-const { environment, model } = require('./config');
 const app = express();
+
+const csurf = require('csurf');
+const cookieParser = require('cookie-parser');
+const csrfProtection = csurf({ cookie: true });
+
+const questionsRoute = require('./routes/api/questions');
+const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
 
+const { asyncHandler } = require('./utils');
+
+const db = require('./db/models');
+const { User, Question, Answer, Vote } = db;
+
+const morgan = require("morgan");
+const { environment, model, cookieConfig, jwtConfig } = require('./config');
+const { secret, expiresIn } = jwtConfig;
+
 const path = require('path');
-const cookieParser = require('cookie-parser');
-// const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const { searchRouter } = require('./routes/api/search');
-const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
-
-
-// const { Question } = require('./db/models')
-app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use(cookieParser());
+const bearerToken = require('express-bearer-token');
+const { checkAuth } = require("./auth.js");
+
+
+app.set('view engine', 'pug');
+
+app.use(cookieParser(cookieConfig));
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bearerToken({
+  cookie: {
+    signed: true,
+    secret,
+    key: "access_token",
+  }
+}));
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
+app.use("/questions", questionsRoute);
 
-
-//TODO: Get username from session Id
 app.get('/', (req, res) => {
   res.render('banner')
 })
@@ -39,15 +53,19 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 })
 
-app.get('/main', async (req, res) => {
+app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-  res.render('main', { topQuestions })
+  // const signedIn = true;
+  // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
+  console.log(req.user)
+  res.render('main', { topQuestions, signedIn: req.user })
 })
 
-app.get('/users', (req, res) => {
-  res.render('user');
-})
 
+app.get('/postQuestion', csrfProtection, (req, res) => {
+  let csrfToken = req.csrfToken();
+  res.render('add-question', { csrfToken })
+})
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
   const err = new Error("The requested resource couldn't be found.");
@@ -65,6 +83,7 @@ app.use((err, req, res, next) => {
   res.json({
     title: err.title || "Server Error",
     message: err.message,
+    errors: err.errors,
     stack: isProduction ? null : err.stack,
   });
 });
