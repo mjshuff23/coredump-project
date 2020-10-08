@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 const router = express.Router();
 const { asyncHandler } = require('../../utils');
 
-router.post('/', asyncHandler (async (req, res, next) => {
+router.post('/', asyncHandler(async (req, res, next) => {
   let { search } = req.body;         // Grab search value
   let relevantQuestions = [];
   let questionIds = [];
