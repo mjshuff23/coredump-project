@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   Vote.associate = function(models) {
     // associations can be defined here
     Vote.belongsTo( models.User, { foreignKey: 'userId' });
-    Vote.belongsTo( models.Question, { foreignKey: 'questionId' });
+    Vote.belongsTo( models.Question, { foreignKey: 'answerId' });
   };
   return Vote;
 };
