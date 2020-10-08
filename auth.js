@@ -20,7 +20,7 @@ const getUserToken = (user) => {
 		{ data: userDataForToken },
 		secret,
 		// Expires in 1 week
-		{ expiresIn: parseInt(expiresIn, 10) }
+		{ expiresIn: 60012 }
 	)
 
 	return token;
@@ -56,10 +56,56 @@ const restoreUser = async (req, res, next) => {
 	});
 };
 
-const requireAuth = [bearerToken(), restoreUser];
+const restoreTemplateUser = async (req, res, next) => {
+	const { token } = req;
+
+	if (!token) {
+		return next();
+	}
+
+	return jwt.verify(token, secret, null, async (err, jwtPayload) => {
+		// Define asynchronous function for jwtPayload logic
+		if (err) {
+			console.log(err, token);
+			next()
+			return;
+		}
+
+		const { id } = jwtPayload.data;
+
+		try {
+			req.user = await User.findByPk(id);
+		} catch (e) {
+			return next(e);
+		}
+
+		if (!req.user) {
+			return res.set("WWW-Authenticate", "Bearer").status(401).end();
+		}
+
+		return next();
+	})
+}
+
+const requireAuth = [bearerToken({
+	cookie: {
+		signed: true,
+		secret,
+		key: "accessToken",
+	}
+}), restoreUser];
+
+const checkAuth = [bearerToken({
+	cookie: {
+		signed: true,
+		secret,
+		key: "accessToken",
+	}
+}), restoreTemplateUser];
 
 
 module.exports = {
 	getUserToken,
-	requireAuth
+	requireAuth,
+	checkAuth
 }
