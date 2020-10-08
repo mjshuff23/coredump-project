@@ -1,51 +1,28 @@
-//- doctype html
-//- html(lang="en")
-//-   head
-//-     meta(charset="UTF-8")
-//-     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-//-     link(rel="stylesheet" type='text/css' href="/style.css")
-//-     title= question.questionSubject
-//-   body
-//-     div.containerSolo
-//-       h1.questionSubject= question.questionSubject
-//-       div.questionTextSolo= question.questionText
-//-       div.questionFooter Author: #{question.userId} </br> Posted: #{question.createdAt}
-//-       div
-//-         each answer in answers
-//-           p.answer Answer: #{answer.answerText}
-//-           p.questionFooter Author: #{answer.userId} </br> Posted: #{answer.createdAt}
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(href="../style.css" rel='stylesheet' type='text/css')
-    link(href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet")
-    title= question.questionSubject
-  body.gradient
-    div.searchHeader= question.questionSubject
-    br
-    br
-    div.questionContainer
+extends layout.pug
+block content
+  div.searchHeader= question.questionSubject
+  br
+  br
+  div.questionContainer
+    div.containerSolo.box-width
+      div.questionVotes
+        span(style="font-size: 2em; color: lightblue;")
+          i(class="fas fa-caret-up")
+          span 0
+        span(style="font-size: 2em; color: lightblue;")
+          i(class="fas fa-caret-down")
+      div.questionTextSolo
+        span #{question.questionText} <br>
+        span.author Author: John Hughes </br> Posted: March 25, 2020
+      //- Author: #{question.userId} </br> Posted: #{question.createdAt}
+    div.numAnswers
+      if answers.length === 1
+        span #{answers.length} Answer
+      else if answers.length === 0
+        span No answers for this question
+      else
+        span #{answers.length} Answers
+    each answer in answers
       div.containerSolo.box-width
-        div.questionVotes
-          span(style="font-size: 2em; color: lightblue;")
-            i(class="fas fa-caret-up")
-            span 0
-          span(style="font-size: 2em; color: lightblue;")
-            i(class="fas fa-caret-down")
-        div.questionTextSolo
-          span #{question.questionText} <br>
-          span.author Author: John Hughes </br> Posted: March 25, 2020
-        //- Author: #{question.userId} </br> Posted: #{question.createdAt}
-      div.numAnswers
-        if answers.length === 1
-          span #{answers.length} Answer
-        else if answers.length === 0
-          span No answers for this question
-        else
-          span #{answers.length} Answers
-      each answer in answers
-        div.containerSolo.box-width
-          p.questionTextSolo #{answer.answerText}
-            span.author Author: #{answer.userId} </br> Posted: March 26, 2020
+        p.questionTextSolo #{answer.answerText}
+          span.author Author: #{answer.userId} </br> Posted: March 26, 2020

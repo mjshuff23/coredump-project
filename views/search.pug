@@ -1,17 +1,11 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(href="../style.css" rel='stylesheet' type='text/css')
-    title Search Results
-  body.gradient
-    div.searchHeader Questions related to:
-    span.searchHeader.searchVal: strong "#{search}"
-    if relevantQuestions
-      div.questionContainer
-        each question in relevantQuestions
-          div.containerSolo.box-width.searchTextSolo
-              div.questionLink: a(href=`/questions/${question.id}`) #{question.questionSubject}
-              div.searchTextSolo #{question.questionText}
-              div.answerAmount #{question.answers.length} Answer(s), 0 Votes(not implemented)
+extends layout.pug
+block content
+  div.searchHeader Questions related to:
+  span.searchHeader.searchVal: strong "#{search}"
+  if relevantQuestions
+    div.questionContainer
+      each question in relevantQuestions
+        div.containerSolo.box-width.searchTextSolo
+          div.questionLink: a(href=`/questions/${question.id}`) #{question.questionSubject}
+          div.searchTextSolo #{question.questionText}
+          div.answerAmount #{question.answers.length} Answer(s), 0 Votes(not implemented)
