@@ -23,13 +23,12 @@ html(lang="en")
       div.center
         span.search
           form(method='post' action='/search')
-          button(type='submit').btn-search Search
-          input(type='search' class='input-search' placeholder='search coredump' name='searchBtn' required)
-          a(href='/login').login Login
-          a(href='/signup').signup Sign Up
-          a(href='/')
-          //- p.line
-          span.avatar
+            input(type='text' class='input-search' placeholder='search coredump' name='searchBtn' required)
+            input(type='submit').btn-search
+            a(href='/login').login Login
+            a(href='/signup').signup Sign Up
+            a(href='/')
+            span.avatar
         div.main-box
             block content
         div.footer

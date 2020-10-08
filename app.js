@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 
@@ -43,7 +44,7 @@ app.get('/main', async (req, res) => {
   res.render('main', { topQuestions })
 })
 
-app.get('/user', (req, res) => {
+app.get('/users', (req, res) => {
   res.render('user');
 })
 
