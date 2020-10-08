@@ -3,6 +3,7 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet")
     link(rel="stylesheet" type='text/css' href="/style.css")
     script(src='../js/logout.js')
     title Core Dump - Welcome
@@ -19,21 +20,21 @@ html(lang="en")
             p
             a(href='/main').submenu-questions Recent Questions
             p
-            a(href='/user').submenu-users Users
+            a(href='/users').submenu-users Users
       div.center
         span.search
           form(method='post' action='/search')
-            input(type='text' class='input-search' placeholder='search coredump' name='searchBtn' required)
+            input(type='text' class='input-search' placeholder='search coredump' name='searchBtn')
             input(type='submit').btn-search
             if !signedIn
               a(href='/login').login Login
               a(href='/signup').signup Sign Up
             else
-              button().logout Log Out
+              span.logout Log Out
               span.avatar
-              span.navbar-text Welcome User!
+              span.navbar-text Welcome #{signedIn.dataValues.userName}!
             a(href='/')
-            div.main-box
-            block content
+        div.main-box
+        block content
         div.footer
-          p © Copyright: App Academy Group Project - July Cohort 2020
+        p © Copyright: App Academy Group Project - July Cohort 2020
