@@ -1,6 +1,4 @@
 const express = require("express");
-const app = express();
-
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const csrfProtection = csurf({ cookie: true });
@@ -8,15 +6,14 @@ const csrfProtection = csurf({ cookie: true });
 const questionsRoute = require('./routes/api/questions');
 const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
-
-const { asyncHandler } = require('./utils');
-
 const db = require('./db/models');
 const { User, Question, Answer, Vote } = db;
-
 const morgan = require("morgan");
 const { environment, model, cookieConfig, jwtConfig } = require('./config');
 const { secret, expiresIn } = jwtConfig;
+
+
+const app = express();
 
 const path = require('path');
 app.use(express.static(path.join(__dirname, '/public')));
@@ -30,6 +27,7 @@ app.set('view engine', 'pug');
 app.use(cookieParser(cookieConfig));
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bearerToken({
   cookie: {
     signed: true,
@@ -42,15 +40,15 @@ app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
 
 app.get('/', (req, res) => {
-  res.render('banner')
+  res.render('banner', { title: 'Core Dump - Welcome' })
 })
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', { title: 'Login Page' });
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup');
+  res.render('signup', { title: 'Login Page' });
 })
 
 app.get('/main', checkAuth, async (req, res) => {
@@ -58,7 +56,7 @@ app.get('/main', checkAuth, async (req, res) => {
   // const signedIn = true;
   // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
   console.log(req.user)
-  res.render('main', { topQuestions, signedIn: req.user })
+  res.render('main', { topQuestions, signedIn: req.user, title: 'Login Page' })
 })
 
 

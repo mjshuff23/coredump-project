@@ -1,6 +1,5 @@
 'use strict';
 const moment = require('moment');
-
 module.exports = (sequelize, DataTypes) => {
   const Question = sequelize.define('Question', {
     questionSubject: DataTypes.TEXT,
