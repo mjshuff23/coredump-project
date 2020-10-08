@@ -1,6 +1,4 @@
 const express = require("express");
-const app = express();
-
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const csrfProtection = csurf({ cookie: true });
@@ -8,15 +6,14 @@ const csrfProtection = csurf({ cookie: true });
 const questionsRoute = require('./routes/api/questions');
 const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
-
-const { asyncHandler } = require('./utils');
-
 const db = require('./db/models');
 const { User, Question, Answer, Vote } = db;
-
 const morgan = require("morgan");
 const { environment, model, cookieConfig, jwtConfig } = require('./config');
 const { secret, expiresIn } = jwtConfig;
+
+
+const app = express();
 
 const path = require('path');
 app.use(express.static(path.join(__dirname, '/public')));
@@ -30,6 +27,7 @@ app.set('view engine', 'pug');
 app.use(cookieParser(cookieConfig));
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bearerToken({
   cookie: {
     signed: true,

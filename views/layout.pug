@@ -3,10 +3,11 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet")
     link(rel="stylesheet" type='text/css' href="/style.css")
     script(src='../js/logout.js')
     title Core Dump - Welcome
-  body.gradient2
+  body.gradient
     div.wrapper
       div.leftbar
         p.logobox-orange
@@ -20,12 +21,12 @@ html(lang="en")
             a(href='/main').submenu-questions Recent Questions
             p
             a(href='/user').submenu-users Users
-
       div.center
         span.search
           form(method='post' action='/search')
-          input(type='search' class='input-search' placeholder='search coredump' name='search' required)
-          input(type='submit').btn-search
+            label(for='search')
+            input(type='text' name='search' placeholder='search coredump' required).input-search
+            input(type='submit' name='searchBtn').btn-search
           if !signedIn
             a(href='/login').login Login
             a(href='/signup').signup Sign Up
