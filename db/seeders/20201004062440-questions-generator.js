@@ -35,6 +35,34 @@ module.exports = {
           updatedAt: new Date(),
           userId: 2,
         },
+        {
+          questionSubject: faker.company.catchPhrase(),
+          questionText: faker.company.catchPhrase(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          userId: 5,
+        },
+        {
+          questionSubject: faker.company.catchPhrase(),
+          questionText: faker.company.catchPhrase(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          userId: 7,
+        },
+        {
+          questionSubject: faker.company.catchPhrase(),
+          questionText: faker.company.catchPhrase(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          userId: 3,
+        },
+        {
+          questionSubject: faker.company.catchPhrase(),
+          questionText: faker.company.catchPhrase(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          userId: 1,
+        },
       ],
       {}
     );
