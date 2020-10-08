@@ -1,11 +1,12 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { handleValidationErrors, asyncHandler } = require('../../utils');
+const { Op } = require("sequelize");
 const router = express.Router();
 const db = require('../../db/models');
 
 
-const { Question } = db;
+const { Question, Answer } = db;
 
 const validateQuestion = [
     check("questionSubject")
@@ -29,5 +30,30 @@ router.post(
         res.json({ question });
     })
 );
+
+router.get('/', asyncHandler(async(req, res, next) => {
+    // Get all questions
+    const questions = await Question.findAll();
+
+    res.render('questions', { questions });
+  }));
+
+
+  router.get('/:id', asyncHandler(async(req, res, next) => {
+    const questionId = parseInt(req.params.id);
+    // Find question based on id
+    const question = await Question.findByPk(questionId);
+    // Find associated answers based on id
+    console.log(questionId);
+    const answers = await Answer.findAll({
+      where: {
+        questionId: {
+          [Op.eq]: [questionId],
+        }
+      },
+    });
+    console.log(answers.length);
+    res.render('question', { question, answers });
+  }));
 
 module.exports = router;

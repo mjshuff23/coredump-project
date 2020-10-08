@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", (e) => {
     const logoutButton = document
         .querySelector(".logout")
-
+    if (!logoutButton) return;
     logoutButton.addEventListener('click', async (eve) => {
         try {
             const res = await fetch("/users/logout", {
