@@ -25,6 +25,14 @@ module.exports = {
           questionText: faker.company.catchPhrase(),
           createdAt: new Date(),
           updatedAt: new Date(),
+          userId: 1,
+        },
+
+        {
+          questionSubject: faker.company.catchPhrase(),
+          questionText: faker.company.catchPhrase(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
           userId: 2,
         },
       ],

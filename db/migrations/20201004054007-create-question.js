@@ -10,7 +10,7 @@ module.exports = {
       },
       questionSubject: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING(45)
       },
       questionText: {
         allowNull: false,
