@@ -19,7 +19,7 @@
   position: fixed;
   top: 65px;
   left: 102px;
-  z-index: 2;
+  z-index: 9;
 }
 
 .logobox-back-logo {
@@ -102,7 +102,7 @@
   padding:30px;
   text-decoration: none;
   position: fixed;
-  z-index: 10;
+  z-index: 0;
   background-color: #809096;
   /* background-color:   #2C8C99; */
   top: 0px;
