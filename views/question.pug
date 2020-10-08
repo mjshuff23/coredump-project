@@ -1,19 +1,20 @@
 extends layout.pug
 block content
-  div.searchHeader= question.questionSubject
   br
   br
   div.questionContainer
     div.containerSolo.box-width
-      div.questionVotes
-        span(style="font-size: 2em; color: lightblue;")
-          i(class="fas fa-caret-up")
-          span 0
-        span(style="font-size: 2em; color: lightblue;")
-          i(class="fas fa-caret-down")
-      div.questionTextSolo
-        span #{question.questionText} <br>
-        span.author Author: John Hughes </br> Posted: March 25, 2020
+      div.questionRow1= question.questionSubject
+      div.questionRow2
+        div.questionVotes
+          span(style="font-size: 2em; color: lightblue;")
+            i(class="fas fa-caret-up")
+            p.score 0
+          span(style="font-size: 2em; color: lightblue;")
+            i(class="fas fa-caret-down")
+        div.questionTextSolo
+          span #{question.questionText} <br>
+      span.author Author: John Hughes </br> Posted: March 25, 2020
       //- Author: #{question.userId} </br> Posted: #{question.createdAt}
     div.numAnswers
       if answers.length === 1
@@ -24,5 +25,12 @@ block content
         span #{answers.length} Answers
     each answer in answers
       div.containerSolo.box-width
-        p.questionTextSolo #{answer.answerText}
-          span.author Author: #{answer.userId} </br> Posted: March 26, 2020
+        div.questionRow2
+          div.questionVotes
+            span(style="font-size: 2em; color: lightblue;")
+              i(class="fas fa-caret-up")
+              p.score 0
+            span(style="font-size: 2em; color: lightblue;")
+              i(class="fas fa-caret-down")
+          p.questionTextSolo #{answer.answerText}
+            span.authorAnswer Author: #{answer.userId} </br> Posted: March 26, 2020
