@@ -61,6 +61,7 @@ app.get('/main', checkAuth, async (req, res) => {
   res.render('main', { topQuestions, signedIn: req.user })
 })
 
+
 app.get('/postQuestion', csrfProtection, (req, res) => {
   let csrfToken = req.csrfToken();
   res.render('add-question', { csrfToken })
