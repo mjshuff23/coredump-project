@@ -9,10 +9,10 @@ html(lang="en")
   body.gradient2
     div.wrapper
       div.leftbar
-        p.logobox-a
-        p.logobox-b
-        p.logobox-c
-        a(href='/').logo COREDUMP
+        p.logobox-orange
+        p.logobox-white-border
+        p.logobox-back-logo
+        a(href='/').logo-text COREDUMP
         div.menu
           a(href='/').home Home
           div.public PUBLIC
@@ -30,11 +30,11 @@ html(lang="en")
             a(href='/login').login Login
             a(href='/signup').signup Sign Up
           else
-            button().logout Log Out
+            span.logout Log Out
             span.navbar-text Welcome User!
           a(href='/')
           span.avatar
-        p.line
+        div.main-box
         block content
     div.footer
       p © Copyright: App Academy Group Project - July Cohort 2020
