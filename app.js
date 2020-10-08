@@ -1,25 +1,31 @@
 const express = require("express");
+const app = express();
+
+const csurf = require('csurf');
+const cookieParser = require('cookie-parser');
+const csrfProtection = csurf({ cookie: true });
+
+const questionsRoute = require('./routes/api/questions');
+const { searchRouter } = require('./routes/api/search');
+const usersRouter = require("./routes/api/users");
+
+const { asyncHandler } = require('./utils');
+
 const db = require('./db/models');
 const { User, Question, Answer, Vote } = db;
+
 const morgan = require("morgan");
 const { environment, model, cookieConfig, jwtConfig } = require('./config');
 const { secret, expiresIn } = jwtConfig;
-const app = express();
-const usersRouter = require("./routes/api/users");
+
+const path = require('path');
+app.use(express.static(path.join(__dirname, '/public')));
+
 const bearerToken = require('express-bearer-token');
 const { checkAuth } = require("./auth.js");
 
-const path = require('path');
-const cookieParser = require('cookie-parser');
 
-const bodyParser = require('body-parser');
-const { searchRouter } = require('./routes/api/search');
-const asyncHandler = handler => (req, res, next) => handler(req, res, next).catch(next);
-
-
-// const { Question } = require('./db/models')
 app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(cookieParser(cookieConfig));
 app.use(morgan("dev"));
@@ -33,8 +39,8 @@ app.use(bearerToken({
 }));
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
+app.use("/questions", questionsRoute);
 
-//TODO: Get username from session Id
 app.get('/', (req, res) => {
   res.render('banner')
 })
@@ -45,7 +51,7 @@ app.get('/login', (req, res) => {
 
 app.get('/signup', (req, res) => {
   res.render('signup');
-});
+})
 
 app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
@@ -55,6 +61,10 @@ app.get('/main', checkAuth, async (req, res) => {
   res.render('main', { topQuestions, signedIn: req.user })
 })
 
+app.get('/postQuestion', csrfProtection, (req, res) => {
+  let csrfToken = req.csrfToken();
+  res.render('add-question', { csrfToken })
+})
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
   const err = new Error("The requested resource couldn't be found.");
@@ -72,6 +82,7 @@ app.use((err, req, res, next) => {
   res.json({
     title: err.title || "Server Error",
     message: err.message,
+    errors: err.errors,
     stack: isProduction ? null : err.stack,
   });
 });

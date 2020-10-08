@@ -1,5 +1,4 @@
 const loginForm = document.querySelector(".log-in-form");
-// const { query } = require("express");
 import { handleErrors } from "./errors.js";
 
 loginForm.addEventListener("submit", async (e) => {
