@@ -53,7 +53,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
       return question;
     });
   }
-  res.render('search', { relevantQuestions, noRelevantQuestions, search });
+  res.render('search', { relevantQuestions, noRelevantQuestions, search, title: 'Search Results' });
 }));
 
 
