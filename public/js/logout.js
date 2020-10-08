@@ -1,18 +1,25 @@
 document.addEventListener("DOMContentLoaded", (e) => {
     const logoutButton = document
-        .querySelector(".logout-button")
+        .querySelector(".logout")
 
-    logoutButton.addEventListener('click', (eve) => {
-        localStorage.removeItem("COREDUMP_CURRENT_USER_ID");
-        localStorage.removeItem("COREDUMP_ACCESS_TOKEN");
+    logoutButton.addEventListener('click', async (eve) => {
+        try {
+            const res = await fetch("/users/logout", {
+                method: "POST",
+            });
+            if (!res.ok) {
+                throw res;
+            }
 
-        // window.location.href = "/login";
-        // document
-        //     .querySelector(".navbar-logout-text")
-        //     .classList.add("hidden")
+            localStorage.removeItem("COREDUMP_CURRENT_USER_ID");
+            localStorage.removeItem("COREDUMP_ACCESS_TOKEN");
+            window.location.href = "/login";
 
-        // document
-        //     .querySelector(".navbar-signup-login")
-        //     .classList.remove("hidden")
+        }
+        catch (err) {
+            console.log(await err.json());
+            // handleErrors(err);
+        }
+
     });
 });
