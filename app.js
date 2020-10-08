@@ -51,6 +51,11 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 })
 
+app.get('/users', async (req, res) => {
+  const users = await User.findAll();
+  res.render('users', { users });
+})
+
 app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
   // const signedIn = true;
