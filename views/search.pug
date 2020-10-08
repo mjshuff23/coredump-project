@@ -11,7 +11,7 @@ html(lang="en")
     if relevantQuestions
       div.questionContainer
         each question in relevantQuestions
-          div.container
-              div.questionSubject: a(href=`/questions/${question.id}`) #{question.questionSubject}
-              div.questionText #{question.questionText}
+          div.containerSolo.box-width.searchTextSolo
+              div.questionLink: a(href=`/questions/${question.id}`) #{question.questionSubject}
+              div.searchTextSolo #{question.questionText}
               div.answerAmount #{question.answers.length} Answer(s), 0 Votes(not implemented)

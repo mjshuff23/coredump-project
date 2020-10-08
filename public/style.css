@@ -527,6 +527,8 @@ margin-top: 90px;
 .author {
   display: flex;
   justify-content: flex-end;
+  padding-top: 20px;
+  padding-top: 20px;
 }
 
 /*
@@ -554,7 +556,7 @@ margin-top: 90px;
   justify-content: center;
   border-top: 1px solid white;
   width: 98%;
-  color: #433E3F;
+  color: #ff6b35;
   padding: 5px;
 }
 
@@ -591,4 +593,19 @@ margin-top: 90px;
   flex-direction: column;
   max-width: 20%;
   margin-left: 10px;
+}
+
+.searchTextSolo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+.questionLink {
+  padding: 5px;
+}
+
+.questionLink :visited {
+  color: whitesmoke;
 }
