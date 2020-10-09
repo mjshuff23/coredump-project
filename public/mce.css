@@ -21,6 +21,12 @@
   height: 40px;
 
 }
+
+.testForm {
+  display: flex;
+  flex-direction: column;
+}
+
 .mceSubject {
   width: 99%;
   height: 30px;
