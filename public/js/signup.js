@@ -61,4 +61,23 @@ signUpForm.addEventListener("submit", async (e) => {
       );
     }
   }
+  try {
+    const res = await fetch("http://localhost:8080/users/token", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      throw res;
+    }
+    const {
+      token,
+      user: { id },
+    } = await res.json();
+  }
+  catch (err) {
+    handleErrors(err);
+  }
 });
