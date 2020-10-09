@@ -7,5 +7,5 @@ block content
       each question in relevantQuestions
         div.containerSolo.box-width.searchTextSolo
           div.questionLink: a(href=`/questions/${question.id}`) #{question.questionSubject}
-          div.searchTextSolo #{question.questionText}
+          div.questionText #{question.questionText}
           div.answerAmount #{question.answers.length} Answer(s), 0 Votes(not implemented)

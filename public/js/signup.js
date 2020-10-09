@@ -1,3 +1,5 @@
+
+
 const signUpForm = document.querySelector(".sign-up-form");
 
 signUpForm.addEventListener("submit", async (e) => {
@@ -7,6 +9,8 @@ signUpForm.addEventListener("submit", async (e) => {
   const email = formData.get("email");
   const password = formData.get("password");
   const avatar = formData.get("avatar");
+
+
 
 
   const body = { email, password, userName, avatar };
@@ -62,3 +66,12 @@ signUpForm.addEventListener("submit", async (e) => {
     }
   }
 });
+
+// function setDefaults(){
+//   if(document.signUpForm.avatar.value==""){
+//       document.signUpForm.avatar.value = "/images/avataaars(12).png";
+//   }
+// }
+// setDefaults();
+
+//faker import?
