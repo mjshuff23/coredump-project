@@ -55,34 +55,40 @@ async function registerQuestionVote(vote, userId, questionId) {
 }
 
 async function countQuestionVotes(questionId) {
-    votes = QuestionVote.findAll( {
-        where: questionId
-    });
-
-    return countVotes(votes);
+  const questionVotes = await QuestionVote.findAll({
+    where: {
+      questionId: {
+        [Op.eq]: [questionId],
+      }
+    },
+  });
+  console.log('made it here')
+  return countVotes(questionVotes);
 }
 
 async function countAnswerVotes(answerId) {
-    votes = AnswerVote.findAll( {
-        where: answerId
+    const answerVotes = await AnswerVote.findAll({
+      where: {
+        answerId: {
+          [Op.eq]: [answerId],
+        }
+      },
     });
 
-    return countVotes(votes);
+    return countVotes(answerVotes);
 }
 
 function countVotes(votes) {
-    let upVote = 0;
-    let downVote = 0;
-
-    for (let i=0; i < votes.length; i++) {
-        if (votes[i].vote) {
-            upVote++;
-        } else {
-            downVote++;
-        }
+  let score = 0;
+  // Find all the trues and all the falses related to this question
+  for (let vote of votes) {
+    if (vote.vote) {
+      score++;
+    } else {
+      score--;
     }
-
-    return upVote - downVote;
+  }
+  return score;
 }
 function setVote(voted, vote) {
   //if we find a vote for this userId and AnswerId, let's see if we can change it.
@@ -128,7 +134,10 @@ router.get('/', asyncHandler(async(req, res, next) => {
   router.get('/:id', asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
+    // Find question based on id
     const question = await Question.findByPk(questionId);
+    // Find votes associated with question
+    let score = await countQuestionVotes(questionId);
     // Find associated answers based on id
     console.log(questionId);
     const answers = await Answer.findAll({
@@ -138,8 +147,13 @@ router.get('/', asyncHandler(async(req, res, next) => {
         }
       },
     });
+    // Find scores associated with each answer
+    for (let answer of answers) {
+      let score = await countAnswerVotes(answer.id);
+      answer.score = score;
+    }
     console.log(answers.length);
-    res.render('question', { question, answers });
+    res.render('question', { question, answers, score });
   }));
 
 module.exports = router;
