@@ -5,7 +5,7 @@
 @import 'signup.css';
 @import 'main.css';
 @import 'mce.css';
-@import 'navbar.sass';
+
 
 .gradient {
   background-image: linear-gradient(180deg, #2c8c99, whitesmoke, #2c8c99);
