@@ -269,12 +269,17 @@ top: 0px;
 .questionLink {
   font-size: 1.25em;
   padding: 5px;
-}
-
-.questionLink :visited {
   color: #cccccc;
 }
 
+.questionLink :visited {
+  color: #b8b8b8;
+}
+
+.main {
+  font-size: .75em;
+  max-height: 285px;
+}
 .questionRow1 {
   display: flex;
   padding-top: 15px;
@@ -284,6 +289,7 @@ top: 0px;
 }
 
 .questionRow2 {
+  height: auto;
   display: flex;
 }
 
