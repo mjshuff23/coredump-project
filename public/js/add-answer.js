@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     postAnswerButton.addEventListener('click', (e) => {
         e.preventDefault();
         console.log("Prevented default");
-
+        const questionEle = document.querySelector('[data-questionid]');
+        const questionId = questionEle.dataset.questionid;
         let answerText2 = tinymce.activeEditor.getContent();
         let userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
 
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log("Got form Text:  ", answerText);
         console.log("Got the userID:  ", userId);
+        console.log("Got the questionID:  ", questionId);
 
         const body = { answerText, userId, questionId }
 
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function postAnswer(body, questionId) {
+    console.log(body);
     try {
         //Relative to the URL we're currently in
         const res = await fetch("/answers/new", {
@@ -43,7 +46,7 @@ async function postAnswer(body, questionId) {
         if (!res.ok) {
             throw res;
         }
-        window.location.href="/questions/:`${question.id}`";
+        window.location.href=`/questions/${questionId}`;
     }
     catch (res)  {
         console.log("err:  ", res.status);

@@ -8,7 +8,7 @@ const db = require('../../db/models');
 const { Question, Answer, AnswerVote, QuestionVote } = db;
 
 const validateAnswer = [
-  check("questionText")
+  check("answerText")
     .isLength({ min: 30 })
     .withMessage("Answer text must be at least 30 characters long."),
   handleValidationErrors,
@@ -19,6 +19,7 @@ router.post(
     validateAnswer,
     asyncHandler( async (req, res) => {
         const { answerText, userId, questionId } = req.body;
+        console.log(answerText);
         const answer = await Answer.create({ answerText, userId, questionId });
         res.json({ answer });
     })
