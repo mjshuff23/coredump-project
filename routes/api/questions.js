@@ -75,18 +75,16 @@ async function countAnswerVotes(answerId) {
 }
 
 function countVotes(votes) {
-    let upVote = 0;
-    let downVote = 0;
-
-    for (let i=0; i < votes.length; i++) {
-        if (votes[i].vote) {
-            upVote++;
-        } else {
-            downVote++;
-        }
+  let score = 0;
+  // Find all the trues and all the falses related to this question
+  for (let vote of votes) {
+    if (vote.vote) {
+      score++;
+    } else {
+      score--;
     }
-
-    return upVote - downVote;
+  }
+  return score;
 }
 function setVote(voted, vote) {
   //if we find a vote for this userId and AnswerId, let's see if we can change it.
