@@ -40,20 +40,20 @@ app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
 
 app.get('/', (req, res) => {
-  res.render('banner')
+  res.render('banner', { title: 'Core Dump - Welcome' })
 })
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', { title: 'Login Page' });
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup');
+  res.render('signup', { title: 'Sign Up' });
 })
 
 app.get('/users', async (req, res) => {
   const users = await User.findAll();
-  res.render('users', { users });
+  res.render('users', { users, title: 'Users' });
 })
 
 app.get('/main', checkAuth, async (req, res) => {
@@ -61,13 +61,13 @@ app.get('/main', checkAuth, async (req, res) => {
   // const signedIn = true;
   // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
   console.log(req.user)
-  res.render('main', { topQuestions, signedIn: req.user })
+  res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
 
 
 app.get('/postQuestion', csrfProtection, (req, res) => {
   let csrfToken = req.csrfToken();
-  res.render('add-question', { csrfToken })
+  res.render('add-question', { csrfToken, title: 'Ask a Quesstion' })
 })
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
