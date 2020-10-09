@@ -25,6 +25,10 @@
   /* opacity: 0.6; */
 }
 
+.main-btn-question {
+  cursor: pointer;
+}
+
 .main-list-question {
   /* display: flex;
   flex-direction: column; */

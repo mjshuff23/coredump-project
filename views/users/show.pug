@@ -1,0 +1,7 @@
+extends ../layout.pug
+block content
+  div.userCard
+    h2.userCard_userName= user.userName
+    div.userCard_id User ID: #{user.id}
+    img.userCard_img(src=`${user.avatar}` width="250")
+    div.userCard_bio Bio: #{user.bio}

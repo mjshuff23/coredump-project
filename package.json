@@ -18,6 +18,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-bearer-token": "^2.4.0",
+    "express-html-sanitizer": "^1.0.0",
     "express-validator": "^6.4.0",
     "faker": "^5.1.0",
     "jsonwebtoken": "^8.5.1",

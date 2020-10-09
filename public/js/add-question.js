@@ -15,13 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Prevented default");
         let subjectElt = document.getElementById('subject');
 
-        let questionText = tinymce.activeEditor.getContent();
+        let questionText2 = tinymce.activeEditor.getContent();
         let questionSubject = subjectElt.value;
-
         let userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
+
+        const questionText = questionText2.substr(3, questionText2.length - 4);
+        console.log("This is the questionText2:  ", questionText2);
 
         console.log("Got form Text:  ", questionText);
         console.log("Got the subject: ", questionSubject);
+        console.log("Got the userID:  ", userId);
 
         const body = { questionSubject, questionText, userId }
 
@@ -32,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function postQuestion(body) {
     try {
         //Relative to the URL we're currently in
-        const res = await fetch("/api/questions/new", {
+        const res = await fetch("/questions/new", {
             method: "POST",
             body: JSON.stringify(body),
             headers: {
@@ -43,7 +46,7 @@ async function postQuestion(body) {
         if (!res.ok) {
             throw res;
         }
-        window.location.href="/";
+        window.location.href="/main";
     }
     catch (res)  {
         console.log("err:  ", res.status);
