@@ -2,7 +2,8 @@ extends layout.pug
 block content
   div.main-question
     h2 Top Questions
-    button(type='submit').main-btn-question Ask a question
+    if signedIn
+      button(type='submit').main-btn-question Ask a question
   div.main-list-question.questionLink
     div.questionContainer
       each question in topQuestions
