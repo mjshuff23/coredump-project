@@ -55,11 +55,15 @@ async function registerQuestionVote(vote, userId, questionId) {
 }
 
 async function countQuestionVotes(questionId) {
-    votes = QuestionVote.findAll( {
-        where: questionId
-    });
-
-    return countVotes(votes);
+  const questionVotes = await QuestionVote.findAll({
+    where: {
+      questionId: {
+        [Op.eq]: [questionId],
+      }
+    },
+  });
+  console.log('made it here')
+  return countVotes(questionVotes);
 }
 
 async function countAnswerVotes(answerId) {
@@ -71,18 +75,16 @@ async function countAnswerVotes(answerId) {
 }
 
 function countVotes(votes) {
-    let upVote = 0;
-    let downVote = 0;
-
-    for (let i=0; i < votes.length; i++) {
-        if (votes[i].vote) {
-            upVote++;
-        } else {
-            downVote++;
-        }
+  let score = 0;
+  // Find all the trues and all the falses related to this question
+  for (let vote of votes) {
+    if (vote.vote) {
+      score++;
+    } else {
+      score--;
     }
-
-    return upVote - downVote;
+  }
+  return score;
 }
 function setVote(voted, vote) {
   //if we find a vote for this userId and AnswerId, let's see if we can change it.
@@ -120,6 +122,7 @@ router.post(
 router.get('/', asyncHandler(async(req, res, next) => {
     // Get all questions
     const questions = await Question.findAll();
+    // Get votes associated with each question
 
     res.render('questions', { questions });
   }));
@@ -129,6 +132,8 @@ router.get('/', asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
     const question = await Question.findByPk(questionId);
+    // Find votes associated with question
+    let score = await countQuestionVotes(questionId);
     // Find associated answers based on id
     console.log(questionId);
     const answers = await Answer.findAll({
@@ -139,7 +144,7 @@ router.get('/', asyncHandler(async(req, res, next) => {
       },
     });
     console.log(answers.length);
-    res.render('question', { question, answers });
+    res.render('question', { question, answers, score });
   }));
 
 module.exports = router;
@@ -179,4 +184,8 @@ router.get('/:id', asyncHandler(async (req, res, next) => {
   res.render('question', { question, answers, title: question.questionSubject });
 }));
 
-module.exports = router;
+module.exports = {
+  questionsRoute: router,
+  countVotes,
+  countQuestionVotes
+}

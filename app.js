@@ -3,7 +3,7 @@ const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const csrfProtection = csurf({ cookie: true });
 
-const questionsRoute = require('./routes/api/questions');
+const { questionsRoute, countQuestionVotes, countVotes } = require('./routes/api/questions');
 const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
 const db = require('./db/models');
@@ -76,8 +76,12 @@ app.get('/users/:id', async (req, res) => {
 
 app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-  // const signedIn = true;
-  // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
+
+  for (let question of topQuestions) {
+    let score = await countQuestionVotes(question.id);
+    question.score = score;
+  }
+
   console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
