@@ -4,6 +4,7 @@ const { handleValidationErrors, asyncHandler } = require('../../utils');
 const { Op } = require("sequelize");
 const router = express.Router();
 const db = require('../../db/models');
+const { checkAuth } = require("../../auth.js");
 
 
 const { Question, Answer, AnswerVote, QuestionVote } = db;
@@ -131,15 +132,16 @@ router.get('/', asyncHandler(async(req, res, next) => {
   }));
 
 
-  router.get('/:id', asyncHandler(async(req, res, next) => {
+  router.get('/:id', checkAuth, asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
     // Find question based on id
+    const currentUserId = req.user.dataValues.id;
     const question = await Question.findByPk(questionId);
     // Find votes associated with question
     let score = await countQuestionVotes(questionId);
+
     // Find associated answers based on id
-    console.log(questionId);
     const answers = await Answer.findAll({
       where: {
         questionId: {
@@ -153,10 +155,8 @@ router.get('/', asyncHandler(async(req, res, next) => {
       answer.score = score;
     }
     console.log(answers.length);
-    res.render('question', { question, answers, score });
+    res.render('question', { question, answers, score, currentUserId });
   }));
-
-module.exports = router;
 
 router.post(
   '/new',
@@ -189,8 +189,23 @@ router.get('/:id', asyncHandler(async (req, res, next) => {
       }
     },
   });
-  console.log(answers.length);
   res.render('question', { question, answers, title: question.questionSubject });
 }));
+
+router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
+  // Grab question to delete by id
+  const questionId = parseInt(req.params.id);
+  const question = await Question.findByPk(questionId);
+  const currentUserId = req.user.dataValues.id;
+
+  // if (question.userId !== currentUserId) res.redirect(`questions/${questionId}`);
+
+  await question.destroy();
+  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+  // const signedIn = true;
+  // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
+  res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
+}));
+
 
 module.exports = router;
