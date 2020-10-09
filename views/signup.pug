@@ -11,15 +11,28 @@ block content
         .form-group
           label(for='email') Email address
           input#email.form-control(type='email', name="email", placeholder='Enter Email')
-          .form-group
-          label(for='avatar') Avatar
-          input#username.form-control(type='text' name='avatar' placeholder="Optional Avatar URL Here")
         .form-group
           label(for='password') Password
           input#password.form-control(type='password', name="password", placeholder='Password')
+        .form-group
+          label(for='avatar') Default Avatar
+            select#avatar(name='avatar')
+              option(value='/images/avataaars.png') Sally
+              option(value='/images/avataaars(1).png') Bill
+              option(value='/images/avataaars(2).png') Saundra
+              option(value='/images/avataaars(3).png') Rachel
+              option(value='/images/avataaars(4).png') Irene
+              option(value='/images/avataaars(5).png') Tammy
+              option(value='/images/avataaars(6).png') Gene
+              option(value='/images/avataaars(11).png') Tim
         //- .form-group
         //-    label(for='confirmPassword') Confirm Password
         //-    input(type='password' name='confirmPassword' value='' placeholder='Confirm Password')
         button.btn.btn-primary(type='submit') Sign Up
       a(href='/login') Already have an account? Log in here.
     script(src="js/signup.js")
+
+
+  //- .form-group
+  //-         label(for='avatar') Avatar
+  //-         input#username.form-control(type='text' name='avatar' placeholder="Optional Avatar URL Here")

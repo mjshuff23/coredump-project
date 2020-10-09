@@ -55,8 +55,8 @@ router.post(
       const { userName, email, password, avatar } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({ userName, email, hashedPassword, avatar });
-      // if(user.avatar.length <= 1){
-      //   user.avatar = "/images/avataaars(12).png";
+      // if(avatar.length <= 1){
+      //   avatar = "/images/avataaars(12).png";
       // }
       const token = getUserToken(user);
       res.status(201).json({
