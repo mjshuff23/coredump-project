@@ -130,7 +130,10 @@ router.get('/', asyncHandler(async(req, res, next) => {
   router.get('/:id', asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
+    // Find question based on id
     const question = await Question.findByPk(questionId);
+    // Find votes associated with question
+    let score = await countQuestionVotes(questionId);
     // Find associated answers based on id
     console.log(questionId);
     const answers = await Answer.findAll({
@@ -141,7 +144,7 @@ router.get('/', asyncHandler(async(req, res, next) => {
       },
     });
     console.log(answers.length);
-    res.render('question', { question, answers });
+    res.render('question', { question, answers, score });
   }));
 
 module.exports = router;
