@@ -15,7 +15,7 @@ signUpForm.addEventListener("submit", async (e) => {
 
   const body = { email, password, userName, avatar };
   try {
-    const res = await fetch("http://localhost:8080/users", {
+    const res = await fetch("/users/", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -66,7 +66,7 @@ signUpForm.addEventListener("submit", async (e) => {
     }
   }
   try {
-    const res = await fetch("http://localhost:8080/users/token", {
+    const res = await fetch("/users/token", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -85,12 +85,3 @@ signUpForm.addEventListener("submit", async (e) => {
     handleErrors(err);
   }
 });
-
-// function setDefaults(){
-//   if(document.signUpForm.avatar.value==""){
-//       document.signUpForm.avatar.value = "/images/avataaars(12).png";
-//   }
-// }
-// setDefaults();
-
-//faker import?
