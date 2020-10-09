@@ -190,6 +190,10 @@ top: 0px;
   color: lightblue;
 }
 
+.answerBox {
+  width: 85%;
+}
+
 .searchHeader {
   font-size: 2rem;
   color: white;
