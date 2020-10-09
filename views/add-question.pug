@@ -3,8 +3,8 @@ block content
   div.mceContainer
     div.mceErrors
     div.mceBox
-        script(src="https://cdn.tiny.cloud/1/imc1fcb65bpfltbfodzejv92t1z705gvnrekj1svi9uz6bgp/tinymce/5/tinymce.min.js" referrerpolicy="origin")
-        script(type="text/javascript" src="/js/add-question.js")
+
+
 
         form(id="testForm" method="post" )
           input(type='hidden' name='_csrf' value=csrfToken)
@@ -13,3 +13,5 @@ block content
           textarea(id="questionText" required value=questionText)
         div
             button(type="submit" id="postQuestion" style="display:inline-block").mceSubmit SUBMIT QUESTION
+        script(src="https://cdn.tiny.cloud/1/imc1fcb65bpfltbfodzejv92t1z705gvnrekj1svi9uz6bgp/tinymce/5/tinymce.min.js" referrerpolicy="origin")
+        script(type="text/javascript" src="/js/add-question.js")
