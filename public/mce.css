@@ -33,3 +33,13 @@
   height: 60%;
   border-radius: 2px;
 }
+
+
+.mceContainer2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: 25px;
+  width: 90%;
+}

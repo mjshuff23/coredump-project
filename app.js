@@ -6,6 +6,7 @@ const csrfProtection = csurf({ cookie: true });
 const questionsRoute = require('./routes/api/questions');
 const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
+const answersRouter = require('./routes/api/answers');
 const db = require('./db/models');
 const { User, Question, Answer, Vote } = db;
 const morgan = require("morgan");
@@ -50,6 +51,7 @@ app.use(sanitizeReqBody);
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
+app.use("/answers", answersRouter);
 
 app.get('/', (req, res) => {
   res.render('banner', { title: 'Core Dump - Welcome' })
@@ -85,7 +87,7 @@ app.get('/main', checkAuth, async (req, res) => {
 
 app.get('/postQuestion', csrfProtection, (req, res) => {
   let csrfToken = req.csrfToken();
-  res.render('add-question', { csrfToken, title: 'Ask a Quesstion' })
+  res.render('add-question', { csrfToken, title: 'Ask a Question' })
 })
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
