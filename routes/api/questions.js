@@ -198,12 +198,13 @@ router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
   const question = await Question.findByPk(questionId);
   const currentUserId = req.user.dataValues.id;
 
-  // if (question.userId !== currentUserId) res.redirect(`questions/${questionId}`);
+  if (!currentUserId || question.userId !== currentUserId) {
+    res.status(403).send(`Can't Delete questions that are not yours, cheater`);
+    return;
+  }
 
   await question.destroy();
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-  // const signedIn = true;
-  // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
 }));
 
