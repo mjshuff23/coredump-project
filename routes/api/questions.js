@@ -55,11 +55,15 @@ async function registerQuestionVote(vote, userId, questionId) {
 }
 
 async function countQuestionVotes(questionId) {
-    votes = QuestionVote.findAll( {
-        where: questionId
-    });
-
-    return countVotes(votes);
+  const questionVotes = await QuestionVote.findAll({
+    where: {
+      questionId: {
+        [Op.eq]: [questionId],
+      }
+    },
+  });
+  console.log('made it here')
+  return countVotes(questionVotes);
 }
 
 async function countAnswerVotes(answerId) {
