@@ -12,6 +12,15 @@ const morgan = require("morgan");
 const { environment, model, cookieConfig, jwtConfig } = require('./config');
 const { secret, expiresIn } = jwtConfig;
 
+//prevent tinymce from allowing <script> tags to be inserted by malicious users
+const sanitizer = require('express-html-sanitizer');
+config = {
+  allowedTags: ['u', 'b', 'i', 'em', 'strong', 'a', 'code', 'p', 'h1', 'h2', 'h3', 'h4', 'ul', 'li', 'ol' ],
+  allowedAttributes: {'a' : [ 'href' ] }
+}
+
+const sanitizeReqBody = sanitizer(config);
+
 
 const app = express();
 
@@ -20,6 +29,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 const bearerToken = require('express-bearer-token');
 const { checkAuth } = require("./auth.js");
+
 
 
 app.set('view engine', 'pug');
@@ -35,6 +45,8 @@ app.use(bearerToken({
     key: "access_token",
   }
 }));
+app.use(sanitizeReqBody);
+
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
