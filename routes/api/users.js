@@ -13,12 +13,28 @@ const validateEmailAndPassword = [
     .exists({ checkFalsy: true })
     .withMessage("Please provide a username")
     .isLength({ max: 50 })
-    .withMessage('Username must not be more than 50 characters long'),
+    .withMessage('Username must not be more than 50 characters long')
+    .custom((value) => {
+      return db.User.findOne({ where: { userName: value } })
+        .then((user) => {
+          if (user) {
+            return Promise.reject('The provided username is already in use by another account');
+          }
+        });
+    }),
   check("email")
     .isEmail()
     .withMessage("Please provide a valid email.")
     .isLength({ max: 255 })
-    .withMessage('Email Address must not be more than 255 characters long'),
+    .withMessage('Email Address must not be more than 255 characters long')
+    .custom((value) => {
+      return db.User.findOne({ where: { email: value } })
+        .then((user) => {
+          if (user) {
+            return Promise.reject('The provided Email Address is already in use by another account');
+          }
+        });
+    }),
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a password.")
@@ -26,14 +42,6 @@ const validateEmailAndPassword = [
     .withMessage('Password must be at least 8 characters long.')
     .isLength({ max: 50 })
     .withMessage('Password must not be more than 50 characters long'),
-  // check('confirmPassword')
-  //   .custom((value, { req }) => {
-  //     if (value !== req.body.password) {
-  //       throw new Error('Confirm password does not match password.');
-  //     }
-  //     return true;
-  //   }),
-
 ];
 
 
@@ -47,7 +55,9 @@ router.post(
       const { userName, email, password, avatar } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({ userName, email, hashedPassword, avatar });
-  
+      // if(avatar.length <= 1){
+      //   avatar = "/images/avataaars(12).png";
+      // }
       const token = getUserToken(user);
       res.status(201).json({
         user: { id: user.id },

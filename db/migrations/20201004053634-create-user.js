@@ -1,4 +1,5 @@
 'use strict';
+const faker = require("faker");
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -25,7 +26,7 @@ module.exports = {
       },
       avatar: {
         type: Sequelize.STRING,
-        defaultValue: "/images/silhouete.jpg"
+        defaultValue: faker.internet.avatar()
       },
       createdAt: {
         allowNull: false,
