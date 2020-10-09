@@ -56,6 +56,12 @@ app.get('/users', async (req, res) => {
   res.render('users', { users });
 })
 
+app.get('/users/:id', async (req, res) => {
+  const user = await User.findByPk(req.params.id);
+  if (!user) res.status(404).end();
+  res.render('users/show', { user });
+});
+
 app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
   // const signedIn = true;

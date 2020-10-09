@@ -108,13 +108,6 @@ top: 0px;
   display: none;
 }
 
-.sign-up-container, .log-in-container{
-  padding: 40px;
-  font-size: large;
-  min-height: min-content;
-
-}
-
 .alert{
   background-color: #ff6b35;
 }

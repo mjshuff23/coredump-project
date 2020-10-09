@@ -1,8 +1,13 @@
 extends layout.pug
 block content
-  div.usersWrapper
-    each user in users
-      div.userBox
-        div.userName2= user.userName
-        div.cred User: #{user.id}
-        img.avatar2(src=`${user.avatar}` height="50")
+  block description
+    div.usersWrapper
+      each user in users
+        div.userBox
+          div.userName2: a(href=`/users/${user.id}`) #{user.userName} 
+          div.cred User: #{user.id}
+          img.avatar2(src=`${user.avatar}` height="50")
+
+
+
+          //- a(href=`/questions/${question.id}`) #{question.questionSubject}
