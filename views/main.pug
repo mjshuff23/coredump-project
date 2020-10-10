@@ -4,8 +4,6 @@ block content
     h2 Top Questions
     if signedIn
       //-button(type='submit' action="/postQuestion").main-btn-question Ask a question
-      a(href='/postQuestion' style='text-decoration:none; color:white').main-btn-question Ask a question
-
   div.main-list-question.questionLink
     div.questionContainer
       each question in topQuestions

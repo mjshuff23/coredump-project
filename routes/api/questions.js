@@ -159,7 +159,7 @@ router.get('/', asyncHandler(async(req, res, next) => {
       answer.score = score;
       answer.author = user.userName;
     }
-    res.render('question', { question, answers, score, currentUserId });
+    res.render('question', { signedIn: req.user, question, answers, score, currentUserId });
   }));
 
 router.post(
