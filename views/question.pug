@@ -13,7 +13,7 @@ block content
           span(style="font-size: 2em; color: lightblue;")
             i(class="question fas fa-caret-down")
         div.questionTextSolo
-          span #{question.questionText} <br>
+          span !{question.questionText} <br>
         input(type='hidden' id='questionId' value=`${question.id}`)
       span.author Author: John Hughes </br> Posted: March 25, 2020
         //- div.mceContainer
@@ -40,7 +40,7 @@ block content
               p.score #{answer.score}
             span(style="font-size: 2em; color: lightblue;")
               i(class="questionAnswer fas fa-caret-down")
-          p.questionTextSolo #{answer.answerText}
+          p.questionTextSolo !{answer.answerText}
             span.authorAnswer Author: #{answer.userId} </br> Posted: March 26, 2020
     div.mceContainer2
       div.mceErrors
