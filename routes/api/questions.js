@@ -208,5 +208,19 @@ router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
 }));
 
+router.get('/:questionId/answers/:answerId/delete', checkAuth, asyncHandler(async(req, res, next) => {
+  const answerId = parseInt(req.params.answerId);
+  const currentUserId = req.user.dataValues.id;
+  const answer = await Answer.findByPk(answerId);
+
+  if (!currentUserId || answer.userId !== currentUserId) {
+    res.status(403).send(`Can't Delete answers that are not yours, cheater`);
+    return;
+  }
+
+  await answer.destroy();
+  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+  res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
+}));
 
 module.exports = router;
