@@ -157,7 +157,6 @@ outline: none;
   border: 1px solid white;
   border-radius: 20px;
   height: 40px;
-  width: 50%;
   text-decoration: none;
   padding-left: 40px;
   margin-left: 10px;
@@ -202,7 +201,7 @@ outline: none;
   /* padding-left: 20px; */
   /* padding-right: 50px; */
   color: white;
-  font-size: small;
+  font-size: 16px;
   font-weight: 500;
   /* position: fixed; */
 }
@@ -248,18 +247,11 @@ outline: none;
 
 .avatar {
   /* box-sizing: border-box; */
-  border: 1px solid white;
   min-width: 50px;
-  height: 50px;
-  /* margin-left: 20px; */
-  background-image: url('/images/masterSergey.jpg');
-  background-color: white;
-  background-repeat: no-repeat;
-  background-size: auto;
+  height: 60px;
   border-radius: 50%;
   opacity: 0.7;
   /* position: fixed; */
-  background-size: cover;
 }
 
 .xmark {

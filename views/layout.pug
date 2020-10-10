@@ -17,19 +17,24 @@ html(lang="en")
           form(method='post' action='/search')
             label(for='search')
             input(type='text' class='input-search' placeholder='search coredump' name='search' required)
-            input(type='submit' name='searchBtn').btn-search
+            //- input(type='submit' name='searchBtn').btn-search
           if !signedIn
             div.auth-btns
               a(href='/login').login Login
               a(href='/signup').signup Sign Up
           else
             div.avatar-container
-              span.logout Log Out
-              span.avatar
               span.navbar-text Welcome #{signedIn.dataValues.userName}!
+              a(href='/postQuestion' style='text-decoration:none; color:white').main-btn-question Ask a question
+              span.logout Log Out
+              a(href=`/users/${signedIn.dataValues.id}` style='text-decoration:none; color:white')
+                img.avatar(src=`${signedIn.dataValues.avatar}`)
               a(href='/')
         div.main-box
         //- position absolutely the error messages and centered.
         block content
         div.footer
           p © Copyright: App Academy Group Project - July Cohort 2020
+
+//- img.avatar2(src=`${user.avatar}` height="50")
+//- div.userName2: a(href=`/users/${user.id}`) #{user.userName} 
