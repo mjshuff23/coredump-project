@@ -37,7 +37,8 @@ flex-direction: row;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-width: 237px;
+/* width: 237px; */
+width: 28%;
 /* background-color: #809096; */
 top: 0px;
 }
@@ -320,10 +321,14 @@ top: 0px;
   .leftbar {
     /* background-color: #000; */
   }
-  .search { 
+  .search {
     width: 100%;
   }
   .center {
     width: 100%;
   }
+.box {
+  width: 350px;
+}
+
 }
