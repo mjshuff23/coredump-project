@@ -4,8 +4,9 @@ const { User, Question, Answer, Vote } = db;
 const { Op } = require("sequelize");
 const router = express.Router();
 const { asyncHandler } = require('../../utils');
+const { checkAuth } = require("../../auth");
 
-router.post('/', asyncHandler(async (req, res, next) => {
+router.post('/', checkAuth, asyncHandler(async (req, res, next) => {
   let { search } = req.body;         // Grab search value
   let relevantQuestions = [];
   let questionIds = [];
@@ -53,7 +54,7 @@ router.post('/', asyncHandler(async (req, res, next) => {
       return question;
     });
   }
-  res.render('search', { relevantQuestions, noRelevantQuestions, search, title: 'Search Results' });
+  res.render('search', { signedIn: req.user, relevantQuestions, noRelevantQuestions, search, title: 'Search Results' });
 }));
 
 

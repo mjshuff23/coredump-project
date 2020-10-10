@@ -159,7 +159,7 @@ router.get('/', asyncHandler(async(req, res, next) => {
       answer.score = score;
       answer.author = user.userName;
     }
-    res.render('question', { question, answers, score, currentUserId });
+    res.render('question', { signedIn: req.user, question, answers, score, currentUserId });
   }));
 
 router.post(
@@ -185,7 +185,7 @@ router.get('/:id', asyncHandler(async (req, res, next) => {
   // Find question based on id
   const question = await Question.findByPk(questionId);
   // Find associated answers based on id
-  console.log(questionId);
+  // console.log(questionId);
   const answers = await Answer.findAll({
     where: {
       questionId: {
@@ -212,7 +212,8 @@ router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
 }));
 
-router.get('/:questionId/answers/:answerId/delete', checkAuth, asyncHandler(async(req, res, next) => {
+router.get('/:questionId/answers/:answerId/delete', checkAuth, asyncHandler(async (req, res, next) => {
+  const questionId = parseInt(req.params.questionId);
   const answerId = parseInt(req.params.answerId);
   const currentUserId = req.user.dataValues.id;
   const answer = await Answer.findByPk(answerId);
@@ -223,8 +224,31 @@ router.get('/:questionId/answers/:answerId/delete', checkAuth, asyncHandler(asyn
   }
 
   await answer.destroy();
-  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-  res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
+  // const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+  // res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
+  const question = await Question.findByPk(questionId);
+  // Find associated answers based on id
+  // console.log(questionId);
+  const answers = await Answer.findAll({
+    where: {
+      questionId: {
+        [Op.eq]: [questionId],
+      }
+    },
+  });
+  // Find scores associated with each answer
+    for (let answer of answers) {
+      let score = await countAnswerVotes(answer.id);
+      const user = await User.findByPk(answer.userId);
+      answer.score = score;
+      answer.author = user.userName;
+    }
+  const user = await User.findByPk(question.userId);
+  question.author = user.userName;
+  let score = await countQuestionVotes(questionId);
+  // res.redirect(`./questions/${questionId}`);
+
+  res.render('question', { question, answers, score, title: question.questionSubject });
 }));
 
 module.exports = router;

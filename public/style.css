@@ -245,6 +245,7 @@ body {
   border-radius: 25px;
   background-color: #226d77;
   margin: 0px 0px 10px;
+  overflow-wrap: anywhere;
 }
 
 .box-width {
@@ -322,9 +323,6 @@ body {
   .burger {
     display: flex;
   }
-  .leftbar {
-    /* background-color: #000; */
-  }
   .search {
     width: 100%;
   }
@@ -333,5 +331,8 @@ body {
   }
   .box {
     width: 350px;
+  }
+  .navbar-text {
+    display: none;
   }
 }
