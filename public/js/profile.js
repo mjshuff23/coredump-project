@@ -12,7 +12,6 @@ const handleDelete = (userId) => {
         if (!res.ok) {
           throw res;
         }
-        document.querySelector(`#userDelete-${userId}`).remove();
       } catch (err) {
         console.error(err);
       }
@@ -34,12 +33,11 @@ const handleDelete = (userId) => {
         return;
       }
   
-      const deleteButtons = document.querySelectorAll(".userDelete-button");
-      if (deleteButtons) {
-        deleteButtons.forEach((button) => {
-          button.addEventListener("click", handleDelete(button.id));
-        });
-      }
+    const deleteButton = document.querySelectorAll(".userDelete-button");
+     
+    deleteButton.addEventListener("click", handleDelete());
+       
+      
     } catch (err) {
       console.error(err);
     }

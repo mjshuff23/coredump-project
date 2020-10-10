@@ -94,6 +94,15 @@ router.post(
   })
 );
 
+router.post('/users/:id(\\d+)', getUserToken,
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const user = await User.findByPk(userId);
+    await user.destroy();
+    res.redirect(`/`);
+  }));
+
+
 router.post('/logout', (req, res) => {
   res.clearCookie('accessToken')
   res.status('200').end()

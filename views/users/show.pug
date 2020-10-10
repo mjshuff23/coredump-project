@@ -5,3 +5,7 @@ block content
     div.userCard_id User ID: #{user.id}
     img.userCard_img(src=`${user.avatar}` width="250")
     div.userCard_bio Bio: #{user.bio}
+  div
+    form(action=`/users/${user.id}` method='post')
+      button.userDelete-button(type='submit') Delete Profile
+      
