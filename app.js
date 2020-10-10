@@ -6,6 +6,7 @@ const csrfProtection = csurf({ cookie: true });
 const questionsRoute = require('./routes/api/questions');
 const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
+const answersRouter = require('./routes/api/answers');
 const db = require('./db/models');
 const { User, Question, Answer, Vote } = db;
 const morgan = require("morgan");
@@ -15,8 +16,8 @@ const { secret, expiresIn } = jwtConfig;
 //prevent tinymce from allowing <script> tags to be inserted by malicious users
 const sanitizer = require('express-html-sanitizer');
 config = {
-  allowedTags: ['u', 'b', 'i', 'em', 'strong', 'a', 'code', 'p', 'h1', 'h2', 'h3', 'h4', 'ul', 'li', 'ol' ],
-  allowedAttributes: {'a' : [ 'href' ] }
+  allowedTags: ['u', 'b', 'i', 'em', 'strong', 'a', 'code', 'p', 'h1', 'h2', 'h3', 'h4', 'ul', 'li', 'ol'],
+  allowedAttributes: { 'a': ['href'] }
 }
 
 const sanitizeReqBody = sanitizer(config);
@@ -50,6 +51,7 @@ app.use(sanitizeReqBody);
 app.use('/search', searchRouter);
 app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
+app.use("/answers", answersRouter);
 
 app.get('/', (req, res) => {
   res.render('banner', { title: 'Core Dump - Welcome' })
@@ -63,15 +65,15 @@ app.get('/signup', (req, res) => {
   res.render('signup', { title: 'Sign Up' });
 })
 
-app.get('/users', async (req, res) => {
+app.get('/users', checkAuth, async (req, res) => {
   const users = await User.findAll();
-  res.render('users', { users, title: 'Users' });
+  res.render('users', { users, signedIn: req.user, title: 'Users' });
 })
 
-app.get('/users/:id', async (req, res) => {
+app.get('/users/:id', checkAuth, async (req, res) => {
   const user = await User.findByPk(req.params.id);
   if (!user) res.status(404).end();
-  res.render('users/show', { user });
+  res.render('users/show', { user, signedIn: req.user });
 });
 
 app.get('/main', checkAuth, async (req, res) => {
@@ -88,7 +90,7 @@ app.get('/main', checkAuth, async (req, res) => {
 
 app.get('/postQuestion', csrfProtection, (req, res) => {
   let csrfToken = req.csrfToken();
-  res.render('add-question', { csrfToken, title: 'Ask a Quesstion' })
+  res.render('add-question', { csrfToken, title: 'Ask a Question' })
 })
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {

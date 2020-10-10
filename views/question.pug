@@ -2,7 +2,7 @@ extends layout.pug
 block content
   br
   br
-  div.questionContainer
+  div.questionContainer(data-questionid=question.id)
     div.containerSolo.box-width
       div.questionRow1= question.questionSubject
       div.questionRow2
@@ -40,3 +40,13 @@ block content
           if (currentUserId === answer.userId)
             a.deleteBtn(href=`${question.id}/answers/${answer.id}/delete`) Delete
           span.authorAnswer Author: #{answer.author} </br> #{answer.createdAt}
+    div.mceContainer2
+      div.mceErrors
+      div.mceBox
+        form(id="testForm" class='testForm' method="post" )
+          input(type='hidden' id='questionId' value=question.id)
+          input(type='hidden' name='_csrf' value=csrfToken)
+          textarea(id="questionText" required value=answerText)
+          button(type="submit" id="postAnswer" style="display:inline-block").mceSubmit SUBMIT ANSWER
+    script(src="https://cdn.tiny.cloud/1/imc1fcb65bpfltbfodzejv92t1z705gvnrekj1svi9uz6bgp/tinymce/5/tinymce.min.js" referrerpolicy="origin")
+    script(type="text/javascript" src="/js/add-answer.js")

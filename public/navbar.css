@@ -1,13 +1,24 @@
+.box {
+  height: 100%;
+  width: 25%;
+  /* border: 1px solid white; */
+  display:flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0px;
+  z-index: 3;
+  background-color: teal;
+}
+
 .logobox-orange {
   box-sizing: border-box;
   width: 165px;
   height: 203px;
   background-color: #ff6b35;
+  /* position: absolute; */
   position: fixed;
-  top: 0px;
   left: 80px;
   margin: 0px;
-  z-index: 3;
 }
 
 .logobox-white-border {
@@ -18,7 +29,7 @@
   border: 2px solid white;
   position: fixed;
   top: 65px;
-  left: 102px;
+  left: 80px;
   z-index: 4;
 }
 
@@ -26,7 +37,7 @@
   box-sizing: border-box;
   width: 5px;
   height: 31px;
-  left: 168px;
+  left: 146px;
   top: 88px;
   background-color: #ff6b35;
   position: fixed;
@@ -40,7 +51,7 @@
   letter-spacing: 0.15em;
   color: white;
   position: fixed;
-  left: 124px;
+  left: 102px;
   top: 102px;
   z-index: 6;
   text-decoration: none;
@@ -51,9 +62,6 @@
   text-decoration: none;
 }
 
-
-
-
 .menu {
   box-sizing: border-box;
   /* border: 1px solid blue; */
@@ -61,13 +69,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 11%;
-  margin-top: 20%;
+  top: 250px;
   position: fixed;
-  margin-left: 60px;
+  left: 60px;
 }
 
 .home {
-  color: #616E74;
+  color: white;
   /* color: #721A8B; */
   margin-left: 20px;
   text-decoration: none;
@@ -79,7 +87,8 @@
 .public{
   margin-top: 15px;
   margin-left: 30px;
-  color: black;
+  color: white;
+
 }
 
 .submenu-questions, .submenu-users {
@@ -88,13 +97,15 @@
   margin-left: 10px;
   font-size: 15px;
   padding-top: 18px;
-  color: #616E74;
+  color: white;
 }
 
 .search {
   box-sizing: border-box;
+  display:flex;
+  justify-content: space-between;
   /* border: 1px solid white; */
-  width: 960px;
+  width: 72%;
   height: 100px;
   font-size: 18px;
   color: white;
@@ -108,7 +119,7 @@
   top: 0px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  max-width: 75%;
+  /* max-width: 75%; */
 }
 
 .main-box {
@@ -118,6 +129,13 @@
   height: auto;
   margin-top: 150px;
   /* position: absolute; */
+}
+
+.burger {
+   display:none;
+   /* box-sizing: border-box; */
+   align-items: flex-start;
+   width: 2rem;
 }
 
 .btn-search {
@@ -139,17 +157,24 @@ outline: none;
   border: 1px solid white;
   border-radius: 20px;
   height: 40px;
-  width: 500px;
+  width: 50%;
   text-decoration: none;
   padding-left: 40px;
   margin-left: 10px;
   outline: none;
 }
 
+.auth-btn {
+  display: flex;
+  justify-content: space-between;
+  width: 10%;
+}
+
 .login {
   text-decoration: none;
-  margin-left: 80px;
+  /* margin-left: 80px; */
   color: white;
+  margin-right: 10px;
   /* display:flex;
   align-items: flex-end; */
   /* display: inline; */
@@ -160,7 +185,7 @@ outline: none;
 
 .signup {
   text-decoration: none;
-  margin-left: 40px;
+  /* margin-left: 40px; */
   color: white;
 }
 
@@ -173,13 +198,13 @@ outline: none;
   display:flex;
   align-items: flex-end;
   display: inline;
-  margin-left: 90px;
+  /* margin-left: 90px; */
   /* padding-left: 20px; */
   /* padding-right: 50px; */
   color: white;
   font-size: small;
   font-weight: 500;
-  position: fixed;
+  /* position: fixed; */
 }
 
 .user-name {
@@ -215,18 +240,36 @@ outline: none;
   text-decoration: none;
 }
 
+
+.avatar-container {
+  display: flex;
+}
+
+
 .avatar {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   border: 1px solid white;
-  width: 50px;
+  min-width: 50px;
   height: 50px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   background-image: url('/images/masterSergey.jpg');
   background-color: white;
   background-repeat: no-repeat;
   background-size: auto;
   border-radius: 50%;
   opacity: 0.7;
-  position: fixed;
+  /* position: fixed; */
   background-size: cover;
 }
+
+.xmark {
+  width: 2.5rem;
+  position: relative;
+  left:280px;
+}
+
+/* @media screen and (max-width: 1200px) {
+  .menu, .logobox-orange, .logobox-white-border, .logo-text, .logobox-back-logo{
+    display: none;
+  }
+} */
