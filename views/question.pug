@@ -14,15 +14,11 @@ block content
             i(class="fas fa-caret-down")
         div.questionTextSolo
           span #{question.questionText} <br>
-      span.author Author: John Hughes </br> Posted: March 25, 2020
-        //- div.mceContainer
-        //-   div.mceErrors
-        //-   div.mceBox
-        //-     form(id="testForm" method="post" )
-        //-       input(type='hidden' name='_csrf' value=csrfToken)
-        //-       textarea(id="questionText" required value=questionText)
-        //-   div
-        //-       button(type="submit" id="postAnswer" style="display:inline-block").mceSubmit SUBMIT ANSWER
+      div.questionRow3
+        if (currentUserId === question.userId)
+          span.deleteBtn: a(href=`${question.id}/delete`) Delete
+        span.author Author: #{question.author} </br> #{question.createdAt}
+      //- Author: #{question.userId} </br> Posted: #{question.createdAt}
     div.numAnswers
       if answers.length === 1
         span #{answers.length} Answer
@@ -40,7 +36,10 @@ block content
             span(style="font-size: 2em; color: lightblue;")
               i(class="fas fa-caret-down")
           p.questionTextSolo #{answer.answerText}
-            span.authorAnswer Author: #{answer.userId} </br> Posted: March 26, 2020
+        div.questionRow3
+          if (currentUserId === answer.userId)
+            a.deleteBtn(href=`${question.id}/answers/${answer.id}/delete`) Delete
+          span.authorAnswer Author: #{answer.author} </br> #{answer.createdAt}
     div.mceContainer2
       div.mceErrors
       div.mceBox

@@ -4,9 +4,10 @@ const { handleValidationErrors, asyncHandler } = require('../../utils');
 const { Op } = require("sequelize");
 const router = express.Router();
 const db = require('../../db/models');
+const { checkAuth } = require("../../auth.js");
 
 
-const { Question, Answer, AnswerVote, QuestionVote } = db;
+const { Question, Answer, AnswerVote, QuestionVote, User } = db;
 
 const validateQuestion = [
   check("questionSubject")
@@ -131,15 +132,19 @@ router.get('/', asyncHandler(async(req, res, next) => {
   }));
 
 
-  router.get('/:id', asyncHandler(async(req, res, next) => {
+  router.get('/:id', checkAuth, asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
     // Find question based on id
+    const currentUserId = req.user.dataValues.id;
     const question = await Question.findByPk(questionId);
+    // Grab username by question.userId
+    const user = await User.findByPk(question.userId);
+    question.author = user.userName;
     // Find votes associated with question
     let score = await countQuestionVotes(questionId);
+
     // Find associated answers based on id
-    console.log(questionId);
     const answers = await Answer.findAll({
       where: {
         questionId: {
@@ -150,13 +155,12 @@ router.get('/', asyncHandler(async(req, res, next) => {
     // Find scores associated with each answer
     for (let answer of answers) {
       let score = await countAnswerVotes(answer.id);
+      const user = await User.findByPk(answer.userId);
       answer.score = score;
+      answer.author = user.userName;
     }
-    console.log(answers.length);
-    res.render('question', { question, answers, score });
+    res.render('question', { question, answers, score, currentUserId });
   }));
-
-module.exports = router;
 
 router.post(
   '/new',
@@ -189,8 +193,38 @@ router.get('/:id', asyncHandler(async (req, res, next) => {
       }
     },
   });
-  console.log(answers.length);
   res.render('question', { question, answers, title: question.questionSubject });
+}));
+
+router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
+  // Grab question to delete by id
+  const questionId = parseInt(req.params.id);
+  const question = await Question.findByPk(questionId);
+  const currentUserId = req.user.dataValues.id;
+
+  if (!currentUserId || question.userId !== currentUserId) {
+    res.status(403).send(`Can't Delete questions that are not yours, cheater`);
+    return;
+  }
+
+  await question.destroy();
+  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+  res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
+}));
+
+router.get('/:questionId/answers/:answerId/delete', checkAuth, asyncHandler(async(req, res, next) => {
+  const answerId = parseInt(req.params.answerId);
+  const currentUserId = req.user.dataValues.id;
+  const answer = await Answer.findByPk(answerId);
+
+  if (!currentUserId || answer.userId !== currentUserId) {
+    res.status(403).send(`Can't Delete answers that are not yours, cheater`);
+    return;
+  }
+
+  await answer.destroy();
+  const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+  res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
 }));
 
 module.exports = router;
