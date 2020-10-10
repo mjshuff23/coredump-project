@@ -67,11 +67,15 @@ async function countQuestionVotes(questionId) {
 }
 
 async function countAnswerVotes(answerId) {
-    votes = AnswerVote.findAll( {
-        where: answerId
+    const answerVotes = await AnswerVote.findAll({
+      where: {
+        answerId: {
+          [Op.eq]: [answerId],
+        }
+      },
     });
 
-    return countVotes(votes);
+    return countVotes(answerVotes);
 }
 
 function countVotes(votes) {
@@ -143,6 +147,7 @@ router.get('/', asyncHandler(async(req, res, next) => {
   router.get('/:id', asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
+    // Find question based on id
     const question = await Question.findByPk(questionId);
     // Find votes associated with question
     let score = await countQuestionVotes(questionId);
@@ -155,6 +160,11 @@ router.get('/', asyncHandler(async(req, res, next) => {
         }
       },
     });
+    // Find scores associated with each answer
+    for (let answer of answers) {
+      let score = await countAnswerVotes(answer.id);
+      answer.score = score;
+    }
     console.log(answers.length);
     res.render('question', { question, answers, score });
   }));
