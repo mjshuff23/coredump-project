@@ -25,10 +25,12 @@ html(lang="en")
           else
             div.avatar-container
               span.logout Log Out
-              span.avatar
+              img.avatar(src=`${signedIn.dataValues.avatar}`)
               span.navbar-text Welcome #{signedIn.dataValues.userName}!
               a(href='/')
         div.main-box
         block content
         div.footer
           p © Copyright: App Academy Group Project - July Cohort 2020
+
+//- img.avatar2(src=`${user.avatar}` height="50")

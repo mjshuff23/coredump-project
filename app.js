@@ -53,8 +53,8 @@ app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
 app.use("/answers", answersRouter);
 
-app.get('/', (req, res) => {
-  res.render('banner', { title: 'Core Dump - Welcome' })
+app.get('/', checkAuth, (req, res) => {
+  res.render('banner', { title: 'Core Dump - Welcome', signedIn: req.user })
 })
 
 app.get('/login', (req, res) => {
@@ -85,9 +85,9 @@ app.get('/main', checkAuth, async (req, res) => {
 })
 
 
-app.get('/postQuestion', csrfProtection, (req, res) => {
+app.get('/postQuestion', checkAuth, csrfProtection, (req, res) => {
   let csrfToken = req.csrfToken();
-  res.render('add-question', { csrfToken, title: 'Ask a Question' })
+  res.render('add-question', { csrfToken, title: 'Ask a Question', signedIn: req.user })
 })
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
