@@ -14,9 +14,10 @@ block content
             i(class="fas fa-caret-down")
         div.questionTextSolo
           span #{question.questionText} <br>
-      if (currentUserId === question.userId)
-        span.deleteBtn: a(href=`${question.id}/delete`) Delete
-      span.author Author: John Hughes </br> Posted: March 25, 2020
+      div.questionRow3
+        if (currentUserId === question.userId)
+          span.deleteBtn: a(href=`${question.id}/delete`) Delete
+        span.author Author: John Hughes </br> Posted: March 25, 2020
       //- Author: #{question.userId} </br> Posted: #{question.createdAt}
     div.numAnswers
       if answers.length === 1

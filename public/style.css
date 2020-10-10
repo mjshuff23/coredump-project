@@ -293,7 +293,15 @@ top: 0px;
   display: flex;
 }
 
+.questionRow3 {
+  padding-left: 10%;
+}
+
 .score {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.deleteBtn :link {
+  color: #cccccc;
 }
