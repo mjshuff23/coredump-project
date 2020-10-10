@@ -16,8 +16,8 @@ const { secret, expiresIn } = jwtConfig;
 //prevent tinymce from allowing <script> tags to be inserted by malicious users
 const sanitizer = require('express-html-sanitizer');
 config = {
-  allowedTags: ['u', 'b', 'i', 'em', 'strong', 'a', 'code', 'p', 'h1', 'h2', 'h3', 'h4', 'ul', 'li', 'ol' ],
-  allowedAttributes: {'a' : [ 'href' ] }
+  allowedTags: ['u', 'b', 'i', 'em', 'strong', 'a', 'code', 'p', 'h1', 'h2', 'h3', 'h4', 'ul', 'li', 'ol'],
+  allowedAttributes: { 'a': ['href'] }
 }
 
 const sanitizeReqBody = sanitizer(config);
@@ -65,15 +65,15 @@ app.get('/signup', (req, res) => {
   res.render('signup', { title: 'Sign Up' });
 })
 
-app.get('/users', async (req, res) => {
+app.get('/users', checkAuth, async (req, res) => {
   const users = await User.findAll();
-  res.render('users', { users, title: 'Users' });
+  res.render('users', { users, signedIn: req.user, title: 'Users' });
 })
 
-app.get('/users/:id', async (req, res) => {
+app.get('/users/:id', checkAuth, async (req, res) => {
   const user = await User.findByPk(req.params.id);
   if (!user) res.status(404).end();
-  res.render('users/show', { user });
+  res.render('users/show', { user, signedIn: req.user });
 });
 
 app.get('/main', checkAuth, async (req, res) => {
