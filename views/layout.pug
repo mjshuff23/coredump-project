@@ -17,7 +17,7 @@ html(lang="en")
           form(method='post' action='/search')
             label(for='search')
             input(type='text' class='input-search' placeholder='search coredump' name='search' required)
-            input(type='submit' name='searchBtn').btn-search
+            //- input(type='submit' name='searchBtn').btn-search
           if !signedIn
             div.auth-btns
               a(href='/login').login Login

@@ -327,8 +327,11 @@ top: 0px;
   .center {
     width: 100%;
   }
-.box {
-  width: 350px;
-}
+  .box {
+    width: 350px;
+  }
+  .navbar-text{
+    display: none;
+  }
 
 }
