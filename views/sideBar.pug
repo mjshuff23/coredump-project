@@ -12,7 +12,8 @@ div.leftbar.hidden
                 div.public PUBLIC
                     p
                     a(href='/main').submenu-questions Recent Questions
-                    p
-                    a(href='/postquestion').submenu-questions Ask Question
+                    //- if !signedIn
+                    //-   p
+                    //-   a(href='/postquestion').submenu-questions Ask Question
                     p
                     a(href='/users').submenu-users Users

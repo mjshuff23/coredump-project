@@ -24,9 +24,11 @@ html(lang="en")
               a(href='/signup').signup Sign Up
           else
             div.avatar-container
-              span.logout Log Out
-              img.avatar(src=`${signedIn.dataValues.avatar}`)
               span.navbar-text Welcome #{signedIn.dataValues.userName}!
+              a(href='/postQuestion' style='text-decoration:none; color:white').main-btn-question Ask a question
+              span.logout Log Out
+              a(href=`/users/${signedIn.dataValues.id}` style='text-decoration:none; color:white')
+                img.avatar(src=`${signedIn.dataValues.avatar}`)
               a(href='/')
         div.main-box
         block content
@@ -34,3 +36,4 @@ html(lang="en")
           p © Copyright: App Academy Group Project - July Cohort 2020
 
 //- img.avatar2(src=`${user.avatar}` height="50")
+//- div.userName2: a(href=`/users/${user.id}`) #{user.userName} 
