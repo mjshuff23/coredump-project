@@ -2,21 +2,13 @@ extends layout.pug
 block content
   br
   br
-<<<<<<< HEAD
-  div.questionContainer(data-questionId=question.id)
-=======
   div.questionContainer(data-questionid=question.id)
->>>>>>> main
     div.containerSolo.box-width
       div.questionRow1= question.questionSubject
       div.questionRow2
         div.questionVotes
           span(style="font-size: 2em; color: lightblue;")
-<<<<<<< HEAD
-            i(class="question fas fa-caret-up")
-=======
             i(class="fas fa-caret-up")
->>>>>>> main
             p.score #{score}
           span(style="font-size: 2em; color: lightblue;")
             i(class="question fas fa-caret-down")
