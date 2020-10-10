@@ -76,8 +76,11 @@ app.get('/users/:id', async (req, res) => {
 
 app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-  // const signedIn = true;
-  // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
+  // Loop through questions and find their author's userName
+  for (let question of topQuestions) {
+    const user = await User.findByPk(question.userId);
+    question.author = user.userName;
+  }
   console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })

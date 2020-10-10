@@ -17,7 +17,7 @@ block content
       div.questionRow3
         if (currentUserId === question.userId)
           span.deleteBtn: a(href=`${question.id}/delete`) Delete
-        span.author Author: John Hughes </br> Posted: March 25, 2020
+        span.author Author: #{question.author} </br> Posted: March 25, 2020
       //- Author: #{question.userId} </br> Posted: #{question.createdAt}
     div.numAnswers
       if answers.length === 1
@@ -39,4 +39,4 @@ block content
         div.questionRow3
           if (currentUserId === answer.userId)
             a.deleteBtn(href=`${question.id}/answers/${answer.id}/delete`) Delete
-            span.authorAnswer Author: #{answer.userId} </br> Posted: March 26, 2020
+            span.authorAnswer Author: #{answer.author} </br> Posted: March 26, 2020

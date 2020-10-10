@@ -7,7 +7,7 @@ const db = require('../../db/models');
 const { checkAuth } = require("../../auth.js");
 
 
-const { Question, Answer, AnswerVote, QuestionVote } = db;
+const { Question, Answer, AnswerVote, QuestionVote, User } = db;
 
 const validateQuestion = [
   check("questionSubject")
@@ -138,6 +138,9 @@ router.get('/', asyncHandler(async(req, res, next) => {
     // Find question based on id
     const currentUserId = req.user.dataValues.id;
     const question = await Question.findByPk(questionId);
+    // Grab username by question.userId
+    const user = await User.findByPk(question.userId);
+    question.author = user.userName;
     // Find votes associated with question
     let score = await countQuestionVotes(questionId);
 
@@ -152,9 +155,10 @@ router.get('/', asyncHandler(async(req, res, next) => {
     // Find scores associated with each answer
     for (let answer of answers) {
       let score = await countAnswerVotes(answer.id);
+      const user = await User.findByPk(answer.userId);
       answer.score = score;
+      answer.author = user.userName;
     }
-    console.log(answers.length);
     res.render('question', { question, answers, score, currentUserId });
   }));
 
