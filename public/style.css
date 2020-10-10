@@ -148,7 +148,7 @@ top: 0px;
 }
 
 :link {
-  color: #2c8c99;
+  color: #cccccc;;
 }
 
 .questionText {
@@ -185,7 +185,8 @@ top: 0px;
 .authorAnswer {
   display: flex;
   justify-content: flex-end;
-  padding-top: 75px;
+  padding-bottom: 15px;
+  padding-right: 15px;
   color: lightblue;
 }
 
@@ -300,8 +301,4 @@ top: 0px;
 .score {
   margin-top: 0px;
   margin-bottom: 0px;
-}
-
-.deleteBtn :link {
-  color: #cccccc;
 }
