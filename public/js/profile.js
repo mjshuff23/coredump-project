@@ -1,7 +1,7 @@
 const handleDelete = (userId) => {
     return async () => {
       try {
-        const res = await fetch(`/users/${userId}`, {
+        const res = await fetch(`/users/${$user.id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${localStorage.getItem(
@@ -12,6 +12,7 @@ const handleDelete = (userId) => {
         if (!res.ok) {
           throw res;
         }
+        window.location.href = "/main";
       } catch (err) {
         console.error(err);
       }
@@ -21,7 +22,7 @@ const handleDelete = (userId) => {
   document.addEventListener("DOMContentLoaded", async () => {
     const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
     try {
-      const res = await fetch(`/users/${userId}`, {
+      const res = await fetch(`/users/${userId}/delete`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem(
             "COREDUMP_ACCESS_TOKEN"

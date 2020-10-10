@@ -27,7 +27,7 @@ html(lang="en")
               span.navbar-text Welcome #{signedIn.dataValues.userName}!
               a(href='/postQuestion' style='text-decoration:none; color:white').main-btn-question Ask a question
               span.logout Log Out
-              a(href=`/users/${signedIn.dataValues.id}` style='text-decoration:none; color:white')
+              a(href=`/users/${signedIn.dataValues.id}`)
                 img.avatar(src=`${signedIn.dataValues.avatar}`)
               a(href='/')
         div.main-box

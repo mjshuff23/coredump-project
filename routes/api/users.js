@@ -94,7 +94,7 @@ router.post(
   })
 );
 
-router.post('/users/:id(\\d+)', getUserToken,
+router.post('/:id(\\d+)', getUserToken,
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
     const user = await User.findByPk(userId);
@@ -108,5 +108,20 @@ router.post('/logout', (req, res) => {
   res.status('200').end()
 });
 
+// router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
+//   // Grab question to delete by id
+//   const questionId = parseInt(req.params.id);
+//   const question = await Question.findByPk(questionId);
+//   const currentUserId = req.user.dataValues.id;
+
+//   if (!currentUserId || question.userId !== currentUserId) {
+//     res.status(403).send(`Can't Delete questions that are not yours, cheater`);
+//     return;
+//   }
+
+//   await question.destroy();
+//   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
+//   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
+// }));
 
 module.exports = router;

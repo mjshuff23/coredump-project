@@ -8,4 +8,8 @@ block content
   div
     form(action=`/users/${user.id}` method='post')
       button.userDelete-button(type='submit') Delete Profile
+  div
+    if (currentUserId === user.id)
+      a.deleteBtn(href=`${user.id}/`) Delete
+      
       

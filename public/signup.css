@@ -129,7 +129,7 @@
     grid-row: 4/4;
   }
 
-#avatar > option{
+/* #avatar > option{
   box-sizing: border-box;
   height: 20px;
   width: 20px;
@@ -143,4 +143,4 @@ select#avatar option[value="/images/avataaars(2).png"]   { background-image:url(
 select#avatar option[value="/images/avataaars(3).png"]   { background-image:url("/images/avataaars(3).png");   }
 select#avatar option[value="/images/avataaars(4).png"]   { background-image:url("/images/avataaars(4).png");   }
 select#avatar option[value="/images/avataaars(5).png"]   { background-image:url("/images/avataaars(5).png");   }
-select#avatar option[value="/images/avataaars(6).png"]   { background-image:url("/images/avataaars(6).png");   }
+select#avatar option[value="/images/avataaars(6).png"]   { background-image:url("/images/avataaars(6).png");   } */
