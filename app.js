@@ -78,21 +78,12 @@ app.get('/users/:id', checkAuth, async (req, res) => {
 
 app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-<<<<<<< HEAD
-
-  for (let question of topQuestions) {
-    let score = await countQuestionVotes(question.id);
-    question.score = score;
-  }
-
-=======
   // Loop through questions and find their author's userName
   for (let question of topQuestions) {
     const user = await User.findByPk(question.userId);
     question.author = user.userName;
   }
->>>>>>> main
-  console.log(req.user)
+  //console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
 

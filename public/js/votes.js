@@ -1,99 +1,69 @@
 document.addEventListener('DOMContentLoaded', (e) => {
 
-    document.querySelector('.question.fa-caret-up').addEventListener( 'click', (e) => {
-        const questionElt = document.querySelector(`[data-questionid]`);
-        const questionId = questionElt.dataset.questionid;
-        const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
-        const route = "/questions/voteQuestion";
-        const body = { vote: true, userId, questionId };
-        let res = postVote(body, route);
-        if (res.ok) {
-            let score = questionElt.querySelector('.score');
-            let newScore = parseInt(score.innerHTML);
-            newScore -= 1;
-            score.innerHTML = newScore;
-        } else {
-            setErrorMessage(res);
+
+
+    document.querySelectorAll('.question.fa-caret-up').forEach( (item) => {
+        item.addEventListener( 'click',  async (e) => {
+            const questionElt = document.querySelector(`[data-questionid]`);
+            const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
+            const questionId = questionElt.dataset.questionid;
+            console.log("Clicked question upVote");
+            const route = "/questions/voteQuestion";
+            const body = { vote: true, userId, questionId };
+            await postVote(body, route, "add", questionElt.querySelector('.score') );
         }
+        )});
+
+    document.querySelectorAll('.question.fa-caret-down').forEach ( (item) => {
+        const questionElt = document.querySelector(`[data-questionid]`);
+        const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
+        const questionId = questionElt.dataset.questionid;
+            item.addEventListener('click', async (e) => {
+            console.log("Clicked question downVote");
+            const route = "/questions/voteQuestion";
+            const body = { vote: false, userId, questionId };
+            await postVote(body, route, "subtract", questionElt.querySelector('.score'));
+        })
     });
 
-    document.querySelector('.question.fa-caret-down').addEventListener('click', (e) => {
-        const questionElt = document.querySelector(`[data-questionid]`);
-        const questionId = questionElt.dataset.questionid;
-        const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
-        const route = "/questions/voteQuestion";
-        const body = { vote: false, userId, questionId };
-        let res = postVote(body, route);
-        if (res.ok) {
-            let score = questionElt.querySelector('.score');
-            let newScore = parseInt(score.innerHTML);
-            newScore -= 1;
-            score.innerHTML = newScore;
-        } else {
-            setErrorMessage(res);
-        }
-    });
+    const answerEltUpVote = document.querySelectorAll('.questionAnswer.fa-caret-up');
+    console.log("Value of answerEltUpVote: ", answerEltUpVote);
+    if (answerEltUpVote) {
+        answerEltUpVote.forEach ( (item) => {
+            item.addEventListener('click', async (e) => {
+            const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
 
-    document.querySelector('.questionAnswer.fa-caret-up').addEventListener('click', (e) => {
-        const answerElt = document.querySelector(`[data-answerid]`);
-        const answerId = answerElt.dataset.questionid;
-        const questionElt = document.querySelector(`[data-questionid]`);
-        const questionId = questionElt.dataset.questionid;
-        const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
-        route = "/questions/voteAnswer";
-        const body = { vote: true, userId, answerId };
-        let res = postVote(body, route);
-        if (res.ok) {
-            let score = answerElt.querySelector('.score');
-            let newScore = parseInt(score.innerHTML);
-            newScore += 1;
-            score.innerHTML = newScore
-        } else {
-          setErrorMessage(res);
-        }
-    });
+            const  answerElt = document.querySelector(`[data-answerid]`);
 
-    document.querySelector('.questionAnswer.fa-caret-down').addEventListener('click', (e) => {
-        const  answerElt = document.querySelector(`[data-answerid]`);
-        const  answerId = answerElt.dataset.questionid;
-        const  questionElt = document.querySelector(`[data-questionid]`);
-        const  questionId = questionElt.dataset.questionid;
-        const  userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
-        const route = "/questions/voteAnswer";
-        const body = { vote: false, userId, answerId };
-        let res = postVote(body, route);
-        //look at results and if ok, then change p.score increasing or decreasing.
-        if (res.ok) {
-            let score = answerElt.querySelector('.score');
-            let newScore = parseInt(score.innerHTML);
-            newScore -= 1;
-            score.innerHTML = newScore
-        } else {
-            setErrorMessage(res);
-        }
-    });
+            const  answerId = answerElt.dataset.answerid;
+            console.log("Clicked answer upVote, answerId: ", answerId);
+            route = "/questions/voteAnswer";
+            const body = { vote: true, userId, answerId };
+            console.log(`answerId: ${answerId}`);
+            await postVote(body, route, "add", answerElt.querySelector('.score'));
+        })
+    })};
+
+    const answerEltDownVote = document.querySelectorAll('.questionAnswer.fa-caret-down');
+    console.log("Value of answerEltDownVote: ", answerEltDownVote);
+    if (answerEltDownVote) {
+        answerEltDownVote.forEach ( (item) => {
+            item.addEventListener('click', async (e) => {
+            const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
+            const  answerElt = document.querySelector(`[data-answerid]`);
+            const  answerId = answerElt.dataset.answerid;
+            console.log("Clicked answer downVote, answerId: ", answerId);
+            const route = "/questions/voteAnswer";
+            const body = { vote: false, userId, answerId };
+            await postVote(body, route, "subtract", answerElt.querySelector('.score'));
+            })
+        });
+    }
 });
 
-async function setErrorMessage(res) {
-    const errorJSON = await res.json();
-    const { errors } = errorJSON;
 
-    if (errors && Array.isArray(errors)) {
-        let errorsContainer = document.querySelector(".main-box");
-        errorsContainer.innerHTML = ``;
-        let errorsHTML = ``;
-        for (let i = 0; i < errors.length; i++)
-        {
-            errorsHTML += `<li>${errors[i]}</li>`;
-        }
-        errorsContainer.innerHTML = `<ul style="color:red; background-color:white">${errorsHTML}</ul>`;
 
-        await setTimeout(function() {errorsContainer.innerHTML = `<ul style="color:red; background-color:white">${errorsHTML}</ul>`;}, 5000);
-        errorsContainer.innerHTML = ``;
-    }
-}
-
-async function postVote(body,route) {
+async function postVote(body,route, op, scoreElt) {
     try {
         const res = await fetch(route, {
             method: "POST",
@@ -102,30 +72,29 @@ async function postVote(body,route) {
                 "Content-Type": "application/json",
             },
         });
-
+        console.log("Returned from fetch... and res.ok is:  ", res.ok);
+        if (res.ok) {
+            const scoreJSON = await res.json();
+            //let newScore = parseInt(scoreElt.innerHTML);
+            console.log("new score:  ", scoreJSON.voteCount, " and scoreJSON: ", scoreJSON);
+            //op === "add" ? newScore += 1 : newScore -= 1;
+            scoreElt.innerHTML = scoreJSON.voteCount;
+        }
         if (!res.ok) {
             throw res;
         }
         return res;
     }
     catch (res)  {
-        console.log("err:  ", res.status);
-        if (res.status >= 400 && res.status < 600) {
-          const errorJSON = await res.json();
-          const { errors } = errorJSON;
+        console.log("Response object:  *******************************************", res);
+        const errorJSON = await res.json();
+        console.log("ErrorJSON:  ", errorJSON);
 
-          //here display for 5 seconds the error message in the pug file
-            //create a div, position absolute, put at top of page, then remove after timeout.
-
-          alert("Received between a 400 and 600 error.  Need to finish error handling in votes.js");
-          //questionSubject = body.questionSubject;
-          //questionText = body.questionText;
-
-          if (errors && Array.isArray(errors)) {
-            alert("We need to process the errors array:  ", errors);
-          }
-        } else {
-            alert("Something went wrong. Please check your internet connection and try again!");
+        if (errorJSON) {
+            let errorsContainer = document.querySelector(".main-box");
+            let errorsHTML = `<li>${errorJSON.error}</li>`;
+            errorsContainer.innerHTML = `<ul width="40px"; style="color:red; background-color:white">${errorsHTML}</ul>`;
+            await setTimeout(function() {errorsContainer.innerHTML = ``;}, 5000);
         }
     }
 }
