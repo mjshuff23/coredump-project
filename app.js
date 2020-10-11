@@ -71,13 +71,9 @@ app.get('/users', checkAuth, async (req, res) => {
 })
 
 app.get('/users/:id', checkAuth, async (req, res) => {
-  try{
+  
   const user = await User.findByPk(req.params.id);
-  const currentUserId = await req.user.dataValues.id;
-  }catch(res){
-    res.status(403).send(`Can't Delete questions that are not yours, cheater`);
-    return;
-  }
+  const currentUserId = req.user.dataValues.id;
   res.render('users/show', { user, signedIn: req.user, currentUserId });
 });
 
