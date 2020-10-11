@@ -1,10 +1,18 @@
-.mceContainer {
+.mceContainer, .mceContainer2 {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  opacity: 0.9;
+}
+
+.mceContainer {
   margin-top: 125px;
   width: 90%;
+}
+
+.mceContainer2 {
+  margin-top: 25px;
 }
 
 .mceErrors {
@@ -15,11 +23,15 @@
 
 .mceSubmit {
   margin-top: 10px;
-  border-radius: 2px;
+  border: 1px solid white;
+  background-color:#ff6b35 ;
+  color: white;
+  letter-spacing: 0.10em;
+  border-radius: 5px;
   float: right;
   right: 10px;
   height: 40px;
-
+  opacity: 0.9;
 }
 
 .testForm {
@@ -35,17 +47,7 @@
 
 .mceBox {
   box-sizing: border-box;
-  width: 75%;
+  width: 68%;
   height: 60%;
   border-radius: 2px;
-}
-
-
-.mceContainer2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  margin-top: 25px;
-  width: 90%;
 }

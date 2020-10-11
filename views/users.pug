@@ -3,6 +3,6 @@ block content
   div.usersWrapper
     each user in users
       div.userBox
-        div.userName2: a(href=`/users/${user.id}`) #{user.userName} 
+        div.userName2: a(href=`/users/${user.id}`).user #{user.userName}
         div.cred User: #{user.id}
         img.avatar2(src=`${user.avatar}` height="50")

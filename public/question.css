@@ -2,23 +2,62 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
+}
+
+.box-width {
+  /* flex-direction: column; */
+  /* min-width: 320px; */
+  /* width: 70%; */
 }
 
 .containerSolo {
-  display: flex;
+  /* display: flex; */
+  width: 70%;
   max-height: 300px;
-  border-radius: 25px;
+  border-radius: 8px;
   background-color: #226d77;
-  margin: 0px 0px 10px;
+  /* margin: 0px 0px 10px; */
+  margin-left: 14.9%;
+  margin-top: 10px;
+  opacity: 0.8;
 }
+
+
+.containerSolo2 {
+  /* display: flex; */
+  max-height: 300px;
+  border-radius: 8px;
+  background-color: #ff6b35;
+  margin: 0px 0px 10px;
+  opacity: 0.8;
+}
+
+
+.questionLink {
+  /* font-size: 1.25em; */
+  padding: 5px;
+  color: #cccccc;
+  text-decoration: none;
+}
+
+.questionLink :visited {
+  color: #b8b8b8;
+}
+
+.main {
+  /* font-size: .75em; */
+  /* max-height: 285px; */
+}
+
+
 
 .questionRow1 {
   display: flex;
-  padding-top: 15px;
+  padding-top: 10px;
   padding-left: 15px;
-  font-size: 1.5em;
-  color: whitesmoke;
+  font-size: 1.4em;
+  color: #b8b8b8;
 }
 
 .questionRow2 {
@@ -26,27 +65,41 @@
   display: flex;
 }
 
+.questionRow3 {
+  font-size: 15px;
+}
+
 .questionVotes {
   display: flex;
   flex-direction: column;
   max-width: 20%;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .questionTextSolo {
-  color: white;
-  padding: 20px 20px 0px;
-  width: 575px;
+  color: whitesmoke;
+  padding: 20px 20px 20px;
+  width:  680px;
+}
+
+.author {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  padding-bottom: 10px;
+  color: lightblue;
 }
 
 .numAnswers {
   color: #226d77;
-  font-size: 1.25rem;
-  margin-bottom: 10px;
+  font-size: 1.2rem;
+  /* padding-top: 10px; */
+  text-align: center;
 }
 
 .answerBox {
-  width: 85%;
+  /* width: 85%; */
+  margin-left: 30%;
 }
 
 .questionSubject {
@@ -64,16 +117,24 @@
   padding: 10px 20px;
   justify-content: center;
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   text-overflow: ellipsis;
-  width: 80%;
+  width: 92%;
 }
 
 .authorAnswer {
   display: flex;
   justify-content: flex-end;
-  padding-top: 75px;
-  color: lightblue;
+  margin-right: 20px;
+  padding-bottom: 10px;
+  color: whitesmoke;
+}
+
+.deleteBtn{
+  display: inline-block;
+  text-decoration: none;
+  color: whitesmoke;
+  margin-left: 15px;
 }
 
 .questionFooter {

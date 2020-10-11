@@ -11,16 +11,19 @@
 } */
 
 
-.main-btn-question {
+/* .main-btn-question {
   display: block;
   box-sizing: border-box;
-  height: 50px;
+  border: 1px solid white;
+  height: 40px;
+  padding: 6px;
+  border-radius: 20px;
   margin-bottom: 20px;
-  color:#ff6b35;
+  background-color:#ff6b35;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
-}
+} */
 
 
 .main-list-question {

@@ -16,8 +16,8 @@ block content
           span #{question.questionText} <br>
       div.questionRow3
         if (currentUserId === question.userId)
-          span.deleteBtn: a(href=`${question.id}/delete`) Delete
-        span.author Author: #{question.author} </br> #{question.createdAt}
+          a.deleteBtn(href=`${question.id}/delete`) Delete
+          span.author Author: #{question.author} </br> #{question.createdAt}
       //- Author: #{question.userId} </br> Posted: #{question.createdAt}
     div.numAnswers
       if answers.length === 1
@@ -27,7 +27,7 @@ block content
       else
         span #{answers.length} Answers
     each answer in answers
-      div.containerSolo.box-width.answerBox
+      div.containerSolo2.box-width.answerBox
         div.questionRow2
           div.questionVotes
             span(style="font-size: 2em; color: lightblue;")

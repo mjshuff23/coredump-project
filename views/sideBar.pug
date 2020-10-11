@@ -10,10 +10,11 @@ div.leftbar.hidden
             div.menu
                 a(href='/').home Home
                 div.public PUBLIC
+                    div.submenu
                     p
-                    a(href='/main').submenu-questions Recent Questions
+                        a(href='/main').submenu-questions Recent Questions
+                        p
+                        a(href='/users').submenu-users Users
                     //- if !signedIn
                     //-   p
                     //-   a(href='/postquestion').submenu-questions Ask Question
-                    p
-                    a(href='/users').submenu-users Users
