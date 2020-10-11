@@ -9,11 +9,12 @@ signUpForm.addEventListener("submit", async (e) => {
   const email = formData.get("email");
   const password = formData.get("password");
   const avatar = formData.get("avatar");
+  const confirmPassword = formData.get("confirmPassword");
 
 
 
 
-  const body = { email, password, userName, avatar };
+  const body = { email, password, userName, avatar, confirmPassword };
   try {
     const res = await fetch("/users/", {
       method: "POST",

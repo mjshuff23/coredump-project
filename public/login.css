@@ -1,67 +1,68 @@
-
 .loginbox {
   box-sizing: border-box;
-  width: 350px;
-  height: min-content;
+  width: 357px;
   border: 1px solid white;
-  margin-top: 50px;
-  /* margin-left: 585px; */
   border-radius: 25px;
   background-color: white;
   opacity: 0.7;
-  text-align: center;
+}
+
+.errors-container {
+box-sizing:border-box;
+width: 250px;
+height: 15px;
+}
+
+.log-in-container{
+  padding: 14%;
+  padding-top: 8%;
+  padding-bottom: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .loginhead {
   font-size: 24px;
-  letter-spacing: 0.05em;
   text-align: center;
   font-weight: 700;
-  margin-top: 40px;
+  margin-bottom: 10%;
+}
+
+.label-email {
+margin-top: 20px;
+}
+
+.email, .password {
+  width: 250px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  height: 35px;
+  margin-top: 10px;
+  padding-left: 10px;
 }
 
 .email {
-  height: 40px;
-  width: 250px;
-  border-radius: 10px;
-  border: 1px solid grey;
+  margin-bottom: 20px;
 }
 
 .password {
-  height: 35px;
-  width: 250px;
-  border-radius: 10px;
-  border: 1px solid grey;
+  margin-bottom: 30px;
 }
 
-
-.username, .email, .password {
-  margin-top: 30px;
- }
-
-
- .remember {
-  margin-top: 50px;
-  margin-right: 10px;
-}
-
-.signup2 {
+.link-signup {
+  margin-top: 40px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
+  color: #AB7ED6;
+  text-align: center;
 }
 
  .btn-login {
-  margin-top: 20px;
+  margin-left: 40%;
 }
-
-.btn-signUp {
-  margin-top: 10px
-}
-
-
-
 
 .footer {
-margin-top: 90px;
+margin-top: 3%;
 }

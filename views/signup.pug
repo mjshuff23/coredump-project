@@ -1,21 +1,24 @@
 extends layout.pug
 block content
-  .loginbox
-    div(class="sign-up-container")
-      div(class="errors-container")
-      h2 Sign Up
-      form(class="sign-up-form")
+  .signupbox
+    div.sign-up-container
+      div.errors-container
+      h2.signuphead Sign Up
+      form.sign-up-form
         .form-group
-          label(for='username') Username
-          input#username.form-control(type='text' name='userName' placeholder="Username")
+          label.label-username(for='username') Username
+          input.input-username(type='text' name='userName' placeholder="Enter user name")
         .form-group
-          label(for='email') Email address
-          input#email.form-control(type='email', name="email", placeholder='Enter Email')
+          label.label-email(for='email') Email address
+          input.input-email(type='email', name="email", placeholder='Enter email')
         .form-group
-          label(for='password') Password
-          input#password.form-control(type='password', name="password", placeholder='Password')
+          label.label-pasword(for='password') Password
+          input.input-password(type='password', name="password", placeholder='Password')
         .form-group
-          label(for='avatar') Default Avatar
+          label.label-confirm-password(for='confirmPassword') Confirm Password
+          input.input-confirmPassword(type='password', name='confirmPassword', placeholder='Confirm password')
+        .form-group
+          label.label-avatar(for='avatar') Default Avatar
             select#avatar(name='avatar')
               option(value='/images/avataaars.png') Sally
               option(value='/images/avataaars(1).png') Bill
@@ -25,11 +28,8 @@ block content
               option(value='/images/avataaars(5).png') Tammy
               option(value='/images/avataaars(6).png') Gene
               option(value='/images/avataaars(11).png') Tim
-        //- .form-group
-        //-    label(for='confirmPassword') Confirm Password
-        //-    input(type='password' name='confirmPassword' value='' placeholder='Confirm Password')
-        button.btn.btn-primary(type='submit') Sign Up
-      a(href='/login') Already have an account? Log in here.
+        button.btn-signUp(type='submit') Sign Up
+      a(href='/login').link-signup Already have an account? Log in here.
     script(src="js/signup.js")
 
 
