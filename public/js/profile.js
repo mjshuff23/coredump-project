@@ -1,7 +1,8 @@
 const handleDelete = (userId) => {
     return async () => {
+        
       try {
-        const res = await fetch(`/users/${$user.id}`, {
+        const res = await fetch(`/users/${$user.id}/delete`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${localStorage.getItem(
@@ -16,6 +17,24 @@ const handleDelete = (userId) => {
       } catch (err) {
         console.error(err);
       }
+
+      try {
+        const res = await fetch("/users/logout", {
+            method: "POST",
+        });
+        if (!res.ok) {
+            throw res;
+        }
+
+        localStorage.removeItem("COREDUMP_CURRENT_USER_ID");
+        localStorage.removeItem("COREDUMP_ACCESS_TOKEN");
+        window.location.href = "/login";
+
+    }
+    catch (err) {
+        console.log(await err.json());
+        // handleErrors(err);
+    }
     };
   };
 

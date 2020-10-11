@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check } = require("express-validator");
 const { handleValidationErrors, asyncHandler } = require("../../utils");
-const { getUserToken, loginUser } = require('../../auth');
+const { getUserToken, loginUser, checkAuth } = require('../../auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
@@ -94,13 +94,31 @@ router.post(
   })
 );
 
-router.post('/:id(\\d+)', getUserToken,
-  asyncHandler(async (req, res) => {
-    const userId = parseInt(req.params.id, 10);
-    const user = await User.findByPk(userId);
-    await user.destroy();
-    res.redirect(`/`);
-  }));
+
+router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
+  // Grab question to delete by id
+  const userId = parseInt(req.params.id);
+  const user = await User.findByPk(userId);
+  const currentUserId = req.user.dataValues.id;
+
+  if (!currentUserId || user.id !== currentUserId) {
+    res.status(403).send(`Can't Delete user that is not yours, cheater`);
+    return;
+  }
+  localStorage.removeItem("COREDUMP_CURRENT_USER_ID");
+  localStorage.removeItem("COREDUMP_ACCESS_TOKEN");
+  await user.destroy();
+  
+  res.render('banner', { title: 'Core Dump - Welcome' })
+}));
+
+// router.post('/:id(\\d+)/delete', getUserToken,
+//   asyncHandler(async (req, res) => {
+//     const userId = parseInt(req.params.id, 10);
+//     const user = await User.findByPk(userId);
+//     await user.destroy();
+//     res.redirect(`/users`);
+//   }));
 
 
 router.post('/logout', (req, res) => {
