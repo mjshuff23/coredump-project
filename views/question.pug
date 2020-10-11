@@ -8,12 +8,12 @@ block content
       div.questionRow2
         div.questionVotes
           span(style="font-size: 2em; color: lightblue;")
-            i(class="fas fa-caret-up")
+            i(class="question fas fa-caret-up")
             p.score #{score}
           span(style="font-size: 2em; color: lightblue;")
-            i(class="fas fa-caret-down")
+            i(class="question fas fa-caret-down")
         div.questionTextSolo
-          span #{question.questionText} <br>
+          span !{question.questionText} <br>
       div.questionRow3
         if (currentUserId === question.userId)
           span.deleteBtn: a(href=`${question.id}/delete`) Delete
@@ -28,13 +28,13 @@ block content
         span #{answers.length} Answers
     each answer in answers
       div.containerSolo.box-width.answerBox
-        div.questionRow2
+        div.questionRow2(data-answerid=answer.id)
           div.questionVotes
             span(style="font-size: 2em; color: lightblue;")
-              i(class="fas fa-caret-up")
+              i(class="questionAnswer fas fa-caret-up")
               p.score #{answer.score}
             span(style="font-size: 2em; color: lightblue;")
-              i(class="fas fa-caret-down")
+              i(class="questionAnswer fas fa-caret-down")
           p.questionTextSolo !{answer.answerText}
         div.questionRow3
           if (currentUserId === answer.userId)
@@ -50,3 +50,4 @@ block content
           button(type="submit" id="postAnswer" style="display:inline-block").mceSubmit SUBMIT ANSWER
     script(src="https://cdn.tiny.cloud/1/imc1fcb65bpfltbfodzejv92t1z705gvnrekj1svi9uz6bgp/tinymce/5/tinymce.min.js" referrerpolicy="origin")
     script(type="text/javascript" src="/js/add-answer.js")
+    script(type="text/javascript" src="/js/votes.js")

@@ -3,7 +3,7 @@ const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const csrfProtection = csurf({ cookie: true });
 
-const questionsRoute = require('./routes/api/questions');
+const { questionsRoute, countQuestionVotes, countVotes } = require('./routes/api/questions');
 const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
 const answersRouter = require('./routes/api/answers');
@@ -82,8 +82,9 @@ app.get('/main', checkAuth, async (req, res) => {
   for (let question of topQuestions) {
     const user = await User.findByPk(question.userId);
     question.author = user.userName;
+    question.score = await countQuestionVotes(question.id);
   }
-  console.log(req.user)
+  //console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
 
