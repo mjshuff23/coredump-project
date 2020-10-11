@@ -8,7 +8,6 @@
 @import 'search.css';
 @import 'mce.css';
 
-
 .gradient {
   background-image: linear-gradient(180deg, #2c8c99, whitesmoke, #2c8c99);
   height: 100vh;
@@ -16,7 +15,7 @@
 }
 
 .gradient2 {
-  background: linear-gradient(to bottom, #2c8c99 -100%,white 100%);
+  background: linear-gradient(to bottom, #2c8c99 -100%, white 100%);
 }
 
 html {
@@ -28,20 +27,21 @@ body {
   height: auto;
   min-height: 100%;
   min-width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.wrapper{
-display: flex;
-flex-direction: row;
+.wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 .leftbar {
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-width: 28%;
-top: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 28%;
+  top: 0px;
 }
 
 .center {
@@ -63,7 +63,8 @@ top: 0px;
   border: 1px solid white;
   width: 900px;
   height: 400px;
-  background-image: url(./images/core.png), url(./images/tile.png), url(./images/code3.png), url(./images/Wireframe-Core-preview.jpg);
+  background-image: url(./images/core.png), url(./images/tile.png),
+    url(./images/code3.png), url(./images/Wireframe-Core-preview.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -89,9 +90,9 @@ top: 0px;
   display: none;
 }
 
-.alert{
-  color:red;
-  font-weight:500 ;
+.alert {
+  color: red;
+  font-weight: 500;
   text-align: center;
   font-size: 14px;
 }
@@ -128,7 +129,7 @@ top: 0px;
 
 .box-width {
   flex-direction: column;
-  min-width: 320px;
+  width: 550px;
 }
 
 .questionLink {
@@ -142,7 +143,7 @@ top: 0px;
 }
 
 .main {
-  font-size: .75em;
+  font-size: 0.75em;
   max-height: 285px;
 }
 
@@ -151,8 +152,17 @@ top: 0px;
   margin-bottom: 0px;
 }
 
+:link {
+  color: #cccccc;
+}
+
+.deleteBtn {
+  padding-left: 10%;
+}
+
 @media screen and (min-width: 1000px) {
-  .sidebar, .leftbar{
+  .sidebar,
+  .leftbar {
     display: flex;
   }
   .xmark {
@@ -162,7 +172,7 @@ top: 0px;
 
 @media screen and (max-width: 1000px) {
   .burger {
-    display: flex
+    display: flex;
   }
   .leftbar {
     /* background-color: #000; */
@@ -173,8 +183,7 @@ top: 0px;
   .center {
     width: 100%;
   }
-.box {
-  width: 350px;
-}
-
+  .box {
+    width: 350px;
+  }
 }
