@@ -6,7 +6,6 @@
 @import 'users.css';
 @import 'mce.css';
 
-
 .gradient {
   background-image: linear-gradient(180deg, #2c8c99, whitesmoke, #2c8c99);
   height: 100vh;
@@ -14,7 +13,7 @@
 }
 
 .gradient2 {
-  background: linear-gradient(to bottom, #2c8c99 -100%,white 100%);
+  background: linear-gradient(to bottom, #2c8c99 -100%, white 100%);
 }
 
 html {
@@ -26,22 +25,23 @@ body {
   height: auto;
   min-height: 100%;
   min-width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.wrapper{
-display: flex;
-flex-direction: row;
+.wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 .leftbar {
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-/* width: 237px; */
-width: 28%;
-/* background-color: #809096; */
-top: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* width: 237px; */
+  width: 28%;
+  /* background-color: #809096; */
+  top: 0px;
 }
 
 .center {
@@ -59,14 +59,11 @@ top: 0px;
   /* margin: 0px 0px; */
 }
 
-
-
 .banner {
   box-sizing: border-box;
   border: 1px solid white;
   width: 900px;
   height: 400px;
-  /* margin: 60px auto; */
   background-image: url(./images/core.png), url(./images/tile.png), url(./images/code3.png), url(./images/Wireframe-Core-preview.jpg);
   background-position: center;
   background-repeat: no-repeat;
@@ -74,7 +71,6 @@ top: 0px;
   position: relative;
   opacity: 0.5;
   border-radius: 20px;
-  /* z-index: 1; */
 }
 
 .background {
@@ -85,12 +81,10 @@ top: 0px;
   box-sizing: border-box;
   width: 800px;
   height: 300px;
-  /* margin:30px auto; */
   color: black;
   text-align: center;
   opacity: 0.6;
 }
-
 
 .rightbar {
   display: flex;
@@ -111,17 +105,6 @@ top: 0px;
   display: none;
 }
 
- /* .log-in-container{
-  padding: 40px;
-  font-size: large;
-  min-height: min-content;
-  padding-bottom: 58%;
-} */
-
-/* .sign-up-container {
-
-} */
-
 .alert{
   /* background-color: whitesmoke; */
   color:red;
@@ -129,8 +112,6 @@ top: 0px;
   text-align: center;
   font-size: 14px;
 }
-
-
 
 .questionContainer {
   display: flex;
@@ -150,7 +131,6 @@ top: 0px;
   margin: 0px 0px 10px;
 }
 
-
 .questionSubject {
   display: flex;
   flex-direction: column;
@@ -160,9 +140,9 @@ top: 0px;
   font-size: 1.15rem;
 }
 
-/* :link {
-  color: #2c8c99;
-} */
+:link {
+  color: #cccccc;
+}
 
 .questionText {
   color: white;
@@ -180,7 +160,7 @@ top: 0px;
   padding: 10px 0 10px 0;
   max-height: 100%;
   color: white;
-  font-size: .75rem;
+  font-size: 0.75rem;
   width: 100%;
   border-top: 2px solid black;
   margin-bottom: 5px;
@@ -198,7 +178,8 @@ top: 0px;
 .authorAnswer {
   display: flex;
   justify-content: flex-end;
-  padding-top: 75px;
+  padding-bottom: 15px;
+  padding-right: 15px;
   color: lightblue;
 }
 
@@ -257,6 +238,7 @@ top: 0px;
   border-radius: 25px;
   background-color: #226d77;
   margin: 0px 0px 10px;
+  overflow-wrap: anywhere;
 }
 
 .box-width {
@@ -290,7 +272,7 @@ top: 0px;
 }
 
 .main {
-  font-size: .75em;
+  font-size: 0.75em;
   max-height: 285px;
 }
 .questionRow1 {
@@ -306,6 +288,10 @@ top: 0px;
   display: flex;
 }
 
+.questionRow3 {
+  padding-left: 10%;
+}
+
 .score {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -317,7 +303,8 @@ top: 0px;
   }
 } */
 @media screen and (min-width: 1000px) {
-  .sidebar, .leftbar{
+  .sidebar,
+  .leftbar {
     display: flex;
   }
   .xmark {
@@ -327,10 +314,7 @@ top: 0px;
 
 @media screen and (max-width: 1000px) {
   .burger {
-    display: flex
-  }
-  .leftbar {
-    /* background-color: #000; */
+    display: flex;
   }
   .search {
     width: 100%;
@@ -338,8 +322,10 @@ top: 0px;
   .center {
     width: 100%;
   }
-.box {
-  width: 350px;
-}
-
+  .box {
+    width: 350px;
+  }
+  .navbar-text {
+    display: none;
+  }
 }

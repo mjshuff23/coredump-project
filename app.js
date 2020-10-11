@@ -53,8 +53,8 @@ app.use("/users", usersRouter);
 app.use("/questions", questionsRoute);
 app.use("/answers", answersRouter);
 
-app.get('/', (req, res) => {
-  res.render('banner', { title: 'Core Dump - Welcome' })
+app.get('/', checkAuth, (req, res) => {
+  res.render('banner', { title: 'Core Dump - Welcome', signedIn: req.user })
 })
 
 app.get('/login', (req, res) => {
@@ -78,16 +78,19 @@ app.get('/users/:id', checkAuth, async (req, res) => {
 
 app.get('/main', checkAuth, async (req, res) => {
   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-  // const signedIn = true;
-  // if (window.localStorage.getItem("COREDUMP_ACCESS_TOKEN") && window.localStorage.getItem("COREDUMP_CURRENT_USER_ID")) signedIn = !signedIn;
+  // Loop through questions and find their author's userName
+  for (let question of topQuestions) {
+    const user = await User.findByPk(question.userId);
+    question.author = user.userName;
+  }
   console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
 
 
-app.get('/postQuestion', csrfProtection, (req, res) => {
+app.get('/postQuestion', checkAuth, csrfProtection, (req, res) => {
   let csrfToken = req.csrfToken();
-  res.render('add-question', { csrfToken, title: 'Ask a Question' })
+  res.render('add-question', { csrfToken, title: 'Ask a Question', signedIn: req.user })
 })
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
