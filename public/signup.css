@@ -10,7 +10,7 @@
 
 .errors-container {
   box-sizing:border-box;
-  width: 400px;
+  width: 500px;
   height: 15px;
 }
 
@@ -51,6 +51,7 @@
 
 .btn-signUp {
   margin-top: 10%;
+  margin-left: 40%;
   align-items: center;
   align-content: center;
 }
