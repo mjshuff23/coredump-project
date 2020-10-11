@@ -4,6 +4,8 @@
 @import 'signup.css';
 @import 'main.css';
 @import 'users.css';
+@import 'question.css';
+@import 'search.css';
 @import 'mce.css';
 
 
@@ -56,8 +58,6 @@ top: 0px;
   font-size: 12px;
 }
 
-
-
 .banner {
   box-sizing: border-box;
   border: 1px solid white;
@@ -85,22 +85,6 @@ top: 0px;
   opacity: 0.6;
 }
 
-
-.rightbar {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 10;
-}
-
-.user {
-  font-size: 14px;
-  font-weight: normal;
-  margin-left: 60px;
-  margin-top: 10px;
-  margin-bottom: 25px;
-}
-
 .hidden {
   display: none;
 }
@@ -112,16 +96,7 @@ top: 0px;
   font-size: 14px;
 }
 
-
-
-.questionContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,40 +105,7 @@ top: 0px;
   border-radius: 25px;
   background-color: #d5a23c;
   margin: 0px 0px 10px;
-}
-
-
-.questionSubject {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: #2c8c99;
-  padding: 4px 10px;
-  font-size: 1.15rem;
-}
-
-.questionText {
-  color: white;
-  box-sizing: border-box;
-  padding: 10px 20px;
-  justify-content: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 80%;
-}
-
-.questionFooter {
-  justify-content: center;
-  padding: 10px 0 10px 0;
-  max-height: 100%;
-  color: white;
-  font-size: .75rem;
-  width: 100%;
-  border-top: 2px solid black;
-  margin-bottom: 5px;
-  font-weight: 10;
-}
+} */
 
 .author {
   display: flex;
@@ -171,45 +113,6 @@ top: 0px;
   margin-right: 20px;
   padding-bottom: 20px;
   color: lightblue;
-}
-
-.authorAnswer {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 75px;
-  color: lightblue;
-}
-
-.answerBox {
-  width: 85%;
-}
-
-.searchHeader {
-  font-size: 2rem;
-  color: white;
-  display: flex;
-  justify-content: center;
-}
-
-.searchVal {
-  font-size: 1.75rem;
-  color: rgb(117, 117, 117);
-  padding-bottom: 10px;
-}
-
-.answerAmount {
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid white;
-  width: 98%;
-  color: #88d3dd;
-  padding: 5px;
-}
-
-.questionTextSolo {
-  color: white;
-  padding: 20px 20px 0px;
-  width: 575px;
 }
 
 .answer {
@@ -223,38 +126,9 @@ top: 0px;
   justify-content: center;
 }
 
-.numAnswers {
-  color: #226d77;
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-}
-
-.containerSolo {
-  display: flex;
-  max-height: 300px;
-  border-radius: 25px;
-  background-color: #226d77;
-  margin: 0px 0px 10px;
-}
-
 .box-width {
   flex-direction: column;
   min-width: 320px;
-}
-
-.questionVotes {
-  display: flex;
-  flex-direction: column;
-  max-width: 20%;
-  margin-left: 10px;
-}
-
-.searchTextSolo {
-  display: flex;
-  color: whitesmoke;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
 }
 
 .questionLink {
@@ -270,18 +144,6 @@ top: 0px;
 .main {
   font-size: .75em;
   max-height: 285px;
-}
-.questionRow1 {
-  display: flex;
-  padding-top: 15px;
-  padding-left: 15px;
-  font-size: 1.5em;
-  color: whitesmoke;
-}
-
-.questionRow2 {
-  height: auto;
-  display: flex;
 }
 
 .score {
