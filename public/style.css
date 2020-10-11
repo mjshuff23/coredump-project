@@ -6,6 +6,7 @@
 @import 'users.css';
 @import 'mce.css';
 
+
 .gradient {
   background-image: linear-gradient(180deg, #2c8c99, whitesmoke, #2c8c99);
   height: 100vh;
@@ -13,7 +14,7 @@
 }
 
 .gradient2 {
-  background: linear-gradient(to bottom, #2c8c99 -100%, white 100%);
+  background: linear-gradient(to bottom, #2c8c99 -100%,white 100%);
 }
 
 html {
@@ -25,23 +26,20 @@ body {
   height: auto;
   min-height: 100%;
   min-width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: row;
+.wrapper{
+display: flex;
+flex-direction: row;
 }
 
 .leftbar {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  /* width: 237px; */
-  width: 28%;
-  /* background-color: #809096; */
-  top: 0px;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+width: 28%;
+top: 0px;
 }
 
 .center {
@@ -56,8 +54,9 @@ body {
   color: grey;
   text-align: center;
   font-size: 12px;
-  /* margin: 0px 0px; */
 }
+
+
 
 .banner {
   box-sizing: border-box;
@@ -86,6 +85,7 @@ body {
   opacity: 0.6;
 }
 
+
 .rightbar {
   display: flex;
   flex-direction: row;
@@ -106,12 +106,13 @@ body {
 }
 
 .alert{
-  /* background-color: whitesmoke; */
   color:red;
   font-weight:500 ;
   text-align: center;
   font-size: 14px;
 }
+
+
 
 .questionContainer {
   display: flex;
@@ -131,6 +132,7 @@ body {
   margin: 0px 0px 10px;
 }
 
+
 .questionSubject {
   display: flex;
   flex-direction: column;
@@ -138,10 +140,6 @@ body {
   color: #2c8c99;
   padding: 4px 10px;
   font-size: 1.15rem;
-}
-
-:link {
-  color: #cccccc;
 }
 
 .questionText {
@@ -160,7 +158,7 @@ body {
   padding: 10px 0 10px 0;
   max-height: 100%;
   color: white;
-  font-size: 0.75rem;
+  font-size: .75rem;
   width: 100%;
   border-top: 2px solid black;
   margin-bottom: 5px;
@@ -178,8 +176,7 @@ body {
 .authorAnswer {
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 15px;
-  padding-right: 15px;
+  padding-top: 75px;
   color: lightblue;
 }
 
@@ -238,7 +235,6 @@ body {
   border-radius: 25px;
   background-color: #226d77;
   margin: 0px 0px 10px;
-  overflow-wrap: anywhere;
 }
 
 .box-width {
@@ -272,7 +268,7 @@ body {
 }
 
 .main {
-  font-size: 0.75em;
+  font-size: .75em;
   max-height: 285px;
 }
 .questionRow1 {
@@ -288,23 +284,13 @@ body {
   display: flex;
 }
 
-.questionRow3 {
-  padding-left: 10%;
-}
-
 .score {
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-/* @media screen and (max-width: 1200px) {
-  .leftbar{
-    display: none;
-  }
-} */
 @media screen and (min-width: 1000px) {
-  .sidebar,
-  .leftbar {
+  .sidebar, .leftbar{
     display: flex;
   }
   .xmark {
@@ -314,7 +300,10 @@ body {
 
 @media screen and (max-width: 1000px) {
   .burger {
-    display: flex;
+    display: flex
+  }
+  .leftbar {
+    /* background-color: #000; */
   }
   .search {
     width: 100%;
@@ -322,10 +311,8 @@ body {
   .center {
     width: 100%;
   }
-  .box {
-    width: 350px;
-  }
-  .navbar-text {
-    display: none;
-  }
+.box {
+  width: 350px;
+}
+
 }
