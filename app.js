@@ -61,8 +61,9 @@ app.get('/login', (req, res) => {
   res.render('login', { title: 'Login Page' });
 })
 
-app.get('/signup', (req, res) => {
-  res.render('signup', { title: 'Sign Up' });
+app.get('/signup', csrfProtection, (req, res) => {
+  let csrfToken = req.csrfToken();
+  res.render('signup', {csrfToken, title: 'Sign Up'});
 })
 
 app.get('/users', checkAuth, async (req, res) => {
@@ -72,6 +73,7 @@ app.get('/users', checkAuth, async (req, res) => {
 
 app.get('/users/:id', checkAuth, async (req, res) => {
   const user = await User.findByPk(req.params.id);
+  // const currentUserId = await req.user.dataValues.id;
   if (!user) res.status(404).end();
   res.render('users/show', { user, signedIn: req.user });
 });
@@ -83,7 +85,6 @@ app.get('/main', checkAuth, async (req, res) => {
     const user = await User.findByPk(question.userId);
     question.author = user.userName;
   }
-  console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
 

@@ -42,6 +42,15 @@ const validateEmailAndPassword = [
     .withMessage('Password must be at least 8 characters long.')
     .isLength({ max: 50 })
     .withMessage('Password must not be more than 50 characters long'),
+  check('confirmPassword')
+    .isLength({ max: 50 })
+    .withMessage('Confirm Password must not be more than 50 characters long')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Confirm Password does not match Password');
+      }
+      return true;
+    }),
 ];
 
 
@@ -55,14 +64,13 @@ router.post(
       const { userName, email, password, avatar } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({ userName, email, hashedPassword, avatar });
-      // if(avatar.length <= 1){
-      //   avatar = "/images/avataaars(12).png";
-      // }
       const token = getUserToken(user);
       res.status(201).json({
         user: { id: user.id },
         token,
       });
+      // loginUser(req, res, user);
+      // res.redirect('/');
     })
   );
 
@@ -100,25 +108,30 @@ router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
   const userId = parseInt(req.params.id);
   const user = await User.findByPk(userId);
   const currentUserId = req.user.dataValues.id;
+  console.log(userId);
+  console.log(currentUserId);
 
   if (!currentUserId || user.id !== currentUserId) {
-    res.status(403).send(`Can't Delete user that is not yours, cheater`);
+    res.status(403).send(`Can't delete user that is not you`);
     return;
   }
-  (function(){document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); })();
-  res.render('banner', { title: 'Core Dump - Welcome' })
-  await user.destroy();
   
+  await user.destroy();
+  res.clearCookie('accessToken')
+  res.render('banner', { title: 'Core Dump - Welcome' })
   
 }));
 
-// router.post('/:id(\\d+)/delete', getUserToken,
-//   asyncHandler(async (req, res) => {
-//     const userId = parseInt(req.params.id, 10);
-//     const user = await User.findByPk(userId);
-//     await user.destroy();
-//     res.redirect(`/users`);
-//   }));
+router.post('/:id(\\d+)/delete', getUserToken,
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const user = await User.findByPk(userId);
+    await user.destroy();
+    res.clearCookie('accessToken')
+    
+    res.redirect(`/users`);
+    res.status('200').end()
+  }));
 
 
 router.post('/logout', (req, res) => {
@@ -126,20 +139,6 @@ router.post('/logout', (req, res) => {
   res.status('200').end()
 });
 
-// router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
-//   // Grab question to delete by id
-//   const questionId = parseInt(req.params.id);
-//   const question = await Question.findByPk(questionId);
-//   const currentUserId = req.user.dataValues.id;
 
-//   if (!currentUserId || question.userId !== currentUserId) {
-//     res.status(403).send(`Can't Delete questions that are not yours, cheater`);
-//     return;
-//   }
-
-//   await question.destroy();
-//   const topQuestions = await Question.findAll({ limit: 10, order: [['createdAt', 'DESC']] });
-//   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' });
-// }));
 
 module.exports = router;

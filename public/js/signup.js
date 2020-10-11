@@ -1,5 +1,6 @@
 
 
+
 const signUpForm = document.querySelector(".sign-up-form");
 
 signUpForm.addEventListener("submit", async (e) => {
@@ -9,11 +10,12 @@ signUpForm.addEventListener("submit", async (e) => {
   const email = formData.get("email");
   const password = formData.get("password");
   const avatar = formData.get("avatar");
+  const confirmPassword = formData.get("confirmPassword");
 
 
 
 
-  const body = { email, password, userName, avatar };
+  const body = { email, password, userName, avatar, confirmPassword };
   try {
     const res = await fetch("/users/", {
       method: "POST",
@@ -34,7 +36,10 @@ signUpForm.addEventListener("submit", async (e) => {
     // storage access_token in localStorage:
     localStorage.setItem("COREDUMP_ACCESS_TOKEN", token);
     localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
-    window.location.href = "/main";
+
+    window.location.href = "/";
+    
+    
   } catch (err) {
     if (err.status >= 400 && err.status < 600) {
       const errorJSON = await err.json();
@@ -84,4 +89,7 @@ signUpForm.addEventListener("submit", async (e) => {
   catch (err) {
     handleErrors(err);
   }
+
+  
 });
+
