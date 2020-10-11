@@ -13,13 +13,12 @@ block content
             div.questionVotes
               span(style="font-size: 2em; color: lightblue;")
                 i(class="question fas fa-caret-up")
-                p.score #{question.score}
+                p.score 0
               span(style="font-size: 2em; color: lightblue;")
                 i(class="question fas fa-caret-down")
             div.questionTextSolo.questionText
               span !{question.questionText} <br>
           span.author Author: #{question.author} </br> Posted: #{question.createdAt}
-    script(type="text/javascript" src="/js/votes.js")
       //- Author: #{question.userId} </br> Posted: #{question.createdAt}
           p.main-questionText #{question.questionText}
           p.main-user Author: #{question.userId}, Posted: #{question.createdAt}

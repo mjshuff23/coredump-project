@@ -82,6 +82,7 @@ app.get('/main', checkAuth, async (req, res) => {
   for (let question of topQuestions) {
     const user = await User.findByPk(question.userId);
     question.author = user.userName;
+    question.score = await countQuestionVotes(question.id);
   }
   //console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
