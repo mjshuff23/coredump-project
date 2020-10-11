@@ -105,11 +105,11 @@ router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
     res.status(403).send(`Can't Delete user that is not yours, cheater`);
     return;
   }
-  localStorage.removeItem("COREDUMP_CURRENT_USER_ID");
-  localStorage.removeItem("COREDUMP_ACCESS_TOKEN");
+  (function(){document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); }); })();
+  res.render('banner', { title: 'Core Dump - Welcome' })
   await user.destroy();
   
-  res.render('banner', { title: 'Core Dump - Welcome' })
+  
 }));
 
 // router.post('/:id(\\d+)/delete', getUserToken,

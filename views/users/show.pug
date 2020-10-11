@@ -6,10 +6,10 @@ block content
     img.userCard_img(src=`${user.avatar}` width="250")
     div.userCard_bio Bio: #{user.bio}
   div
-    span: a(href=`${user.id}/delete`) Delete
-  div
-    form(action=`/users/${user.id}/delete` method='post')
-      button.userDelete-button(type='submit') Delete Profile
+    span: a(href=`${user.id}/delete`) Delete User Account
+  //- div
+  //-   form(action=`/users/${user.id}/delete` method='post')
+  //-     button.userDelete-button(type='submit') Delete Profile
  
       
       
