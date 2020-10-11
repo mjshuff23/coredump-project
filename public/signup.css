@@ -1,141 +1,59 @@
-.signuphead {
+.signupbox {
+  box-sizing: border-box;
+  width: 65%;
+  border: 1px solid white;
+  border-radius: 25px;
+  background-color: white;
+  opacity: 0.7;
+
+}
+
+.errors-container {
+  box-sizing:border-box;
+  width: 400px;
+  height: 15px;
+}
+
+.sign-up-container{
+  padding: 22%;
+  /* font-size: large; */
+  /* min-height: min-content; */
+  padding-top: 4%;
+  /* padding-bottom: 25%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signuphead  {
     font-size: 24px;
-    letter-spacing: 0.05em;
     text-align: center;
     font-weight: 700;
-    margin-top: 20px;
-  }
-  
-.username, .email, .password, .confirmPassword {
-    margin-top: 30px;
-}
-
-.signupbox {
-    box-sizing: border-box;
-    width: 850px;
-    height: 420px;
-    border: 1px solid white;
-    margin-top: 80px;
-    /* margin-left: 320px; */
-    border-radius: 25px;
-    background-color: white;
-    opacity: 0.7;
-    text-align: center;
-    margin-bottom: 30px;
-}
-.sign-up-container, .log-in-container{
-    padding: 40px;
-    font-size: large;
-    min-height: min-content;
-  
-}
-  
-.alert{
-    background-color: #ff6b35;
-}
-
-.usersWrapper{
-    display:flex;
-    max-width: 66%;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .userBox{
-    /* border: 2px solid black ; */
-    padding: 6px;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns:  30% 70% ;
-    grid-template-rows: 25% 25% 50%;
-    grid-gap: 5px;
-    width: 180px;
-    position: relative;
-  }
-  
-  .userName2{
-    grid-column: 2/2;
-    grid-row: 2/3;
-  }
-  
-  .cred{
-    grid-column: 2/2;
-    grid-row: 1/3;
-    z-index: -5;
-  }
-  
-  .avatar2{
-    grid-column: 1/2;
-    grid-row: 1/3;
-    border-radius: 50%;
-    position: relative;
-    top: 0px;
-    
+    padding-top: 2%;
+    padding-bottom: 1%;
   }
 
 
-.btn-login {
+.label-username, .label-email, .label-password, .label-confirmPassword {
   margin-top: 20px;
 }
 
-.btn-signUp {
-  margin-top: 10px
-}
-
-
-.input-username, .input-email,.input-avatar, .input-password, .input-confirmPassword {
+.input-username, .input-email,.input-avatar, .input-password, .input-confirmPassword, #avatar {
   box-sizing: border-box;
-  width: 300px;
+  width: 100%;
   height: 35px;
   border-radius: 10px;
   border: 1px solid grey;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 10px;
 }
 
-.footer {
-  margin-top: 90px;
-  }
-
-.userCard{
-  display:grid;
-  padding: 16px;
-  width: 250px;
-  margin: 0 auto;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 2fr 0.50fr 0.50fr 1fr;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
-  transition: 0.3s;
-  border-radius: 0.25em;
-  font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .userCard_userName{
-    grid-column: 1/2;
-    grid-row: 2/3;
-  }
-
-  .userCard_id{
-    grid-column: 1/3;
-    grid-row: 3/3;
-  }
-
-  .userCard_img{
-    grid-column: 1/3;
-    grid-row: 1/2;
-  }
-
-  .userCard_bio{
-    grid-column: 1/3;
-    grid-row: 4/4;
-  }
-
-#avatar > option{
-  box-sizing: border-box;
-  height: 20px;
-  width: 20px;
-  border: 1px solid white;
+.btn-signUp {
+  margin-top: 10%;
+  align-items: center;
+  align-content: center;
 }
-
 
 select#avatar option[value="/images/avataaars.png"]   { background-image:url("/images/avataaars.png");   }
 select#avatar option[value="/images/avataaars(1).png"]   { background-image:url("/images/avataaars(1).png");   }
@@ -144,3 +62,28 @@ select#avatar option[value="/images/avataaars(3).png"]   { background-image:url(
 select#avatar option[value="/images/avataaars(4).png"]   { background-image:url("/images/avataaars(4).png");   }
 select#avatar option[value="/images/avataaars(5).png"]   { background-image:url("/images/avataaars(5).png");   }
 select#avatar option[value="/images/avataaars(6).png"]   { background-image:url("/images/avataaars(6).png");   }
+
+/*
+.input-username, .input-email,.input-avatar, .input-password, .input-confirmPassword, #avatar {
+  box-sizing: border-box;
+  width: 47%;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid grey;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  margin-left: 50px;
+}
+
+.sign-up-form {
+  box-sizing: border-box;
+  width: 150%;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  align-content: space-between;
+} */
