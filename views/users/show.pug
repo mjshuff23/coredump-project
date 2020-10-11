@@ -6,9 +6,8 @@ block content
     img.userCard_img(src=`${user.avatar}` width="250")
     div.userCard_bio Bio: #{user.bio}
   div.deleteUser
-    if signedIn
+    if (currentUserId === user.id)
       a.user-delete-link(href=`${user.id}/delete`) Delete User Account
-  div
-    script(src="js/signup.js")
+ 
       
       
