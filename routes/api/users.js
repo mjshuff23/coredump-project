@@ -42,6 +42,15 @@ const validateEmailAndPassword = [
     .withMessage('Password must be at least 8 characters long.')
     .isLength({ max: 50 })
     .withMessage('Password must not be more than 50 characters long'),
+  check('confirmPassword')
+    .isLength({ max: 50 })
+    .withMessage('Confirm Password must not be more than 50 characters long')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Confirm Password does not match Password');
+      }
+      return true;
+    }),
 ];
 
 
