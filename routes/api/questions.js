@@ -202,7 +202,11 @@ router.get('/', asyncHandler(async(req, res, next) => {
   router.get('/:id', checkAuth, asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
-    const currentUserId = req.user.dataValues.id;
+    if (req.user) {
+      const currentUserId = req.user.dataValues.id;
+    } else {
+      currentUserId = 0;
+    }
     const question = await Question.findByPk(questionId);
     // Grab username by question.userId
     const user = await User.findByPk(question.userId);
