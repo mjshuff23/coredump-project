@@ -27,7 +27,7 @@ loginForm.addEventListener("submit", async (e) => {
 		localStorage.setItem("COREDUMP_ACCESS_TOKEN", token);
 		localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
 
-		window.location.href = "/";
+		window.location.href = "/main";
 		// let login = document.querySelector("login");
 		// let signup = document.querySelector("signup");
 		// let welcome = document.querySelector("navbar-text");
