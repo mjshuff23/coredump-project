@@ -9,13 +9,13 @@ block content
       each question in topQuestions
         div.containerSolo.box-width.main
           div.questionRow1: a.questionLink.main(href=`/questions/${question.id}`) #{question.questionSubject}
-          div.questionRow2
+          div.questionRow2(data-questionid=question.id)
             div.questionVotes
               span(style="font-size: 2em; color: lightblue;")
-                i(class="fas fa-caret-up")
+                i(class="question fas fa-caret-up")
                 p.score 0
               span(style="font-size: 2em; color: lightblue;")
-                i(class="fas fa-caret-down")
+                i(class="question fas fa-caret-down")
             div.questionTextSolo.questionText
               span !{question.questionText} <br>
           span.author Author: #{question.author} </br> Posted: #{question.createdAt}

@@ -84,6 +84,15 @@
   margin-bottom: 25px;
 }
 
+.fa-caret-up:hover {
+  cursor: pointer;
+  color: white;
+}
+
+.fa-caret-down:hover {
+  cursor: pointer;
+  color: white;
+}
 
 
 /* .list-answer {

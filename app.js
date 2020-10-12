@@ -3,7 +3,7 @@ const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const csrfProtection = csurf({ cookie: true });
 
-const questionsRoute = require('./routes/api/questions');
+const { questionsRoute, countQuestionVotes, countVotes } = require('./routes/api/questions');
 const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
 const answersRouter = require('./routes/api/answers');
@@ -62,7 +62,7 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup', { title: 'Sign Up' });
+  res.render('signup', {title: 'Sign Up'});
 })
 
 app.get('/users', checkAuth, async (req, res) => {
@@ -71,9 +71,10 @@ app.get('/users', checkAuth, async (req, res) => {
 })
 
 app.get('/users/:id', checkAuth, async (req, res) => {
+  
   const user = await User.findByPk(req.params.id);
-  if (!user) res.status(404).end();
-  res.render('users/show', { user, signedIn: req.user });
+  const currentUserId = req.user.dataValues.id;
+  res.render('users/show', { user, signedIn: req.user, currentUserId });
 });
 
 app.get('/main', checkAuth, async (req, res) => {
@@ -82,8 +83,8 @@ app.get('/main', checkAuth, async (req, res) => {
   for (let question of topQuestions) {
     const user = await User.findByPk(question.userId);
     question.author = user.userName;
+    question.score = await countQuestionVotes(question.id);
   }
-  console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
 

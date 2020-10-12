@@ -22,39 +22,6 @@ const validateQuestion = [
   handleValidationErrors,
 ];
 
-async function registerAnswerVote(vote, userId, answerId) {
-    let voted = await AnswerVote.findAll( {
-        where: {
-            userId,
-            answerId
-        }
-    })
-    if (!setVote(voted, vote)) {
-        await AnswerVote.create( {
-            vote,
-            userId,
-            answerId
-        })
-    }
-};
-
-async function registerQuestionVote(vote, userId, questionId) {
-    let voted = await QuestionVote.findAll( {
-        where: {
-            userId,
-            questionId
-        }
-    });
-
-   if (!setVote(voted, vote)){
-       await QuestionVote.create( {
-           vote,
-           userId,
-           questionId,
-       });
-    }
-}
-
 async function countQuestionVotes(questionId) {
   const questionVotes = await QuestionVote.findAll({
     where: {
@@ -63,8 +30,9 @@ async function countQuestionVotes(questionId) {
       }
     },
   });
-  console.log('made it here')
-  return countVotes(questionVotes);
+  let votes = countVotes(questionVotes);
+  console.log("Votes from countQuestionVotes:  ", votes);
+  return votes;
 }
 
 async function countAnswerVotes(answerId) {
@@ -75,58 +43,158 @@ async function countAnswerVotes(answerId) {
         }
       },
     });
+    let votes = countVotes(answerVotes);
+    console.log("Votes from countAnswerVotes: ", votes);
 
-    return countVotes(answerVotes);
+    return votes;
 }
 
 function countVotes(votes) {
   let score = 0;
   // Find all the trues and all the falses related to this question
-  for (let vote of votes) {
-    if (vote.vote) {
-      score++;
+  console.log(`Received ${votes.length} votes.`);
+  for (let i = 0; i < votes.length; i++){
+    console.log(`VoteId:  ${votes[i].id}, QuestionId: ${votes[i].questionId}, UserId: ${votes[i].userId}, Vote: ${votes[i].vote}`);
+  }
+  for (let thisVote of votes) {
+    if (thisVote.vote) {
+      console.log("thisVote.vote:  ", thisVote.vote, " adding 1.");
+      score += 1;
     } else {
-      score--;
+      console.log("this.Vote.vote:  ", thisVote.vote, " subtracting 1 from the score");
+      score -= 1;
     }
   }
+  console.log("Returning count of votes:  ", score);
   return score;
 }
-function setVote(voted, vote) {
-  //if we find a vote for this userId and AnswerId, let's see if we can change it.
-   let retVal = true;
-   if (voted) {
-        //up vote (true) - cannot upvote
-        if (vote) {
-            //current vote is false; We can only set it if the current vote is true;
-           voted.vote ? console.log("Cannot upvote an upvote") : voted.vote=vote;
+
+async function setVote(dbVoteObj, currentVote, res) {
+  // console.log("*********************************************");
+  // console.log("dbVoteObj.vote:  ", dbVoteObj.vote, " and currentVote:  ", currentVote, "and  currentVote === true:  ", (currentVote));
+    //new vote is an upVote
+    // console.log("Result of currentVote === true:  ", (currentVote === true));
+    if (currentVote) {
+        // console.log("Vote is true ...", currentVote);
+        //current vote is an upVote
+        if (dbVoteObj.vote) {
+          // console.log("dbVoteObj.vote is true ... throwing error ");
+          return("You have already upvoted this.");
+
+        } else {
+          // console.log("dbVoteObj.vote is false ... setting vote to downvote");
+          //current vote is downVote;
+          //new vote is an upVote; change to upvote;
+          await dbVoteObj.destroy();
+          // await dbVoteObj.save();
         }
-        else if(!vote) { //down vote (false)
-            voted.vote ? voted.vote=vote : console.log("Cannot downvote a downvote");
+    } else {
+      // console.log("vote is false ...");
+      //new vote is a downvote (false)
+      if (dbVoteObj.vote) {
+        //current vote is an upvote;
+        //change current vote to a downvote
+        // console.log("dbVoteObj.vote is true ... setting vote to downvote");
+        await dbVoteObj.destroy();
+        // dbVoteObj.vote=currentVote;
+        // await dbVoteObj.save();
+        } else {
+          //database vote is a downVote
+          //new vote is a downVote
+          // console.log("dbVoteObj.vote is false ... throwing error - cannot downvote downvote");
+          return "You have already downvoted this.";
         }
-        return retVal;
-    }
-    return false;
+      }
+      return "";
 }
 
-router.post(
-    '/new',
-    validateQuestion,
-    asyncHandler( async (req, res) => {
+router.post('/new', validateQuestion, asyncHandler ( async (req, res) => {
         const { questionSubject, questionText, userId } = req.body;
         const question = await Question.create({ questionSubject, questionText, userId });
         res.json({ question });
-    })
-);
+    }
+));
 
-router.post(
-    '/upVoteQuestion',
-    (req, res) => {
-        console.log("Hit the post question route!");
-    });
+router.post('/countQuestions', asyncHandler (async (req, res, next) => {
+  const { questionId } = req.body;
+  let votes = await countQuestionVotes(questionId);
+  console.log(`Counted ${votes} for questionId: ${questionId}`);
+  res.json({ votes });
+
+
+}));
+
+router.post('/voteQuestion', asyncHandler ( async (req, res, next) => {
+
+        let { vote, userId, questionId } = req.body;
+        vote === 'true' ? vote = true : vote = false;
+        console.log("**********************************************************");
+        console.log("Voting on Question for userId: ", userId, " and QuestionId: ", questionId, " and vote:  ", vote);
+        let errText = "";
+        const voted = await QuestionVote.findAll( {
+          where: {
+              userId,
+              questionId
+          }
+        });
+        if (voted.length > 1) {
+          errText = `Something is wrong with db tables - there is more than one vote for this userId: ${userId} and questionId: ${questionId}.`
+        } else {
+          if (voted[0] === undefined) {
+            await QuestionVote.create( {
+              vote,
+              userId,
+              questionId,
+            });
+          } else {
+            errText = await setVote(voted[0], vote, res);
+          }
+        }
+        if (errText) {
+          res.status(400).json({error: errText});
+        } else {
+          const newVoteCount = await countQuestionVotes(questionId);
+          res.send({voteCount: newVoteCount});
+        }
+      }
+));
+
+router.post('/voteAnswer', asyncHandler (async (req, res, next) => {
+        let { vote, userId, answerId } = req.body;
+        vote === 'true' ? vote = true : vote = false;
+        let errText = "";
+        const voted = await AnswerVote.findAll( {
+          where: {
+              userId,
+              answerId
+          }
+        });
+        if (voted.length > 1) {
+          errText = `Something is wrong with db tables - there is more than one vote for this userId: ${userId} and questionId: ${questionId}.`
+        } else {
+          if (voted[0] === undefined) {
+            await AnswerVote.create( {
+              vote,
+              userId,
+              answerId,
+            });
+          } else {
+            errText = await setVote(voted[0], vote, res);
+          }
+        }
+        if (errText) {
+          res.status(400).json({error: errText});
+        } else {
+          const newVoteCount = await countAnswerVotes(answerId);
+          res.send({voteCount: newVoteCount});
+        }
+    }));
+
 
 router.get('/', asyncHandler(async(req, res, next) => {
     // Get all questions
     const questions = await Question.findAll();
+    // Get votes associated with each question
 
     res.render('questions', { questions });
   }));
@@ -135,8 +203,10 @@ router.get('/', asyncHandler(async(req, res, next) => {
   router.get('/:id', checkAuth, asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
-    // Find question based on id
-    const currentUserId = req.user.dataValues.id;
+    let currentUserId = 0;
+    if (req.user) {
+      currentUserId = req.user.dataValues.id;
+    }
     const question = await Question.findByPk(questionId);
     // Grab username by question.userId
     const user = await User.findByPk(question.userId);
@@ -251,4 +321,8 @@ router.get('/:questionId/answers/:answerId/delete', checkAuth, asyncHandler(asyn
   res.render('question', { question, answers, score, title: question.questionSubject });
 }));
 
-module.exports = router;
+module.exports = {
+  questionsRoute: router,
+  countQuestionVotes,
+  countVotes
+};

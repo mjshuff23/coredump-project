@@ -262,6 +262,7 @@ outline: none;
 .logout {
   text-decoration: none;
   padding: 5px;
+  padding-top: 8px;
   display:flex;
   align-items: flex-end;
   display: inline;
