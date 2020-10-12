@@ -149,6 +149,7 @@ body {
 }
 
 .score {
+  width: 40px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
