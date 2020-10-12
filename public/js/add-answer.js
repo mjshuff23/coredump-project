@@ -12,18 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let postAnswerButton =  document.getElementById('postAnswer');
     postAnswerButton.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log("Prevented default");
         const questionEle = document.querySelector('[data-questionid]');
         const questionId = questionEle.dataset.questionid;
         let answerText2 = tinymce.activeEditor.getContent();
         let userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
 
         const answerText = answerText2.substr(3, answerText2.length - 4);
-        console.log("This is the questionText2:  ", answerText2);
-
-        console.log("Got form Text:  ", answerText);
-        console.log("Got the userID:  ", userId);
-        console.log("Got the questionID:  ", questionId);
 
         const body = { answerText, userId, questionId }
 
@@ -32,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function postAnswer(body, questionId) {
-    console.log(body);
     try {
         //Relative to the URL we're currently in
         const res = await fetch("/answers/new", {

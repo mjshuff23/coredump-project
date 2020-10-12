@@ -62,7 +62,7 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup', { title: 'Sign Up' });
+  res.render('signup', {title: 'Sign Up'});
 })
 
 app.get('/users', checkAuth, async (req, res) => {
@@ -71,9 +71,10 @@ app.get('/users', checkAuth, async (req, res) => {
 })
 
 app.get('/users/:id', checkAuth, async (req, res) => {
+  
   const user = await User.findByPk(req.params.id);
-  if (!user) res.status(404).end();
-  res.render('users/show', { user, signedIn: req.user });
+  const currentUserId = req.user.dataValues.id;
+  res.render('users/show', { user, signedIn: req.user, currentUserId });
 });
 
 app.get('/main', checkAuth, async (req, res) => {
@@ -84,7 +85,6 @@ app.get('/main', checkAuth, async (req, res) => {
     question.author = user.userName;
     question.score = await countQuestionVotes(question.id);
   }
-  //console.log(req.user)
   res.render('main', { topQuestions, signedIn: req.user, title: 'Core Dump' })
 })
 

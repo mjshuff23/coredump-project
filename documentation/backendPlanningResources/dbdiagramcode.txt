@@ -1,4 +1,52 @@
-// Table code for dbdiagram.io
+// Table code for input in dbdiagram.io
+
+// Draft 4
+
+Table Users {
+  id int [pk, increment]
+  username varchar
+  email varchar
+  bio text
+  hashedPassword varchar
+
+}
+
+Table AnswerVotes {
+  id int [pk, increment]
+  vote boolean
+  userId int
+  answerId int
+}
+Ref: AnswerVotes.userId > Users.id
+Ref: AnswerVotes.answerId > Answers.id
+
+Table QuestionVotes {
+  id int [pk, increment]
+  vote boolean
+  userId int
+  questionsId int
+}
+Ref: QuestionVotes.userId > Users.id
+Ref: QuestionVotes.questionsId > Questions.id
+
+Table Questions {
+  id int [pk, increment] // auto-increment
+  questionSubject varchar
+  questionText text
+  userId int
+  created_at timestamp
+}
+Ref: Questions.userId > Users.id
+
+Table Answers {
+  id int [pk, increment]
+  answerText text
+  questionId int
+  userId int
+  created_at timestamp
+}
+Ref: Answers.questionId > Questions.id
+Ref: Answers.userId > Users.id
 
 // Draft 3
 
