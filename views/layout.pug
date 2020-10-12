@@ -5,6 +5,7 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet")
     link(rel="stylesheet" type='text/css' href="/style.css")
+    link(rel="icon" type="image/png" href="https://img.icons8.com/fluent/48/000000/monitor.png")
     script(src='../js/logout.js')
     script(src='../js/sidebar.js')
     title= title
@@ -27,7 +28,7 @@ html(lang="en")
               span.navbar-text Welcome #{signedIn.dataValues.userName}!
               a(href='/postQuestion' style='text-decoration:none; color:white').main-btn-question Ask a question
               span.logout Log Out
-              a(href=`/users/${signedIn.dataValues.id}` style='text-decoration:none; color:white')
+              a(href=`/users/${signedIn.dataValues.id}`)
                 img.avatar(src=`${signedIn.dataValues.avatar}`)
               a(href='/')
         div.main-box
@@ -37,4 +38,4 @@ html(lang="en")
           p © Copyright: App Academy Group Project - July Cohort 2020
 
 //- img.avatar2(src=`${user.avatar}` height="50")
-//- div.userName2: a(href=`/users/${user.id}`) #{user.userName} 
+//- div.userName2: a(href=`/users/${user.id}`) #{user.userName}

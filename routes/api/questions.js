@@ -31,7 +31,7 @@ async function countQuestionVotes(questionId) {
     },
   });
   let votes = countVotes(questionVotes);
-  console.log("Votes from countQuestionVotes:  ", votes);
+  // console.log("Votes from countQuestionVotes:  ", votes);
   return votes;
 }
 
@@ -44,7 +44,7 @@ async function countAnswerVotes(answerId) {
       },
     });
     let votes = countVotes(answerVotes);
-    console.log("Votes from countAnswerVotes: ", votes);
+    // console.log("Votes from countAnswerVotes: ", votes);
 
     return votes;
 }
@@ -52,20 +52,20 @@ async function countAnswerVotes(answerId) {
 function countVotes(votes) {
   let score = 0;
   // Find all the trues and all the falses related to this question
-  console.log(`Received ${votes.length} votes.`);
+  // console.log(`Received ${votes.length} votes.`);
   for (let i = 0; i < votes.length; i++){
-    console.log(`VoteId:  ${votes[i].id}, QuestionId: ${votes[i].questionId}, UserId: ${votes[i].userId}, Vote: ${votes[i].vote}`);
+    // console.log(`VoteId:  ${votes[i].id}, QuestionId: ${votes[i].questionId}, UserId: ${votes[i].userId}, Vote: ${votes[i].vote}`);
   }
   for (let thisVote of votes) {
     if (thisVote.vote) {
-      console.log("thisVote.vote:  ", thisVote.vote, " adding 1.");
+      // console.log("thisVote.vote:  ", thisVote.vote, " adding 1.");
       score += 1;
     } else {
-      console.log("this.Vote.vote:  ", thisVote.vote, " subtracting 1 from the score");
+      // console.log("this.Vote.vote:  ", thisVote.vote, " subtracting 1 from the score");
       score -= 1;
     }
   }
-  console.log("Returning count of votes:  ", score);
+  // console.log("Returning count of votes:  ", score);
   return score;
 }
 
@@ -85,8 +85,8 @@ async function setVote(dbVoteObj, currentVote, res) {
           // console.log("dbVoteObj.vote is false ... setting vote to downvote");
           //current vote is downVote;
           //new vote is an upVote; change to upvote;
-          dbVoteObj.vote=currentVote;
-          await dbVoteObj.save();
+          await dbVoteObj.destroy();
+          // await dbVoteObj.save();
         }
     } else {
       // console.log("vote is false ...");
@@ -95,8 +95,9 @@ async function setVote(dbVoteObj, currentVote, res) {
         //current vote is an upvote;
         //change current vote to a downvote
         // console.log("dbVoteObj.vote is true ... setting vote to downvote");
-        dbVoteObj.vote=currentVote;
-        await dbVoteObj.save();
+        await dbVoteObj.destroy();
+        // dbVoteObj.vote=currentVote;
+        // await dbVoteObj.save();
         } else {
           //database vote is a downVote
           //new vote is a downVote
@@ -202,7 +203,10 @@ router.get('/', asyncHandler(async(req, res, next) => {
   router.get('/:id', checkAuth, asyncHandler(async(req, res, next) => {
     const questionId = parseInt(req.params.id);
     // Find question based on id
-    const currentUserId = req.user.dataValues.id;
+    let currentUserId = 0;
+    if (req.user) {
+      currentUserId = req.user.dataValues.id;
+    }
     const question = await Question.findByPk(questionId);
     // Grab username by question.userId
     const user = await User.findByPk(question.userId);
