@@ -26,25 +26,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let answerVoteUpArrs = createIds("answer", "VoteUp", "[data-answerid]");
     let answerVoteDownArrs = createIds("answer", "VoteDown", "[data-answerid]");
 
-    // for (let i = 0; i < questionVoteUpArrs[0].length; i++) {
-    //     console.log("QuestionVoteUp ids:  ", questionVoteUpArrs[0][i]);
-    // }
-    // for (let i = 0; i < questionVoteDownArrs[0].length; i++) {
-    //     console.log("QuestionVoteDown ids:  ", questionVoteDownArrs[0][i]);
-    // }
-
-    // for (let i = 0; i< answerVoteUpArrs[0].length; i++) {
-    //     console.log("AnswerVoteUp ids: ", answerVoteUpArrs[0][i]);
-    // }
-
-    // for (let i = 0; i< answerVoteDownArrs[0].length; i++) {
-    //     console.log("AnswerVoteDown ids: ", answerVoteDownArrs[0][i]);
-    // }
-
-    // for(let i = 0; i < questionVoteUpArrs[1].length; i++) {
-    //     console.log("Score ids: ", questionVoteUpArrs[1][i]);
-    // }
-
     questionVoteUpArrs[0].forEach( (item) => {
         document.getElementById(item).addEventListener ( 'click', async (e) => {
             console.log("Set event listener on item id:  ", item);
@@ -100,59 +81,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
 
-    // questionVoteUpArr = votesIds.forEach( voteId => {
-    //     return `questionVoteUp-${voteId.dataset.questionid}`;
-    // });
-    // questionVoteDownArr = votesIds.forEach( voteId => {
-    //     return `questionVoteDown-${voteId.dataset.questionid}`;
-    // });
-    // console.log("voteUpArr:  ", questionVoteUpArr);
-    // console.log("voteDownArr: ", questionVoteDownArr);
-
-
-
-
-    // const questionElt = document.querySelector(`[data-questionid]`);
-    //
-    // const questionId = questionElt.dataset.questionid;
-
-
-    // document.querySelector('.question.fa-caret-up').addEventListener( 'click',  async (e) => {
-    //
-
-
-    // });
-
-    // document.querySelector('.question.fa-caret-down').addEventListener('click', async (e) => {
-    //     console.log("Clicked question downVote");
-    //     const route = "/questions/voteQuestion";
-    //     const body = { vote: false, userId, questionId };
-    //     await postVote(body, route, "subtract", questionElt.querySelector('.score'));
-    // });
-
-    // const answerEltUpVote = document.querySelector('.questionAnswer.fa-caret-up');
-    // if (answerEltUpVote) {
-    //     answerEltUpVote.addEventListener('click', async (e) => {
-    //         console.log("Clicked answer upVote");
-    //         const  answerElt = document.querySelector(`[data-answerid]`);
-    //         const  answerId = answerElt.dataset.questionid;
-    //         route = "/questions/voteAnswer";
-    //         const body = { vote: true, userId, answerId };
-    //         await postVote(body, route, "add", answerElt.querySelector('.score'));
-    //     });
-    // }
-
-    // const answerEltDownVote = document.querySelector('.questionAnswer.fa-caret-down');
-    // if (answerEltDownVote) {
-    //     document.querySelector('.questionAnswer.fa-caret-down').addEventListener('click', async (e) => {
-    //         console.log("Clicked answer downVote");
-    //         const  answerElt = document.querySelector(`[data-answerid]`);
-    //         const  answerId = answerElt.dataset.questionid;
-    //         const route = "/questions/voteAnswer";
-    //         const body = { vote: false, userId, answerId };
-    //         await postVote(body, route, "subtract", answerElt.querySelector('.score'));
-    //     });
-    // }
 });
 
 
