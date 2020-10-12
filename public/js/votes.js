@@ -1,106 +1,65 @@
-function createIds(qOrA, upOrDown,  attribute) {
-    ids = document.querySelectorAll(`${attribute}`);
-    let idsArr = [];
-    let scoresArr = []
-     for (let i=0; i < ids.length; i++) {
-         let id = '';
-         if (qOrA === 'question') {
-            id = ids[i].dataset.questionid;
-            scoresArr.push(`score-${qOrA}-${id}`)
-         } else if (qOrA === 'answer') {
-            id = ids[i].dataset.answerid;
-            scoresArr.push(`score-${qOrA}-${id}`)
-         }
-        idsArr.push(`${qOrA}${upOrDown}-${id}`);
-     }
+// function createIds(qOrA, upOrDown,  attribute) {
+//     ids = document.querySelectorAll(`${attribute}`);
+//     let idsArr = [];
+//     let scoresArr = []
+//      for (let i=0; i < ids.length; i++) {
+//          let id = '';
+//          if (qOrA === 'question') {
+//             id = ids[i].dataset.questionid;
+//             scoresArr.push(`score-${qOrA}-${id}`)
+//          } else if (qOrA === 'answer') {
+//             id = ids[i].dataset.answerid;
+//             scoresArr.push(`score-${qOrA}-${id}`)
+//          }
+//         idsArr.push(`${qOrA}${upOrDown}-${id}`);
+//      }
 
-     return [ idsArr, scoresArr ];
-}
+//      return [ idsArr, scoresArr ];
+// }
 
-function printStuff(array) {
-    for (let i = 0; i < array.length; i++) {
-        console.log("Array [", i, "]: ", array[i]);
-}
-}
+// function printStuff(array) {
+//     for (let i = 0; i < array.length; i++) {
+//         console.log("Array [", i, "]: ", array[i]);
+// }
+// }
 
+console.log("Outside of DOM Content Loaded");
 document.addEventListener('DOMContentLoaded', (e) => {
     const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
 
-    let questionVoteUpArrs = createIds("question", "VoteUp", "[data-questionid]");
-    let questionVoteDownArrs = createIds("question", "VoteDown", "[data-questionid]");
-    let answerVoteUpArrs = createIds("answer", "VoteUp", "[data-answerid]");
-    let answerVoteDownArrs = createIds("answer", "VoteDown", "[data-answerid]");
-
-    console.log("FIRST ***********************************");
-    printStuff(questionVoteUpArrs[0]);
-    console.log("SECOND***********************************");
-    printStuff(questionVoteDownArrs[0]);
-    console.log("THIRD***********************************");
-    printStuff(answerVoteUpArrs[0]);
-    console.log("FOURTH***********************************");
-    printStuff(answerVoteDownArrs[0]);
-    console.log("FIFTH***********************************");
-
-    questionVoteUpArrs[0].forEach( (item) => {
-        document.getElementById(item).addEventListener ( 'click', async (e) => {
-            console.log("Set event listener on item id:  ", item);
-            console.log("Clicked question upVote");
-            const route = "/questions/voteQuestion";
-            let questionId = item.split('-')[1];
-            let vote = true;
-            const body = { vote, userId, questionId};
-            console.log("Voting for questionId: ", questionId, " vote: ", vote, " userId: ", userId);
-            await postVote(body, route, "add", document.getElementById(questionVoteUpArrs[1]));
+    document.querySelectorAll('.answersContainer').forEach( (item) =>  {
+        item.addEventListener('click', async (e) => {
+            console.log("Event listener for answers ");
+            //e.preventDefault();
+            //e.stopPropagation();
+            const answerId = e.target.dataset.answerid;
+            let scoreElt = document.querySelector(`p[data-answerid="${answerId}"]`)
+            if (e.target.classList.contains('fa-caret-up')) {
+                await postVote( { vote: true, answerId, userId }, '/questions/voteAnswer', scoreElt);
+            } else if (e.target.classList.contains('fa-caret-down')) {
+                await postVote( { vote: false, answerId, userId }, '/questions/voteAnswer', scoreElt );
+            }
         });
     });
-
-    questionVoteDownArrs[0].forEach( (item) => {
-        document.getElementById(item).addEventListener( 'click', async (e) => {
-            console.log("Set event listener on item id:  ", item);
-            console.log("Clicked question downVote");
-            const route = "/questions/voteQuestion";
-            let questionId = item.split('-')[1];
-            let vote = false;
-            const body = { vote, userId, questionId};
-            console.log("Voting for questionId: ", questionId, " vote: ", vote, " userId: ", userId);
-            await postVote(body, route, "subtract", document.getElementById(questionVoteDownArrs[1]));
+    document.querySelectorAll('.containerSolo').forEach ( (item) => {
+        console.log("Item:  ", item);
+        item.addEventListener('click', async (e) => {
+            console.log("Event listener for questions ");
+            //e.preventDefault();
+            //e.stopPropagation();
+            const questionId = e.target.dataset.questionid;
+            console.log("QuestionId: ", questionId);
+            let scoreElt = document.querySelector(`p[data-questionid="${questionId}"]`)
+            if (e.target.classList.contains('fa-caret-up')) {
+                await postVote( { vote: true, questionId, userId }, '/questions/voteQuestion', scoreElt);
+            } else if (e.target.classList.contains('fa-caret-down')) {
+                await postVote( { vote: false, questionId, userId }, '/questions/voteQuestion', scoreElt);
+            }
         });
     });
-
-    answerVoteUpArrs[0].forEach( (item) => {
-        document.getElementById(item).addEventListener( 'click', async (e) => {
-            console.log("Set event listener on item id:  ", item);
-            console.log("Clicked answer upVote");
-            const route="/questions/voteAnswer";
-            let answerId = item.split('-')[1];
-            let vote = true;
-            const body = { vote, userId, answerId};
-            console.log("Voting for answerId: ", answerId, " vote: ", vote, " userId: ", userId);
-            await postVote(body, route, "add", document.getElementById(answerVoteUpArrs[1]));
-        });
     });
 
-    answerVoteDownArrs[0].forEach( (item) => {
-        document.getElementById(item).addEventListener( 'click', async (e) => {
-            console.log("Set event listener on item id:  ", item);
-            console.log("Clicked answer downVote");
-            const route="/questions/voteAnswer";
-            let answerId = item.split('-')[1];
-            let vote = false;
-            const body = { vote, userId, answerId};
-            console.log("Voting for answerId: ", answerId, " vote: ", vote, " userId: ", userId);
-            await postVote(body, route, "subtract", document.getElementById(answerVoteDownArrs[1]));
-        })
-    });
-
-
-
-
-});
-
-
-
-async function postVote(body,route, op, scoreElt) {
+async function postVote(body,route, scoreElt) {
     try {
         const res = await fetch(route, {
             method: "POST",
@@ -113,8 +72,7 @@ async function postVote(body,route, op, scoreElt) {
         if (res.ok) {
             const retVal = await res.json();
             console.log("Return value:  ", retVal.voteCount);
-            //let newScore = parseInt(scoreElt.innerHTML);
-            //op === "add" ? newScore += 1 : newScore -= 1;
+            console.log("scoreElt.innerHTML: ", scoreElt);
             scoreElt.innerHTML = retVal.voteCount //newScore
         }
         if (!res.ok) {

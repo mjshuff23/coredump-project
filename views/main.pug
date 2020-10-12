@@ -12,14 +12,14 @@ block content
           div.questionRow2
             div.questionVotes
               span(style="font-size: 2em; color: lightblue;")
-                i(class="question fas fa-caret-up" id=`questionVoteUp-${question.id}`)
-                p.score(id=`score-question=${question.id}`) #{question.score}
+                i(class="question fas fa-caret-up" data-questionid=question.id)
+                p.score(data-questionid=question.id) #{question.score}
               span(style="font-size: 2em; color: lightblue;")
-                i(class="question fas fa-caret-down" id=`questionVoteDown-${question.id}`)
+                i(class="question fas fa-caret-down" data-questionid=question.id)
             div.questionTextSolo.questionText
               span !{question.questionText} <br>
           span.author Author: #{question.author} </br> Posted: #{question.createdAt}
-          script(type="text/javascript" src="/js/votes.js")
+  script(type="text/javascript" src="/js/votes.js")
       //- Author: #{question.userId} </br> Posted: #{question.createdAt}
           p.main-questionText #{question.questionText}
           p.main-user Author: #{question.userId}, Posted: #{question.createdAt}
