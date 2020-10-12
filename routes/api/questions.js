@@ -85,8 +85,8 @@ async function setVote(dbVoteObj, currentVote, res) {
           // console.log("dbVoteObj.vote is false ... setting vote to downvote");
           //current vote is downVote;
           //new vote is an upVote; change to upvote;
-          dbVoteObj.vote=currentVote;
-          await dbVoteObj.save();
+          await dbVoteObj.destroy();
+          // await dbVoteObj.save();
         }
     } else {
       // console.log("vote is false ...");
@@ -95,8 +95,9 @@ async function setVote(dbVoteObj, currentVote, res) {
         //current vote is an upvote;
         //change current vote to a downvote
         // console.log("dbVoteObj.vote is true ... setting vote to downvote");
-        dbVoteObj.vote=currentVote;
-        await dbVoteObj.save();
+        await dbVoteObj.destroy();
+        // dbVoteObj.vote=currentVote;
+        // await dbVoteObj.save();
         } else {
           //database vote is a downVote
           //new vote is a downVote
