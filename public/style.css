@@ -130,6 +130,7 @@ body {
 .box-width {
   flex-direction: column;
   width: 550px;
+  overflow-wrap: anywhere;
 }
 
 .questionLink {
