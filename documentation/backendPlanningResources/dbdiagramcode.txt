@@ -1,0 +1,152 @@
+// Table code for input in dbdiagram.io
+
+// Draft 4
+
+Table Users {
+  id int [pk, increment]
+  username varchar
+  email varchar
+  bio text
+  hashedPassword varchar
+
+}
+
+Table AnswerVotes {
+  id int [pk, increment]
+  vote boolean
+  userId int
+  answerId int
+}
+Ref: AnswerVotes.userId > Users.id
+Ref: AnswerVotes.answerId > Answers.id
+
+Table QuestionVotes {
+  id int [pk, increment]
+  vote boolean
+  userId int
+  questionsId int
+}
+Ref: QuestionVotes.userId > Users.id
+Ref: QuestionVotes.questionsId > Questions.id
+
+Table Questions {
+  id int [pk, increment] // auto-increment
+  questionSubject varchar
+  questionText text
+  userId int
+  created_at timestamp
+}
+Ref: Questions.userId > Users.id
+
+Table Answers {
+  id int [pk, increment]
+  answerText text
+  questionId int
+  userId int
+  created_at timestamp
+}
+Ref: Answers.questionId > Questions.id
+Ref: Answers.userId > Users.id
+
+// Draft 3
+
+Table Users {
+  id int [pk, increment]
+  username varchar
+  email varchar
+  hashedPassword varchar
+
+}
+
+Table Votes {
+  id int [pk, increment]
+  userId int
+  answerId int
+}
+Ref: Votes.userId > Users.id
+Ref: Votes.answerId > Answers.id
+
+Table Questions {
+  id int [pk, increment] // auto-increment
+  questionText text
+  userId int
+  created_at timestamp
+}
+Ref: Questions.userId > Users.id
+
+Table Answers {
+  id int [pk, increment]
+  answerText text
+  questionId int
+  userId int
+  created_at timestamp
+}
+Ref: Answers.questionId > Questions.id
+Ref: Answers.userId > Users.id
+
+
+//Draft 2
+
+Table Users {
+  id int [pk, increment]
+  username varchar
+  email varchar
+  hashedPassword varchar
+
+}
+
+
+
+Table Questions {
+  id int [pk, increment] // auto-increment
+  questionText text
+  userId int
+  created_at timestamp
+}
+Ref: Questions.userId > Users.id
+
+Table Answers {
+  id int [pk, increment]
+  answerText text
+  questionId int
+  userId int
+  votes int
+  created_at timestamp
+}
+Ref: Answers.questionId > Questions.id
+Ref: Answers.userId > Users.id
+
+// Draft 1
+
+Table Users {
+  id int [pk, increment]
+  username varchar
+  email varchar
+  hashedPassword varchar
+
+}
+
+Table Votes {
+  id int [pk, increment]
+  voteCount int
+}
+
+Table Questions {
+  id int [pk, increment] // auto-increment
+  questionText text
+  userId int
+  created_at timestamp
+}
+Ref: Questions.userId > Users.id
+
+Table Answers {
+  id int [pk, increment]
+  answerText text
+  questionId int
+  userId int
+  voteId int
+  created_at timestamp
+}
+Ref: Answers.questionId > Questions.id
+Ref: Answers.userId > Users.id
+Ref: Answers.voteId > Votes.id
