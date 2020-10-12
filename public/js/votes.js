@@ -17,6 +17,11 @@ function createIds(qOrA, upOrDown,  attribute) {
      return [ idsArr, scoresArr ];
 }
 
+function printStuff(array) {
+    for (let i = 0; i < array.length; i++) {
+        console.log("Array [", i, "]: ", array[i]);
+}
+}
 
 document.addEventListener('DOMContentLoaded', (e) => {
     const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
@@ -25,6 +30,16 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let questionVoteDownArrs = createIds("question", "VoteDown", "[data-questionid]");
     let answerVoteUpArrs = createIds("answer", "VoteUp", "[data-answerid]");
     let answerVoteDownArrs = createIds("answer", "VoteDown", "[data-answerid]");
+
+    console.log("FIRST ***********************************");
+    printStuff(questionVoteUpArrs[0]);
+    console.log("SECOND***********************************");
+    printStuff(questionVoteDownArrs[0]);
+    console.log("THIRD***********************************");
+    printStuff(answerVoteUpArrs[0]);
+    console.log("FOURTH***********************************");
+    printStuff(answerVoteDownArrs[0]);
+    console.log("FIFTH***********************************");
 
     questionVoteUpArrs[0].forEach( (item) => {
         document.getElementById(item).addEventListener ( 'click', async (e) => {
@@ -97,10 +112,10 @@ async function postVote(body,route, op, scoreElt) {
         console.log("Returned from fetch...");
         if (res.ok) {
             const retVal = await res.json();
-            console.log("Return value:  ", retVal);
-            let newScore = parseInt(scoreElt.innerHTML);
-            op === "add" ? newScore += 1 : newScore -= 1;
-            scoreElt.innerHTML = newScore
+            console.log("Return value:  ", retVal.voteCount);
+            //let newScore = parseInt(scoreElt.innerHTML);
+            //op === "add" ? newScore += 1 : newScore -= 1;
+            scoreElt.innerHTML = retVal.voteCount //newScore
         }
         if (!res.ok) {
             throw res;
