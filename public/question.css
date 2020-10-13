@@ -98,8 +98,7 @@
 }
 
 .answerBox {
-  /* width: 85%; */
-  /* margin-left: 30%; */
+  max-width: 85%;
 }
 
 .questionSubject {
@@ -142,7 +141,7 @@
   padding: 10px 0 10px 0;
   max-height: 100%;
   color: white;
-  font-size: .75rem;
+  font-size: 0.75rem;
   width: 100%;
   border-top: 2px solid black;
   margin-bottom: 5px;
