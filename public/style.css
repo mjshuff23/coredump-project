@@ -189,3 +189,7 @@ body {
     width: 350px;
   }
 }
+
+.mce-notification {
+  display: none !important;
+}
