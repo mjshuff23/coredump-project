@@ -7,10 +7,10 @@ block content
       form.log-in-form
         .form-group
           label.label-email(for='email') Email address
-          input.email(type='email', name="email", placeholder='Enter email address')
+          input.email(type='email', name="email", placeholder='Enter email address', value="test@test.com")
         .form-group
           label.label-password(for='password') Password
-          input.password(type='password', name="password", placeholder='Enter password')
+          input.password(type='password', name="password", placeholder='Enter password', value='password')
         button.btn-login(type='submit') Log In
       a(href='/signup').link-signup Don't have an account? Sign up here
     script(src="js/log-in.js" type='module')
