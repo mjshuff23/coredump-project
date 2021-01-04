@@ -8,10 +8,10 @@ block content
       div.questionRow2
         div.questionVotes
           span(style="font-size: 2em; color: lightblue;")
-            i(class="question fas fa-caret-up")
-            p.score #{score}
+            i(class="question fas fa-caret-up" data-questionid=question.id)
+            p.score(data-questionid=question.id) #{score}
           span(style="font-size: 2em; color: lightblue;")
-            i(class="question fas fa-caret-down")
+            i(class="question fas fa-caret-down" data-questionid=question.id)
         div.questionTextSolo
           span !{question.questionText} <br>
       div.questionRow3
@@ -26,6 +26,30 @@ block content
         span No answers for this question
       else
         span #{answers.length} Answers
+    div.answersContainer
+      each answer in answers
+        div.containerSolo.box-width.answerBox
+          div.questionRow2(data-answerid=answer.id)
+            div.questionVotes
+              span(style="font-size: 2em; color: lightblue;")
+                i(class="questionAnswer fas fa-caret-up" data-answerid=answer.id)
+                p.score(data-answerid=answer.id) #{answer.score}
+              span(style="font-size: 2em; color: lightblue;")
+                i(class="questionAnswer fas fa-caret-down" data-answerid=answer.id)
+            p.questionTextSolo !{answer.answerText}
+          div.questionRow3
+            if (currentUserId === answer.userId)
+              a.deleteBtn(href=`${question.id}/answers/${answer.id}/delete`) Delete
+            span.authorAnswer Author: #{answer.author} </br> #{answer.createdAt}
+      div.mceContainer2
+        div.mceErrors
+        div.mceBox
+          form(id="testForm" class='testForm' method="post" )
+            input(type='hidden' id='questionId' value=question.id)
+            input(type='hidden' name='_csrf' value=csrfToken)
+            textarea(id="questionText" required value=answerText)
+            button(type="submit" id="postAnswer" style="display:inline-block").mceSubmit SUBMIT ANSWER
+    script(src="https://cdn.tiny.cloud/1/imc1fcb65bpfltbfodzejv92t1z705gvnrekj1svi9uz6bgp/tinymce/5/tinymce.min.js" referrerpolicy="origin")
     each answer in answers
       div.containerSolo.box-width.answerBox
         div.questionRow2(data-answerid=answer.id)

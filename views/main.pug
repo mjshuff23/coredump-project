@@ -7,18 +7,19 @@ block content
   div.main-list-question.questionLink
     div.questionContainer
       each question in topQuestions
-        div.containerSolo.box-width.main
+        div.containerSolo.box-width.main(data-questionid=question.id)
           div.questionRow1: a.questionLink.main(href=`/questions/${question.id}`) #{question.questionSubject}
-          div.questionRow2(data-questionid=question.id)
+          div.questionRow2
             div.questionVotes
               span(style="font-size: 2em; color: lightblue;")
-                i(class="question fas fa-caret-up")
-                p.score 0
+                i(class="question fas fa-caret-up" data-questionid=question.id)
+                p.score(data-questionid=question.id) #{question.score}
               span(style="font-size: 2em; color: lightblue;")
-                i(class="question fas fa-caret-down")
+                i(class="question fas fa-caret-down" data-questionid=question.id)
             div.questionTextSolo.questionText
               span !{question.questionText} <br>
           span.author Author: #{question.author} </br> Posted: #{question.createdAt}
+  script(type="text/javascript" src="/js/votes.js")
       //- Author: #{question.userId} </br> Posted: #{question.createdAt}
           p.main-questionText #{question.questionText}
           p.main-user Author: #{question.userId}, Posted: #{question.createdAt}
