@@ -11,7 +11,7 @@ router.post('/', checkAuth, asyncHandler(async (req, res, next) => {
   let relevantQuestions = [];
   let questionIds = [];
   let answers = [];
-  console.log(req.body);
+  // console.log(req.body);
   search = search.toLowerCase();                              // Make it lowercase
   const questions = await Question.findAll();
   // Search through questions list to find relevant questions
@@ -35,7 +35,7 @@ router.post('/', checkAuth, asyncHandler(async (req, res, next) => {
       answers: []
     };
   } else {
-    console.log(questionIds)
+    // console.log(questionIds)
     // Loop through questions and find associated answers
     answers = await Answer.findAll({
       where: {
@@ -60,4 +60,4 @@ router.post('/', checkAuth, asyncHandler(async (req, res, next) => {
 
 module.exports = {
   searchRouter: router,
-}
+};

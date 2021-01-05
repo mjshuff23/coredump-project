@@ -22,12 +22,12 @@ export const handleErrors = async (err) => {
         errorsContainer.innerHTML = errorsHtml.join("");
     } else {
         console.log(err.status);
-        console.error(err)
+        console.error(err);
         alert(
             "Something went wrong. Please check your internet connection and try again!"
         );
     }
-}
+};;
 
 // module.exports = {
 //     handleErrors

@@ -97,6 +97,4 @@
   justify-content: space-between;
 }
 
-.questionRow3>.deleteBtn {
-  padding-top: 20%;
-}
+.questionRow3>.deleteBtn {}

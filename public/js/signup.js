@@ -38,8 +38,8 @@ signUpForm.addEventListener("submit", async (e) => {
     localStorage.setItem("COREDUMP_CURRENT_USER_ID", id);
 
     window.location.href = "/";
-    
-    
+
+
   } catch (err) {
     if (err.status >= 400 && err.status < 600) {
       const errorJSON = await err.json();
@@ -51,9 +51,9 @@ signUpForm.addEventListener("submit", async (e) => {
         </div>
       `,
       ];
-      console.log(errorJSON);
+      // console.log(errorJSON);
       const { errors } = errorJSON;
-      console.log(errors);
+      // console.log(errors);
       if (errors && Array.isArray(errors)) {
         errorsHtml = errors.map(
           (message) => `
@@ -90,6 +90,5 @@ signUpForm.addEventListener("submit", async (e) => {
     handleErrors(err);
   }
 
-  
-});
 
+});

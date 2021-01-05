@@ -15,21 +15,21 @@ const validateAnswer = [
 ];
 
 router.post(
-    '/new',
-    validateAnswer,
-    asyncHandler( async (req, res) => {
-        const { answerText, userId, questionId } = req.body;
-        console.log(answerText);
-        const answer = await Answer.create({ answerText, userId, questionId });
-        res.json({ answer });
-    })
+  '/new',
+  validateAnswer,
+  asyncHandler(async (req, res) => {
+    const { answerText, userId, questionId } = req.body;
+    // console.log(answerText);
+    const answer = await Answer.create({ answerText, userId, questionId });
+    res.json({ answer });
+  })
 );
 
 router.get('/', asyncHandler(async (req, res, next) => {
-    // Get all questions
-    const answers = await Answer.findAll();
+  // Get all questions
+  const answers = await Answer.findAll();
 
-    res.render('answers', { answers, title: 'Answers' });
-  }));
+  res.render('answers', { answers, title: 'Answers' });
+}));
 
 module.exports = router;

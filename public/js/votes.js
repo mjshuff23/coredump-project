@@ -23,13 +23,13 @@
 // }
 // }
 
-console.log("Outside of DOM Content Loaded");
+// console.log("Outside of DOM Content Loaded");
 document.addEventListener('DOMContentLoaded', (e) => {
     const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
 
     document.querySelectorAll('.answersContainer').forEach((item) => {
         item.addEventListener('click', async (e) => {
-            console.log("Event listener for answers ");
+            // console.log("Event listener for answers ");
             //e.preventDefault();
             //e.stopPropagation();
             const answerId = e.target.dataset.answerid;
@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
         });
     });
     document.querySelectorAll('.containerSolo').forEach((item) => {
-        console.log("Item:  ", item);
+        // console.log("Item:  ", item);
         item.addEventListener('click', async (e) => {
             console.log("Event listener for questions ");
             //e.preventDefault();
             //e.stopPropagation();
             const questionId = e.target.dataset.questionid;
-            console.log("QuestionId: ", questionId);
+            // console.log("QuestionId: ", questionId);
             let scoreElt = document.querySelector(`p[data-questionid="${questionId}"]`);
             if (e.target.classList.contains('fa-caret-up')) {
                 await postVote({ vote: true, questionId, userId }, '/questions/voteQuestion', scoreElt);
@@ -71,11 +71,11 @@ async function postVote(body, route, scoreElt) {
                 "Content-Type": "application/json",
             },
         });
-        console.log("Returned from fetch...");
+        // console.log("Returned from fetch...");
         if (res.ok) {
             const retVal = await res.json();
-            console.log("Return value:  ", retVal.voteCount);
-            console.log("scoreElt.innerHTML: ", scoreElt);
+            // console.log("Return value:  ", retVal.voteCount);
+            // console.log("scoreElt.innerHTML: ", scoreElt);
             scoreElt.innerHTML = retVal.voteCount; //newScore
         }
         if (!res.ok) {
@@ -84,9 +84,9 @@ async function postVote(body, route, scoreElt) {
         return res;
     }
     catch (res) {
-        console.log("Response object:  *******************************************", res);
+        // console.log("Response object:  *******************************************", res);
         const errorJSON = await res.json();
-        console.log("ErrorJSON:  ", errorJSON);
+        // console.log("ErrorJSON:  ", errorJSON);
 
         if (errorJSON) {
             let errorsContainer = document.querySelector(".main-box");
