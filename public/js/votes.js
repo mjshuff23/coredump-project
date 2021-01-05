@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     document.querySelectorAll('.containerSolo').forEach((item) => {
         // console.log("Item:  ", item);
         item.addEventListener('click', async (e) => {
-            console.log("Event listener for questions ");
+            // console.log("Event listener for questions ");
             //e.preventDefault();
             //e.stopPropagation();
             const questionId = e.target.dataset.questionid;
