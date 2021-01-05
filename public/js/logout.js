@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", (e) => {
     const logoutButton = document
-        .querySelector(".logout")
+        .querySelector(".logout");
     if (!logoutButton) return;
     logoutButton.addEventListener('click', async (eve) => {
         try {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
         }
         catch (err) {
-            console.log(await err.json());
+            // console.log(await err.json());
             // handleErrors(err);
         }
 

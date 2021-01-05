@@ -6,7 +6,7 @@ const { getUserToken, loginUser, checkAuth } = require('../../auth');
 const router = express.Router();
 const db = require("../../db/models");
 const { User } = db;
-console.log(check.toString());
+// console.log(check.toString());
 
 const validateEmailAndPassword = [
   check("userName")
@@ -56,23 +56,23 @@ const validateEmailAndPassword = [
 
 //create user with hashedpassword
 router.post(
-    "/",
-    validateEmailAndPassword,
-    handleValidationErrors,
-    asyncHandler(async (req, res) => {
-      console.log(req.body);
-      const { userName, email, password, avatar } = req.body;
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await User.create({ userName, email, hashedPassword, avatar });
-      const token = getUserToken(user);
-      res.status(201).json({
-        user: { id: user.id },
-        token,
-      });
-      // loginUser(req, res, user);
-      // res.redirect('/');
-    })
-  );
+  "/",
+  validateEmailAndPassword,
+  handleValidationErrors,
+  asyncHandler(async (req, res) => {
+    // console.log(req.body);
+    const { userName, email, password, avatar } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({ userName, email, hashedPassword, avatar });
+    const token = getUserToken(user);
+    res.status(201).json({
+      user: { id: user.id },
+      token,
+    });
+    // loginUser(req, res, user);
+    // res.redirect('/');
+  })
+);
 
 
 router.post(
@@ -97,29 +97,29 @@ router.post(
 
     // Token generation
     const token = getUserToken(user);
-    res.cookie('accessToken', `${token}`, { httpOnly: true })
+    res.cookie('accessToken', `${token}`, { httpOnly: true });
     res.json({ token, user: { id: user.id } });
   })
 );
 
 
-router.get('/:id/delete', checkAuth, asyncHandler(async(req, res, next) => {
+router.get('/:id/delete', checkAuth, asyncHandler(async (req, res, next) => {
   // Grab question to delete by id
   const userId = parseInt(req.params.id);
   const user = await User.findByPk(userId);
   const currentUserId = req.user.dataValues.id;
-  console.log(userId);
-  console.log(currentUserId);
+  // console.log(userId);
+  // console.log(currentUserId);
 
   if (!currentUserId || user.id !== currentUserId) {
     res.status(403).send(`Can't delete user that is not you`);
     return;
   }
-  
+
   await user.destroy();
-  res.clearCookie('accessToken')
-  res.render('banner', { title: 'Core Dump - Welcome' })
-  
+  res.clearCookie('accessToken');
+  res.render('banner', { title: 'Core Dump - Welcome' });
+
 }));
 
 router.post('/:id(\\d+)/delete', getUserToken,
@@ -127,16 +127,16 @@ router.post('/:id(\\d+)/delete', getUserToken,
     const userId = parseInt(req.params.id, 10);
     const user = await User.findByPk(userId);
     await user.destroy();
-    res.clearCookie('accessToken')
-    
+    res.clearCookie('accessToken');
+
     res.redirect(`/users`);
-    res.status('200').end()
+    res.status('200').end();
   }));
 
 
 router.post('/logout', (req, res) => {
-  res.clearCookie('accessToken')
-  res.status('200').end()
+  res.clearCookie('accessToken');
+  res.status('200').end();
 });
 
 

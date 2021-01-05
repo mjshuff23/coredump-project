@@ -142,10 +142,12 @@ body {
   font-size: 1.25em;
   padding: 5px;
   color: #cccccc;
+  text-decoration: none;
 }
 
 .questionLink :visited {
   color: #b8b8b8;
+  text-decoration: none;
 }
 
 .main {
@@ -161,6 +163,7 @@ body {
 
 :link {
   color: #cccccc;
+  text-decoration: none;
 }
 
 .deleteBtn {

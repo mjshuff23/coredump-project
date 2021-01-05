@@ -37,7 +37,7 @@ block content
               span(style="font-size: 2em; color: lightblue;")
                 i(class="questionAnswer fas fa-caret-down" data-answerid=answer.id)
             p.questionTextSolo !{answer.answerText}
-          div.questionRow3
+          div.questionRow3.answerRow
             if (currentUserId === answer.userId)
               a.deleteBtn(href=`${question.id}/answers/${answer.id}/delete`) Delete
             span.authorAnswer Author: #{answer.author} </br> #{answer.createdAt}
