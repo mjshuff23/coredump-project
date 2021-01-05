@@ -11,14 +11,14 @@ const { Question, Answer, AnswerVote, QuestionVote, User } = db;
 
 const validateQuestion = [
   check("questionSubject")
-    .isLength({ min: 5 })
-    .withMessage("Question subject must have at least 5 characters."),
+    .isLength({ min: 3 })
+    .withMessage("Question subject must have at least 3 characters."),
   check("questionSubject")
     .isLength({ max: 45 })
     .withMessage("Question subject must be no longer than 45 characters."),
   check("questionText")
-    .isLength({ min: 30 })
-    .withMessage("Question text must be at least 30 characters long."),
+    .isLength({ min: 3 })
+    .withMessage("Question text must be at least 3 characters long."),
   handleValidationErrors,
 ];
 
