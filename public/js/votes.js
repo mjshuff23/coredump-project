@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             } else if (e.target.classList.contains('fa-caret-down')) {
                 await postVote({ vote: false, questionId, userId }, '/questions/voteQuestion', scoreElt);
             } else {
-                if (!questionId) return;
+                if (!questionId || window.location.href.search(/questions\/\d+/) !== -1) return;
                 window.location.href = `questions/${questionId}`;
             }
         });
