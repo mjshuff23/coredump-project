@@ -9,8 +9,8 @@ const { Question, Answer, AnswerVote, QuestionVote } = db;
 
 const validateAnswer = [
   check("answerText")
-    .isLength({ min: 30 })
-    .withMessage("Answer text must be at least 30 characters long."),
+    .isLength({ min: 3 })
+    .withMessage("Answer text must be at least 3 characters long."),
   handleValidationErrors,
 ];
 
@@ -28,7 +28,7 @@ router.post(
 router.get('/', asyncHandler(async (req, res, next) => {
     // Get all questions
     const answers = await Answer.findAll();
-  
+
     res.render('answers', { answers, title: 'Answers' });
   }));
 
