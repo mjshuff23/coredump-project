@@ -163,6 +163,7 @@ body {
 
 :link {
   color: #cccccc;
+  text-decoration: none;
 }
 
 .deleteBtn {
