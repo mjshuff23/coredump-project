@@ -90,8 +90,9 @@ async function postVote(body, route, scoreElt) {
 
         if (errorJSON) {
             let errorsContainer = document.querySelector(".main-box");
+            if (!errorJSON.error) return;
             let errorsHTML = `<li>${errorJSON.error}</li>`;
-            errorsContainer.innerHTML = `<ul width="40px"; style="color:red; background-color:white">${errorsHTML}</ul>`;
+            errorsContainer.innerHTML = `<ul width="40px"; style="color:red; background-color: rgba(255, 255, 255, 0)">${errorsHTML}</ul>`;
             await setTimeout(function () { errorsContainer.innerHTML = ``; }, 5000);
         }
     }
