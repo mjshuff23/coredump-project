@@ -27,21 +27,21 @@ console.log("Outside of DOM Content Loaded");
 document.addEventListener('DOMContentLoaded', (e) => {
     const userId = localStorage.getItem("COREDUMP_CURRENT_USER_ID");
 
-    document.querySelectorAll('.answersContainer').forEach( (item) =>  {
+    document.querySelectorAll('.answersContainer').forEach((item) => {
         item.addEventListener('click', async (e) => {
             console.log("Event listener for answers ");
             //e.preventDefault();
             //e.stopPropagation();
             const answerId = e.target.dataset.answerid;
-            let scoreElt = document.querySelector(`p[data-answerid="${answerId}"]`)
+            let scoreElt = document.querySelector(`p[data-answerid="${answerId}"]`);
             if (e.target.classList.contains('fa-caret-up')) {
-                await postVote( { vote: true, answerId, userId }, '/questions/voteAnswer', scoreElt);
+                await postVote({ vote: true, answerId, userId }, '/questions/voteAnswer', scoreElt);
             } else if (e.target.classList.contains('fa-caret-down')) {
-                await postVote( { vote: false, answerId, userId }, '/questions/voteAnswer', scoreElt );
+                await postVote({ vote: false, answerId, userId }, '/questions/voteAnswer', scoreElt);
             }
         });
     });
-    document.querySelectorAll('.containerSolo').forEach ( (item) => {
+    document.querySelectorAll('.containerSolo').forEach((item) => {
         console.log("Item:  ", item);
         item.addEventListener('click', async (e) => {
             console.log("Event listener for questions ");
@@ -49,17 +49,20 @@ document.addEventListener('DOMContentLoaded', (e) => {
             //e.stopPropagation();
             const questionId = e.target.dataset.questionid;
             console.log("QuestionId: ", questionId);
-            let scoreElt = document.querySelector(`p[data-questionid="${questionId}"]`)
+            let scoreElt = document.querySelector(`p[data-questionid="${questionId}"]`);
             if (e.target.classList.contains('fa-caret-up')) {
-                await postVote( { vote: true, questionId, userId }, '/questions/voteQuestion', scoreElt);
+                await postVote({ vote: true, questionId, userId }, '/questions/voteQuestion', scoreElt);
             } else if (e.target.classList.contains('fa-caret-down')) {
-                await postVote( { vote: false, questionId, userId }, '/questions/voteQuestion', scoreElt);
+                await postVote({ vote: false, questionId, userId }, '/questions/voteQuestion', scoreElt);
+            } else {
+                if (!questionId) return;
+                window.location.href = `questions/${questionId}`;
             }
         });
     });
-    });
+});
 
-async function postVote(body,route, scoreElt) {
+async function postVote(body, route, scoreElt) {
     try {
         const res = await fetch(route, {
             method: "POST",
@@ -73,14 +76,14 @@ async function postVote(body,route, scoreElt) {
             const retVal = await res.json();
             console.log("Return value:  ", retVal.voteCount);
             console.log("scoreElt.innerHTML: ", scoreElt);
-            scoreElt.innerHTML = retVal.voteCount //newScore
+            scoreElt.innerHTML = retVal.voteCount; //newScore
         }
         if (!res.ok) {
             throw res;
         }
         return res;
     }
-    catch (res)  {
+    catch (res) {
         console.log("Response object:  *******************************************", res);
         const errorJSON = await res.json();
         console.log("ErrorJSON:  ", errorJSON);
@@ -89,7 +92,7 @@ async function postVote(body,route, scoreElt) {
             let errorsContainer = document.querySelector(".main-box");
             let errorsHTML = `<li>${errorJSON.error}</li>`;
             errorsContainer.innerHTML = `<ul width="40px"; style="color:red; background-color:white">${errorsHTML}</ul>`;
-            await setTimeout(function() {errorsContainer.innerHTML = ``;}, 5000);
+            await setTimeout(function () { errorsContainer.innerHTML = ``; }, 5000);
         }
     }
 }

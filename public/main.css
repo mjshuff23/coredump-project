@@ -1,6 +1,6 @@
 .main-question {
   text-align: center;
-  color:#2c8c99;
+  color: #2c8c99;
 }
 
 /* .question-list {
@@ -10,18 +10,16 @@
   border: 1px solid blue;
 } */
 
-
 .main-btn-question {
   display: block;
   box-sizing: border-box;
   height: 50px;
   margin-bottom: 20px;
-  color:#ff6b35;
+  color: #ff6b35;
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
 }
-
 
 .main-list-question {
   /* display: flex;
@@ -40,9 +38,10 @@
   width: 900px;
   color: white;
   border-radius: 20px;
-  background-color: #2c8c99 ;
+  background-color: #2c8c99;
   margin-bottom: 20px;
-  }
+}
+
 /*
 .list-box > p {
   margin: 0px;
@@ -70,7 +69,6 @@
   margin-left: 60px;
   font-size: 18px;
   font-weight: normal;
-
 }
 
 .main-user {
@@ -91,6 +89,9 @@
   color: white;
 }
 
+.containerSolo {
+  cursor: pointer;
+}
 
 /* .list-answer {
   box-sizing: border-box;
