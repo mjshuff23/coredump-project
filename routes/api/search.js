@@ -5,6 +5,7 @@ const { Op } = require("sequelize");
 const router = express.Router();
 const { asyncHandler } = require('../../utils');
 const { checkAuth } = require("../../auth");
+const { countQuestionVotes } = require('./questions');
 
 router.post('/', checkAuth, asyncHandler(async (req, res, next) => {
   let { search } = req.body;         // Grab search value
@@ -24,6 +25,12 @@ router.post('/', checkAuth, asyncHandler(async (req, res, next) => {
       relevantQuestions.push(questions[i]);
       questionIds.push(questions[i].id);
     }
+  }
+
+  for (let question of questions) {
+    const user = await User.findByPk(question.userId);
+    question.author = user.userName;
+    question.score = await countQuestionVotes(question.id);
   }
 
   let noRelevantQuestions;
