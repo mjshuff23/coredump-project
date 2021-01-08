@@ -27,3 +27,12 @@
   color: #88d3dd;
   padding: 5px;
 }
+
+.link-signup:link {
+  color: #AB7ED6;
+  transition: color 1s;
+}
+
+.link-signup:hover {
+  color: rgb(33 53 69 / 95%);
+}
