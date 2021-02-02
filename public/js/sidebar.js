@@ -11,12 +11,4 @@ document.addEventListener("DOMContentLoaded", event => {
                 .classList.remove('hidden');
         });
 
-    document
-        .querySelector('.xmark')
-        .addEventListener('click', eve => {
-            // console.log(eve);
-            document
-                .querySelector(".leftbar")
-                .classList.add('hidden');
-        });
 });
