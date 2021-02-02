@@ -8,15 +8,15 @@
 }
 
 .errors-container {
-box-sizing:border-box;
-width: 250px;
-height: 15px;
+  box-sizing: border-box;
+  width: 250px;
+  height: 15px;
 }
 
-.log-in-container{
+.log-in-container {
   padding: 14%;
   padding-top: 8%;
-  padding-bottom: 25%;
+  padding-bottom: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,16 +30,18 @@ height: 15px;
 }
 
 .label-email {
-margin-top: 20px;
+  margin-top: 20px;
 }
 
-.email, .password {
+.email,
+.password {
   width: 250px;
   border-radius: 10px;
   border: 1px solid grey;
   height: 35px;
   margin-top: 10px;
   padding-left: 10px;
+  outline: none;
 }
 
 .email {
@@ -55,14 +57,24 @@ margin-top: 20px;
   text-decoration: none;
   font-weight: bold;
   font-size: 16px;
-  color: #AB7ED6;
+  color: #ab7ed6;
   text-align: center;
 }
 
- .btn-login {
-  margin-left: 40%;
+.btn-login {
+  margin-left: 42%;
 }
 
 .footer {
-margin-top: 3%;
+  margin-top: 3%;
+}
+
+.demoLogin {
+  box-sizing: border-box;
+  width: 10em;
+  height: 2em;
+  background-color: #ab7ed6;
+  margin-left: 25%;
+  color: white;
+  border-radius: 1em;
 }

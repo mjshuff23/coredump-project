@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   document.querySelector(".authorlist").addEventListener("click", (eve) => {
     // console.log(eve);
-    document.querySelector(".leftbar").classList.toggle("hidden");
-    document.querySelector(".xmark").classList.remove("hidden");
+    document.querySelector(".authorlist").classList.remove("hidden");
+    document.querySelector(".authorlist").classList.add("hidden");
   });
 });

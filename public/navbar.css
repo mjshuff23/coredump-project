@@ -17,8 +17,9 @@
   background-color: #ff6b35;
   /* position: absolute; */
   position: fixed;
-  left: 80px;
+  left: 75px;
   margin: 0px;
+  /* margin-left: 0.5em; */
 }
 
 .logobox-white-border {
@@ -91,7 +92,7 @@
 .submenu-questions,
 .submenu-users {
   text-decoration: none;
-  margin-top: 55px;
+  /* margin-top: 55px; */
   margin-left: 10px;
   font-size: 15px;
   padding-top: 18px;
@@ -188,8 +189,8 @@
 .navbar-text {
   box-sizing: border-box;
   /* border: 1px solid white; */
-  height: 60px;
-  width: 120px;
+  /* height: 60px; */
+  width: 138px;
   text-decoration: none;
   display: flex;
   align-items: flex-end;
@@ -240,9 +241,10 @@
 .avatar {
   /* box-sizing: border-box; */
   min-width: 50px;
-  height: 60px;
+  height: 50px;
   border-radius: 50%;
   opacity: 0.7;
+  margin-top: -0.5em;
   /* position: fixed; */
 }
 
@@ -259,18 +261,32 @@
 } */
 
 button {
+  /* box-sizing: border-box; */
+  /* border: 1px solid red; */
+  padding: 0;
   list-style: none;
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
-  margin: 0;
-  padding: 0;
 }
 
 .authorlist {
-  visibility: hidden;
-  font-size: 15px;
+  /* margin-left: -15px; */
+}
+
+.author > img {
+  padding-left: 0.5em;
+}
+
+.author > a {
+  padding-left: 0.5em;
+  color: white;
+  width: 7.5em;
+}
+
+.author:hover {
+  text-shadow: 2px 2px 8px white;
 }
 
 ul:hover {
