@@ -5,16 +5,15 @@
   border-radius: 25px;
   background-color: white;
   opacity: 0.7;
-
 }
 
 .errors-container {
-  box-sizing:border-box;
-  width: 500px;
+  box-sizing: border-box;
+  width: 360px;
   height: 15px;
 }
 
-.sign-up-container{
+.sign-up-container {
   padding: 22%;
   /* font-size: large; */
   /* min-height: min-content; */
@@ -25,20 +24,27 @@
   align-items: center;
 }
 
-.signuphead  {
-    font-size: 24px;
-    text-align: center;
-    font-weight: 700;
-    padding-top: 2%;
-    padding-bottom: 1%;
-  }
+.signuphead {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 700;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
 
-
-.label-username, .label-email, .label-password, .label-confirmPassword {
+.label-username,
+.label-email,
+.label-password,
+.label-confirmPassword {
   margin-top: 20px;
 }
 
-.input-username, .input-email,.input-avatar, .input-password, .input-confirmPassword, #avatar {
+.input-username,
+.input-email,
+.input-avatar,
+.input-password,
+.input-confirmPassword,
+#avatar {
   box-sizing: border-box;
   width: 100%;
   height: 35px;
@@ -47,6 +53,7 @@
   margin-top: 10px;
   margin-bottom: 20px;
   padding-left: 10px;
+  outline: none;
 }
 
 .btn-signUp {
@@ -56,13 +63,27 @@
   align-content: center;
 }
 
-select#avatar option[value="/images/avataaars.png"]   { background-image:url("/images/avataaars.png");   }
-select#avatar option[value="/images/avataaars(1).png"]   { background-image:url("/images/avataaars(1).png");   }
-select#avatar option[value="/images/avataaars(2).png"]   { background-image:url("/images/avataaars(2).png");   }
-select#avatar option[value="/images/avataaars(3).png"]   { background-image:url("/images/avataaars(3).png");   }
-select#avatar option[value="/images/avataaars(4).png"]   { background-image:url("/images/avataaars(4).png");   }
-select#avatar option[value="/images/avataaars(5).png"]   { background-image:url("/images/avataaars(5).png");   }
-select#avatar option[value="/images/avataaars(6).png"]   { background-image:url("/images/avataaars(6).png");   }
+select#avatar option[value="/images/avataaars.png"] {
+  background-image: url("/images/avataaars.png");
+}
+select#avatar option[value="/images/avataaars(1).png"] {
+  background-image: url("/images/avataaars(1).png");
+}
+select#avatar option[value="/images/avataaars(2).png"] {
+  background-image: url("/images/avataaars(2).png");
+}
+select#avatar option[value="/images/avataaars(3).png"] {
+  background-image: url("/images/avataaars(3).png");
+}
+select#avatar option[value="/images/avataaars(4).png"] {
+  background-image: url("/images/avataaars(4).png");
+}
+select#avatar option[value="/images/avataaars(5).png"] {
+  background-image: url("/images/avataaars(5).png");
+}
+select#avatar option[value="/images/avataaars(6).png"] {
+  background-image: url("/images/avataaars(6).png");
+}
 
 /*
 .input-username, .input-email,.input-avatar, .input-password, .input-confirmPassword, #avatar {

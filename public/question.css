@@ -98,4 +98,7 @@
   justify-content: space-between;
 }
 
-.questionRow3>.deleteBtn {}
+.questionRow3 > .deleteBtn {
+}
+
+

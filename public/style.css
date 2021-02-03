@@ -1,12 +1,13 @@
-@import 'navbar.css';
-@import 'banner.css';
-@import 'login.css';
-@import 'signup.css';
-@import 'main.css';
-@import 'users.css';
-@import 'question.css';
-@import 'search.css';
-@import 'mce.css';
+@import "navbar.css";
+@import "banner.css";
+@import "login.css";
+@import "signup.css";
+@import "main.css";
+@import "users.css";
+@import "question.css";
+@import "add-question.css";
+@import "search.css";
+@import "mce.css";
 .gradient {
   background-image: linear-gradient(180deg, #2c8c99, whitesmoke, #2c8c99);
   height: 100vh;
@@ -28,9 +29,10 @@ html {
 
 body {
   height: auto;
-  min-height: 100%;
-  min-width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  min-width: 100vw;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .wrapper {
@@ -42,15 +44,16 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 28%;
+  width: 25.8em;
   top: 0px;
+  margin-left: -10px;
 }
 
 .center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 72%;
+  width: 71vw;
   top: 0px;
 }
 
@@ -60,12 +63,21 @@ body {
   font-size: 12px;
 }
 
+.link {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 10em;
+}
+
 .banner {
   box-sizing: border-box;
   border: 1px solid white;
   width: 900px;
   height: 400px;
-  background-image: url(./images/core.png), url(./images/tile.png), url(./images/code3.png), url(./images/Wireframe-Core-preview.jpg);
+  background-image: url(./images/core.png), url(./images/tile.png),
+    url(./images/code3.png), url(./images/Wireframe-Core-preview.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -170,8 +182,9 @@ body {
   padding-left: 10%;
 }
 
-@media screen and (min-width: 1000px) {
-  .sidebar, .leftbar {
+@media screen and (min-width: 1130px) {
+  .sidebar,
+  .leftbar {
     display: flex;
   }
   .xmark {
@@ -179,7 +192,7 @@ body {
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1130px) {
   .burger {
     display: flex;
   }
