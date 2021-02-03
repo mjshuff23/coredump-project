@@ -10,9 +10,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.querySelector(".leftbar").classList.add("hidden");
   });
 
-  document.querySelector(".authorlist").addEventListener("click", (eve) => {
+  document.querySelector(".list").addEventListener("click", (eve) => {
     // console.log(eve);
-    document.querySelector(".authorlist").classList.remove("hidden");
-    document.querySelector(".authorlist").classList.add("hidden");
+    document.querySelector(".authorlist").classList.toggle("hidden");
   });
 });

@@ -1,6 +1,6 @@
 .box {
-  height: 100%;
-  width: 25%;
+  height: 100vh;
+  width: 35vh;
   /* border: 1px solid white; */
   display: flex;
   flex-direction: row;
@@ -84,9 +84,16 @@
 }
 
 .public {
-  margin-top: 15px;
+  margin-top: 3em;
   margin-left: 30px;
   color: white;
+  box-sizing: border-box;
+  /* border: 1px solid white; */
+  width: 10em;
+  position: absolute;
+}
+
+.submenu-questions {
 }
 
 .submenu-questions,
@@ -95,7 +102,7 @@
   /* margin-top: 55px; */
   margin-left: 10px;
   font-size: 15px;
-  padding-top: 18px;
+  /* padding-top: 18px; */
   color: white;
 }
 
@@ -104,7 +111,7 @@
   display: flex;
   justify-content: space-between;
   /* border: 1px solid white; */
-  width: 72%;
+  width: 60em;
   height: 100px;
   font-size: 18px;
   color: white;
@@ -272,7 +279,7 @@ button {
 }
 
 .authorlist {
-  /* margin-left: -15px; */
+  list-style: none;
 }
 
 .author > img {
@@ -287,11 +294,6 @@ button {
 
 .author:hover {
   text-shadow: 2px 2px 8px white;
-}
-
-ul:hover {
-  color: red;
-  visibility: visible;
 }
 
 li a {
