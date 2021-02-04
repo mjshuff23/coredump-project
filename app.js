@@ -73,8 +73,15 @@ app.get('/users', checkAuth, async (req, res) => {
 app.get('/users/:id', checkAuth, async (req, res) => {
   
   const user = await User.findByPk(req.params.id);
+  const userId = await req.params.id;
   const currentUserId = req.user.dataValues.id;
-  res.render('users/show', { user, signedIn: req.user, currentUserId });
+  const questions = await Question.findAll({
+    where: {userId}
+  });
+  const answers = await Answer.findAll({
+    where: {userId}
+  });
+  res.render('users/show', { user, signedIn: req.user, currentUserId, questions, answers });
 });
 
 app.get('/main', checkAuth, async (req, res) => {

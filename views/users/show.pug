@@ -1,13 +1,26 @@
 extends ../layout.pug
 block content
-  div.userCard
-    h2.userCard_userName= user.userName
-    div.userCard_id User ID: #{user.id}
-    img.userCard_img(src=`${user.avatar}` width="250")
-    div.userCard_bio Bio: #{user.bio}
-  div.deleteUser
-    if (currentUserId === user.id)
-      a.user-delete-link(href=`${user.id}/delete`) Delete User Account
- 
+  div.user-container
+    div.questionCard
+      h2 Questions
+      each question in questions
+        div 
+          a(href=`/questions/${question.id}`) #{question.questionSubject}
+        div #{question.questionText}
+      h2 Answers
+      each answer in answers
+        div #{answer.questionId}
+        div #{answer.answerText}
+    
+    div.userCard
+      h2.userCard_userName= user.userName
+      div.userCard_id User ID: #{user.id}
+      img.userCard_img(src=`${user.avatar}` width="250")
+      div.userCard_bio Bio: #{user.bio}
+
+      div.deleteUser
+        if (currentUserId === user.id)
+          a.user-delete-link(href=`${user.id}/delete`) Delete User Account
+    
       
       

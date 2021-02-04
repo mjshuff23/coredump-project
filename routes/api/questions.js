@@ -199,6 +199,18 @@ router.get('/', asyncHandler(async (req, res, next) => {
   res.render('questions', { questions });
 }));
 
+// router.get('/users/:id', checkAuth, async (req, res) => {
+//   const user = await User.findByPk(req.params.id);
+  
+//   const questions = await Question.findAll({
+//     where: {
+//       userId: {
+//         [Op.eq]: [user],
+//       }
+//     },
+//   });
+//   res.render('users/show', { user, questions });
+// });
 
 router.get('/:id', checkAuth, asyncHandler(async (req, res, next) => {
   const questionId = parseInt(req.params.id);
