@@ -6,26 +6,33 @@ block content
       if questions.length === 0 
         div No Questions Yet
       each question in questions
-        div 
+        div.question 
           a(href=`/questions/${question.id}`) #{question.questionSubject}
-        div.indent #{question.questionText}
+          div.indent #{question.questionText}
       h2 Answers
       if answers.length === 0 
         div No Answers Yet
       each answer in answers
-        a(href=`/questions/${answer.questionId}`) Question # #{answer.questionId}
-        div.indent #{answer.answerText}
+        div.question
+          a(href=`/questions/${answer.questionId}`) #{answer.Question.questionSubject}
+          div.indent #{answer.answerText}
     
     div.userCard
       h2.userCard_userName= user.userName
       div.userCard_id 
-        strong User ID: #{user.id}
-        div.userCard_id 
-          strong Answer Score: #{answerVotes.length}
+        div User ID: #{user.id}
+        div
+          div Questions: #{questions.length}
+          div Answers: #{answers.length}
+          //- div Answer Score: #{answerVotes.length}
+          
       img.userCard_img(src=`${user.avatar}` width="250")
       div.userCard_bio 
         strong Bio: 
+        if user.bio === null
+          div Nothing here yet.
         div #{user.bio}
+        
           div.deleteUser
             if (currentUserId === user.id)
               a.user-delete-link(href=`${user.id}/delete`) Delete User Account

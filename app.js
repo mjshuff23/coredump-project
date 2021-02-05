@@ -76,13 +76,15 @@ app.get('/users/:id', checkAuth, async (req, res) => {
   const userId = await req.params.id;
   const currentUserId = req.user.dataValues.id;
   const questions = await Question.findAll({
-    where: {userId}
+    where: {userId},
   });
   const answers = await Answer.findAll({
-    where: {userId}
+    where: {userId},
+    include: [Question],
   });
   const answerVotes = await AnswerVote.findAll({
-    where: {userId}
+    where: {userId},
+    
   });
   res.render('users/show', { user, signedIn: req.user, currentUserId, questions, answers, answerVotes });
 });
