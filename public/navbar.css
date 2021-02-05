@@ -282,10 +282,10 @@ button {
   list-style: none;
 }
 
-.author {
+/* .author {
   width: 10em;
   margin-left: -0.5em;
-}
+} */
 
 .author > img {
   padding-left: 0.5em;
