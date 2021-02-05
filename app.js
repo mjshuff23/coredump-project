@@ -8,7 +8,7 @@ const { searchRouter } = require('./routes/api/search');
 const usersRouter = require("./routes/api/users");
 const answersRouter = require('./routes/api/answers');
 const db = require('./db/models');
-const { User, Question, Answer, Vote } = db;
+const { User, Question, Answer, AnswerVote } = db;
 const morgan = require("morgan");
 const { environment, model, cookieConfig, jwtConfig } = require('./config');
 const { secret, expiresIn } = jwtConfig;
@@ -73,8 +73,20 @@ app.get('/users', checkAuth, async (req, res) => {
 app.get('/users/:id', checkAuth, async (req, res) => {
   
   const user = await User.findByPk(req.params.id);
+  const userId = await req.params.id;
   const currentUserId = req.user.dataValues.id;
-  res.render('users/show', { user, signedIn: req.user, currentUserId });
+  const questions = await Question.findAll({
+    where: {userId},
+  });
+  const answers = await Answer.findAll({
+    where: {userId},
+    include: [Question],
+  });
+  const answerVotes = await AnswerVote.findAll({
+    where: {userId},
+    
+  });
+  res.render('users/show', { user, signedIn: req.user, currentUserId, questions, answers, answerVotes });
 });
 
 app.get('/main', checkAuth, async (req, res) => {
