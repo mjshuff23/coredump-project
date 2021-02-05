@@ -1,6 +1,6 @@
 .box {
   height: 100vh;
-  width: 35vh;
+  width: 18em;
   /* border: 1px solid white; */
   display: flex;
   flex-direction: row;
@@ -17,7 +17,7 @@
   background-color: #ff6b35;
   /* position: absolute; */
   position: fixed;
-  left: 75px;
+  left: 71px;
   margin: 0px;
   /* margin-left: 0.5em; */
 }
@@ -77,7 +77,7 @@
 .home {
   color: white;
   /* color: #721A8B; */
-  margin-left: 20px;
+  margin-left: 16px;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
@@ -280,6 +280,11 @@ button {
 
 .authorlist {
   list-style: none;
+}
+
+.author {
+  width: 10em;
+  margin-left: -0.5em;
 }
 
 .author > img {
