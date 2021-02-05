@@ -26,7 +26,7 @@ router.post(
 );
 
 router.get('/', asyncHandler(async (req, res, next) => {
-  // Get all questions
+  // Get all answers
   const answers = await Answer.findAll();
 
   res.render('answers', { answers, title: 'Answers' });

@@ -84,6 +84,9 @@
   display: flex
 }
 
+.indent {
+  margin-left:50px;
+}
 .user-container a {
   font-weight: bold;
   color: purple;
@@ -97,6 +100,10 @@
   padding: 16px;
   width: 500px;
   margin: 10px;
+}
+
+.deleteUser{
+  align-self: flex-end;
 }
 
 @media screen and (max-width: 1200px) {
