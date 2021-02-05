@@ -86,10 +86,13 @@
 
 .indent {
   margin-left:50px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .user-container a {
   font-weight: bold;
-  color: purple;
+  color: rgb(77, 49, 129);
 }
 
 .questionCard {

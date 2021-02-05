@@ -15,7 +15,7 @@ block content
       each answer in answers
         div.question
           a(href=`/questions/${answer.questionId}`) #{answer.Question.questionSubject}
-          div.indent #{answer.answerText}
+          div.indent #{answer.answerText > 14 ? answer.answerText.substring(0, 14) + "..." : answer.answerText}
     
     div.userCard
       h2.userCard_userName= user.userName
